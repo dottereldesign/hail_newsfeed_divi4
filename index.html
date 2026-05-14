@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hail Newsfeeds</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #15352f;
+        background: #f6f5f0;
+      }
+
+      main {
+        width: min(900px, calc(100% - 32px));
+        margin: 48px auto;
+      }
+
+      h1 {
+        margin: 0 0 20px;
+        font-size: 36px;
+        line-height: 1.1;
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .newsfeed {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: 520px;
+        padding: 18px;
+        border: 1px solid #d8d2c0;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .newsfeed-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      button {
+        border: 0;
+        border-radius: 6px;
+        padding: 11px 16px;
+        color: #fff;
+        background: #0b3f34;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:focus-visible {
+        outline: 3px solid #c89f30;
+        outline-offset: 2px;
+      }
+
+      .status {
+        min-height: 20px;
+        margin-top: 12px;
+        color: #0b3f34;
+        font-size: 14px;
+      }
+
+      .copy-source {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Hail Newsfeeds</h1>
+      <h2>Divi 4</h2>
+
+      <section class="newsfeed" aria-label="Newsfeed-01">
+        <div class="newsfeed-title">Newsfeed-01</div>
+        <button type="button" id="copy-code">Copy Code Module</button>
+      </section>
+      <div class="status" id="copy-status" aria-live="polite"></div>
+    </main>
+
+    <textarea class="copy-source" id="code-template" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   SAFETY: HIDE OLD POST TILES MODULE
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Extra safety if any DBP tile excerpts leak through elsewhere */
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ================================
+   DIVI BLOG -> EQUAL RESPONSIVE GRID
+   Module target: .et_pb_blog_0
+   Desktop: 4 columns
+   Tablet: 3 columns
+   Mobile: 1 column
+================================ */
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(14px, 1.6vw, 22px);
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: var(--hail-grid-gap) !important;
+    column-gap: var(--hail-grid-gap) !important;
+    row-gap: var(--hail-grid-gap) !important;
+    grid-auto-flow: row !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    align-items: stretch !important;
+  }
+
+  /* Neutralise Divi / Salvattore masonry wrappers */
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Completely hide Older / Next Entries */
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    float: none !important;
+    clear: none !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    min-width: 0 !important;
+    min-height: clamp(250px, 24vw, 360px) !important;
+    aspect-ratio: 1 / 1.08 !important;
+    margin: 0 !important;
+    padding: clamp(18px, 1.8vw, 26px) !important;
+    border: 0 !important;
+    background-color: #0b3f34 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 14px 32px rgba(5, 25, 20, 0.16) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  /* Hide the real image element because JS puts it on the card background */
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  /* Hide original Divi meta. JS copies the date into .hail-card-date */
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide excerpt/content visually, but keep it in DOM for Hail link detection */
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 38%,
+      rgba(0, 0, 0, 0.54) 78%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(13px, 0.86vw, 15px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(19px, 1.35vw, 27px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+    transition: color 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::before,
+  .et_pb_blog_0 article.et_pb_post:focus-within::before {
+    opacity: 0.9;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::after,
+  .et_pb_blog_0 article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+  .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .entry-title a,
+  .et_pb_blog_0 article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    box-shadow:
+      0 0 0 3px rgba(200, 159, 48, 0.82),
+      0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  /* Tablet */
+  @media (max-width: 980px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      --hail-grid-gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: var(--hail-grid-gap) !important;
+      column-gap: var(--hail-grid-gap) !important;
+      row-gap: var(--hail-grid-gap) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      min-height: clamp(230px, 32vw, 320px) !important;
+      padding: 18px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(18px, 2.2vw, 24px) !important;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      --hail-grid-gap: 18px;
+      grid-template-columns: 1fr !important;
+      gap: var(--hail-grid-gap) !important;
+      column-gap: var(--hail-grid-gap) !important;
+      row-gap: var(--hail-grid-gap) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: 16 / 11 !important;
+      min-height: 270px !important;
+      padding: 20px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-date {
+      font-size: clamp(13px, 3.7vw, 15px) !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: auto !important;
+      min-height: 300px !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post::before,
+    .et_pb_blog_0 article.et_pb_post::after,
+    .et_pb_blog_0 article.et_pb_post .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post .entry-title a {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within,
+    .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      const paginations = container.querySelectorAll(".pagination");
+
+      paginations.forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = post.querySelector(
+          '.post-content-inner a[href*="hail.to"]',
+        );
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty(
+            "background-image",
+            'url("' + imageUrl + '")',
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const fallbackUrl = titleLink.href;
+        const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <script>
+      const copyButton = document.getElementById("copy-code");
+      const codeTemplate = document.getElementById("code-template");
+      const copyStatus = document.getElementById("copy-status");
+
+      function fallbackCopy(code) {
+        const textarea = document.createElement("textarea");
+        textarea.value = code;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "0";
+        textarea.style.left = "0";
+        textarea.style.width = "1px";
+        textarea.style.height = "1px";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        const copied = document.execCommand("copy");
+        textarea.remove();
+
+        if (!copied) {
+          throw new Error("Copy command failed.");
+        }
+      }
+
+      async function copyCodeModule() {
+        const code = codeTemplate.value;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(code);
+          } else {
+            fallbackCopy(code);
+          }
+
+          copyStatus.textContent = "Copied Newsfeed-01 code.";
+        } catch (error) {
+          try {
+            fallbackCopy(code);
+            copyStatus.textContent = "Copied Newsfeed-01 code.";
+          } catch (fallbackError) {
+            copyStatus.textContent = "Copy failed. Please try again.";
+          }
+        }
+      }
+
+      copyButton.addEventListener("click", copyCodeModule);
+    </script>
+  </body>
+</html>
