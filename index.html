@@ -12,9 +12,30 @@
         background: #f6f5f0;
       }
 
+      .site-header {
+        background: #fff;
+        border-bottom: 1px solid #e4dfd1;
+      }
+
+      .site-header-inner {
+        display: flex;
+        align-items: center;
+        width: min(1160px, calc(100% - 32px));
+        min-height: 70px;
+        margin: 0 auto;
+      }
+
+      .site-logo {
+        display: block;
+        width: auto;
+        height: 42px;
+        max-width: 160px;
+        object-fit: contain;
+      }
+
       main {
-        width: min(900px, calc(100% - 32px));
-        margin: 48px auto;
+        width: min(1160px, calc(100% - 32px));
+        margin: 42px auto 48px;
       }
 
       h1 {
@@ -29,16 +50,135 @@
         line-height: 1.2;
       }
 
+      .page-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 28px;
+        margin-bottom: 18px;
+      }
+
+      .instructions {
+        max-width: 620px;
+        margin: -6px 0 0;
+        color: #435a54;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .module-formula {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 4px;
+        padding: 12px;
+        border: 1px solid #d8d2c0;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 14px 32px rgba(5, 25, 20, 0.08);
+      }
+
+      .module-card {
+        display: grid;
+        place-items: center;
+        gap: 5px;
+        min-width: 132px;
+        min-height: 54px;
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 4px;
+        color: #64707d;
+        background: #f0f3f8;
+        box-shadow: inset 0 0 0 1px rgba(39, 52, 68, 0.03);
+      }
+
+      .module-icon {
+        width: 19px;
+        height: 19px;
+        color: #2d9bf0;
+      }
+
+      .module-name {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .formula-symbol {
+        color: #67B110;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .newsfeed-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+        gap: 22px;
+        align-items: start;
+      }
+
+      .newsfeed-list.is-fixed-columns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .newsfeed-category {
+        margin-top: 28px;
+      }
+
+      .newsfeed-category:first-of-type {
+        margin-top: 0;
+      }
+
+      .category-title {
+        margin: 0 0 14px;
+        color: #15352f;
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
       .newsfeed {
+        display: grid;
+        gap: 0;
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid #d8d2c0;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 14px 32px rgba(5, 25, 20, 0.12);
+      }
+
+      .newsfeed-image {
+        display: block;
+        width: 100%;
+        aspect-ratio: var(--newsfeed-image-ratio, 1000 / 522);
+        object-fit: contain;
+        object-position: center;
+        background: #fff;
+      }
+
+      .newsfeed-image.is-tall-preview {
+        aspect-ratio: var(--newsfeed-frame-ratio, 1474 / 994);
+      }
+
+      .newsfeed-placeholder {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        aspect-ratio: 1000 / 522;
+        color: #697973;
+        background:
+          linear-gradient(135deg, rgba(103, 177, 16, 0.08), rgba(200, 159, 48, 0.12)),
+          #eee9dc;
+        font-weight: 700;
+      }
+
+      .newsfeed-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 16px;
-        max-width: 520px;
         padding: 18px;
-        border: 1px solid #d8d2c0;
-        border-radius: 8px;
-        background: #fff;
       }
 
       .newsfeed-title {
@@ -48,13 +188,28 @@
 
       button {
         border: 0;
-        border-radius: 6px;
-        padding: 11px 16px;
+        border-radius: 7px;
+        min-width: 178px;
+        padding: 11px 18px;
         color: #fff;
-        background: #0b3f34;
+        background: linear-gradient(180deg, #74bf1d 0%, #67B110 100%);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.22),
+          0 8px 18px rgba(103, 177, 16, 0.16);
         font: inherit;
         font-weight: 700;
         cursor: pointer;
+        transition:
+          box-shadow 180ms ease,
+          filter 180ms ease,
+          transform 180ms ease;
+      }
+
+      button:hover {
+        filter: brightness(0.96);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.2),
+          0 10px 20px rgba(103, 177, 16, 0.2);
       }
 
       button:focus-visible {
@@ -62,11 +217,24 @@
         outline-offset: 2px;
       }
 
+      .copy-code.is-copied {
+        background: linear-gradient(180deg, #42a5f5 0%, #1e88e5 100%);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.26),
+          0 8px 18px rgba(30, 136, 229, 0.22);
+      }
+
+      .copy-code.is-error {
+        background: linear-gradient(180deg, #c94a3c 0%, #a63c2f 100%);
+      }
+
       .status {
-        min-height: 20px;
-        margin-top: 12px;
-        color: #0b3f34;
-        font-size: 14px;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
 
       .copy-source {
@@ -75,21 +243,130 @@
         width: 1px;
         height: 1px;
       }
+
+      @media (max-width: 520px) {
+        .page-header,
+        .newsfeed-content {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .module-formula {
+          align-items: stretch;
+          flex-wrap: wrap;
+        }
+
+        .newsfeed-list.is-fixed-columns {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Hail Newsfeeds</h1>
-      <h2>Divi 4</h2>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <img class="site-logo" src="project_logo.png" alt="Hail Newsfeeds">
+      </div>
+    </header>
 
-      <section class="newsfeed" aria-label="Newsfeed-01">
-        <div class="newsfeed-title">Newsfeed-01</div>
-        <button type="button" id="copy-code">Copy Code Module</button>
+    <main>
+      <header class="page-header">
+        <div>
+          <h1>Hail Newsfeeds</h1>
+          <h2>Divi 4</h2>
+          <ol class="instructions">
+            <li>Add the standard Divi 4 Blog module.</li>
+            <li>Add a Code module below it and paste in one of the newsfeed codes.</li>
+          </ol>
+        </div>
+
+        <div class="module-formula" aria-label="Use Blog and Code modules">
+          <div class="module-card">
+            <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 8-4 4 4 4M15 8l4 4-4 4M13 6l-2 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="module-name">Code</span>
+          </div>
+          <span class="formula-symbol">+</span>
+          <div class="module-card">
+            <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 16.8h4.1L18.4 7.5l-4.1-4.1L5 12.7v4.1Zm2.4-3.1 6.9-6.9 1.1 1.1-6.9 6.9H7.4v-1.1Z" fill="currentColor"/>
+              <path d="M15.3 2.4 19.4 6.5l.7-.7c.5-.5.5-1.2 0-1.7l-2.4-2.4c-.5-.5-1.2-.5-1.7 0l-.7.7Z" fill="currentColor"/>
+            </svg>
+            <span class="module-name">Blog</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="newsfeed-category" aria-labelledby="homepage-title">
+        <h3 class="category-title" id="homepage-title">Homepage</h3>
+        <div class="newsfeed-list">
+          <section class="newsfeed" aria-label="Newsfeed-01">
+            <img class="newsfeed-image" src="newsfeed%2001.webp" alt="Newsfeed-01 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-01</div>
+              <button type="button" class="copy-code" data-code-target="code-template-01" data-newsfeed-name="Newsfeed-01">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed" aria-label="Newsfeed-02">
+            <img class="newsfeed-image" src="newsfeed%2002.webp" alt="Newsfeed-02 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-02</div>
+              <button type="button" class="copy-code" data-code-target="code-template-02" data-newsfeed-name="Newsfeed-02">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed" aria-label="Newsfeed-03">
+            <img class="newsfeed-image" style="--newsfeed-image-ratio: 1470 / 812;" src="newsfeed%2003.webp" alt="Newsfeed-03 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-03</div>
+              <button type="button" class="copy-code" data-code-target="code-template-03" data-newsfeed-name="Newsfeed-03">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed" aria-label="Newsfeed-04">
+            <img class="newsfeed-image" style="--newsfeed-image-ratio: 1466 / 978;" src="newsfeed%2004.webp" alt="Newsfeed-04 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-04</div>
+              <button type="button" class="copy-code" data-code-target="code-template-04" data-newsfeed-name="Newsfeed-04">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed" aria-label="Newsfeed-06">
+            <img class="newsfeed-image" style="--newsfeed-image-ratio: 1474 / 994;" src="newsfeed%2006.webp" alt="Newsfeed-06 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-06</div>
+              <button type="button" class="copy-code" data-code-target="code-template-06" data-newsfeed-name="Newsfeed-06">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed" aria-label="Newsfeed-07">
+            <img class="newsfeed-image is-tall-preview" style="--newsfeed-frame-ratio: 1474 / 994;" src="newsfeed%2007.webp" alt="Newsfeed-07 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-07</div>
+              <button type="button" class="copy-code" data-code-target="code-template-07" data-newsfeed-name="Newsfeed-07">Copy Code Module</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="newsfeed-category" aria-labelledby="subpage-title">
+        <h3 class="category-title" id="subpage-title">Subpage</h3>
+        <div class="newsfeed-list is-fixed-columns">
+          <section class="newsfeed" aria-label="Newsfeed-05">
+            <img class="newsfeed-image" style="--newsfeed-image-ratio: 862 / 983;" src="newsfeed%2005.webp" alt="Newsfeed-05 preview">
+            <div class="newsfeed-content">
+              <div class="newsfeed-title">Newsfeed-05</div>
+              <button type="button" class="copy-code" data-code-target="code-template-05" data-newsfeed-name="Newsfeed-05">Copy Code Module</button>
+            </div>
+          </section>
+        </div>
       </section>
       <div class="status" id="copy-status" aria-live="polite"></div>
     </main>
 
-    <textarea class="copy-source" id="code-template" aria-hidden="true" tabindex="-1"><style>
+    <textarea class="copy-source" id="code-template-01" aria-hidden="true" tabindex="-1"><style>
   /* ================================
    SAFETY: HIDE OLD POST TILES MODULE
 ================================ */
@@ -133,6 +410,23 @@
     min-width: 0 !important;
     height: auto !important;
     align-items: stretch !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
   }
 
   /* Neutralise Divi / Salvattore masonry wrappers */
@@ -185,7 +479,7 @@
     margin: 0 !important;
     padding: clamp(18px, 1.8vw, 26px) !important;
     border: 0 !important;
-    background-color: #0b3f34 !important;
+    background-color: #67B110 !important;
     background-image: var(--hail-card-image) !important;
     background-size: cover !important;
     background-position: center !important;
@@ -678,10 +972,3355 @@
   })();
 </script></textarea>
 
+    <textarea class="copy-source" id="code-template-02" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   SAFETY: HIDE OLD POST TILES MODULE
+   This is the module causing mobile/tablet excerpt issues.
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Extra safety if any DBP tile excerpts leak through elsewhere */
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ================================
+   DIVI BLOG → 3 COL / 2 ROW FEATURE GRID
+   Module target: .et_pb_blog_0
+================================ */
+
+  /* Main grid */
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: 300px 300px !important;
+    grid-auto-rows: 300px !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+    align-items: stretch !important;
+    grid-auto-flow: dense !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /* Neutralise Divi / Salvattore masonry wrappers */
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Completely hide Older / Next Entries */
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Base card */
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background-color: #67B110 !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 0 !important;
+    height: auto !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    box-shadow: 0 10px 28px rgba(5, 25, 20, 0.14) !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 280ms ease !important;
+  }
+
+  /* Exact layout */
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(3) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(5) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  /* Adapt desktop layout to however many posts actually exist */
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="1"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 520px !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="1"]
+    article.et_pb_post:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="2"] {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) !important;
+    grid-template-rows: 520px !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="2"]
+    article.et_pb_post:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="2"]
+    article.et_pb_post:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="3"] {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) !important;
+    grid-template-rows: 300px 300px !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="4"]
+    article.et_pb_post:nth-of-type(4) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+
+  /* Hide the real image element because JS puts it on the card background */
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  /* Hide original Divi meta. JS copies the date into .hail-card-date */
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide excerpt/content visually, but keep it in DOM for Hail link detection */
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  /* Smooth full-image overlay with stronger darkness at bottom */
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.14) 22%,
+      rgba(0, 0, 0, 0.22) 45%,
+      rgba(0, 0, 0, 0.38) 68%,
+      rgba(0, 0, 0, 0.62) 86%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 280ms ease;
+  }
+
+  /* Gold/green stripe */
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.95) 0%,
+      rgba(200, 159, 48, 0.95) 55%,
+      rgba(13, 63, 51, 0.95) 55%,
+      rgba(13, 63, 51, 0.95) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 280ms ease !important;
+  }
+
+  /* Text group: date above title */
+  /* Bottom spacing now matches left spacing */
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: absolute !important;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  /* Copied date */
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(16px, 1vw, 18px) !important;
+    line-height: 1.1 !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+    text-decoration: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "◷";
+    color: rgba(255, 255, 255, 0.96) !important;
+    font-size: 1.18em !important;
+    line-height: 1 !important;
+    transform: translateY(-1px);
+  }
+
+  /* Title */
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.05 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    color: #fff !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    font-size: clamp(22px, 1.45vw, 30px) !important;
+    text-wrap: balance !important;
+    transition: color 280ms ease !important;
+  }
+
+  /* Bigger title on featured card */
+  .et_pb_blog_0
+    article.et_pb_post:nth-of-type(1)
+    .hail-card-text
+    .entry-title
+    a {
+    font-size: clamp(32px, 2.7vw, 52px) !important;
+  }
+
+  /* Hide Divi read more button */
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::before,
+  .et_pb_blog_0 article.et_pb_post:focus-within::before {
+    opacity: 0.84;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::after,
+  .et_pb_blog_0 article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+  .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .entry-title a,
+  .et_pb_blog_0 article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    box-shadow:
+      0 0 0 3px rgba(200, 159, 48, 0.82),
+      0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  /* Tablet */
+  @media (max-width: 1366px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count] {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: minmax(300px, auto) !important;
+    }
+
+    .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="1"] {
+      grid-template-columns: 1fr !important;
+      grid-auto-rows: unset !important;
+      grid-template-rows: 420px !important;
+    }
+
+    .et_pb_blog_0
+      .et_pb_ajax_pagination_container[data-post-count]
+      article.et_pb_post {
+      grid-column: auto !important;
+      grid-row: auto !important;
+      min-height: 300px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text {
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(20px, 2.35vw, 28px) !important;
+    }
+
+    .et_pb_blog_0
+      article.et_pb_post:nth-of-type(1)
+      .hail-card-text
+      .entry-title
+      a {
+      font-size: clamp(22px, 2.45vw, 30px) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post::after {
+      bottom: 10px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container,
+    .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count] {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: auto !important;
+    }
+
+    .et_pb_blog_0
+      .et_pb_ajax_pagination_container[data-post-count]
+      article.et_pb_post {
+      grid-column: 1 !important;
+      grid-row: auto !important;
+      min-height: 300px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text {
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6vw, 30px) !important;
+    }
+
+    .et_pb_blog_0
+      article.et_pb_post:nth-of-type(1)
+      .hail-card-text
+      .entry-title
+      a {
+      font-size: clamp(24px, 6.2vw, 32px) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post::after {
+      bottom: 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post::before,
+    .et_pb_blog_0 article.et_pb_post::after,
+    .et_pb_blog_0 article.et_pb_post .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post .entry-title a {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within,
+    .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/◷/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      const paginations = container.querySelectorAll(".pagination");
+
+      paginations.forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = post.querySelector(
+          '.post-content-inner a[href*="hail.to"]',
+        );
+
+        if (!titleLink || !title) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty(
+            "background-image",
+            'url("' + imageUrl + '")',
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const fallbackUrl = titleLink.href;
+        const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            const clickedLink = event.target.closest("a");
+
+            if (clickedLink) return;
+
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-03" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   SAFETY: HIDE OLD POST TILES MODULE
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Extra safety if any DBP tile excerpts leak through elsewhere */
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ================================
+   DIVI BLOG -> 3 COL / 2 ROW GRID
+   Module target: .et_pb_blog_0
+================================ */
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(12px, 1.2vw, 18px);
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(260px, auto)) !important;
+    grid-auto-rows: minmax(260px, auto) !important;
+    gap: var(--hail-grid-gap) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    align-items: stretch !important;
+    grid-auto-flow: row !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /* Neutralise Divi / Salvattore masonry wrappers */
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Completely hide Older / Next Entries */
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: clamp(250px, 23vw, 330px) !important;
+    aspect-ratio: 1 / 0.86 !important;
+    margin: 0 !important;
+    padding: clamp(18px, 1.5vw, 24px) !important;
+    border: 0 !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 12px 30px rgba(5, 25, 20, 0.16) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  /* Hide the real image element because JS puts it on the card background */
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  /* Hide original Divi meta. JS copies the date into .hail-card-date */
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide excerpt/content visually, but keep it in DOM for Hail link detection */
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 40%,
+      rgba(0, 0, 0, 0.58) 82%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(12px, 0.82vw, 14px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(18px, 1.2vw, 24px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+    transition: color 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 40px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::before,
+  .et_pb_blog_0 article.et_pb_post:focus-within::before {
+    opacity: 0.9;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::after,
+  .et_pb_blog_0 article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+  .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .entry-title a,
+  .et_pb_blog_0 article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    box-shadow:
+      0 0 0 3px rgba(200, 159, 48, 0.82),
+      0 20px 40px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  /* Tablet */
+  @media (max-width: 980px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      --hail-grid-gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: minmax(250px, auto) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      min-height: clamp(240px, 38vw, 320px) !important;
+      padding: 18px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(19px, 2.35vw, 25px) !important;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      --hail-grid-gap: 18px;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: auto !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: 16 / 11 !important;
+      min-height: 270px !important;
+      padding: 20px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-date {
+      font-size: clamp(13px, 3.7vw, 15px) !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: auto !important;
+      min-height: 300px !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post::before,
+    .et_pb_blog_0 article.et_pb_post::after,
+    .et_pb_blog_0 article.et_pb_post .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post .entry-title a {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within,
+    .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      const paginations = container.querySelectorAll(".pagination");
+
+      paginations.forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = post.querySelector(
+          '.post-content-inner a[href*="hail.to"]',
+        );
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty(
+            "background-image",
+            'url("' + imageUrl + '")',
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const fallbackUrl = titleLink.href;
+        const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-04" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   SAFETY: HIDE OLD POST TILES MODULE
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ================================
+   DIVI BLOG -> 2 COL / 2 ROW GRID
+   Module target: .et_pb_blog_0
+================================ */
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(14px, 1.4vw, 20px);
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(300px, auto)) !important;
+    grid-auto-rows: minmax(300px, auto) !important;
+    gap: var(--hail-grid-gap) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    align-items: stretch !important;
+    grid-auto-flow: row !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: clamp(300px, 28vw, 420px) !important;
+    aspect-ratio: 16 / 11 !important;
+    margin: 0 !important;
+    padding: clamp(20px, 1.8vw, 28px) !important;
+    border: 0 !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 14px 34px rgba(5, 25, 20, 0.17) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 38%,
+      rgba(0, 0, 0, 0.56) 78%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(13px, 0.9vw, 15px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(22px, 1.65vw, 32px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+    transition: color 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::before,
+  .et_pb_blog_0 article.et_pb_post:focus-within::before {
+    opacity: 0.9;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::after,
+  .et_pb_blog_0 article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+  .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .entry-title a,
+  .et_pb_blog_0 article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    box-shadow:
+      0 0 0 3px rgba(200, 159, 48, 0.82),
+      0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      --hail-grid-gap: 18px;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: auto !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: 16 / 11 !important;
+      min-height: 270px !important;
+      padding: 20px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .et_pb_blog_0 article.et_pb_post {
+      aspect-ratio: auto !important;
+      min-height: 300px !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post::before,
+    .et_pb_blog_0 article.et_pb_post::after,
+    .et_pb_blog_0 article.et_pb_post .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post .entry-title a {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within,
+    .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      container.querySelectorAll(".pagination").forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = post.querySelector(
+          '.post-content-inner a[href*="hail.to"]',
+        );
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty(
+            "background-image",
+            'url("' + imageUrl + '")',
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const fallbackUrl = titleLink.href;
+        const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-05" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   SAFETY: HIDE OLD POST TILES MODULE
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ================================
+   DIVI BLOG -> RESPONSIVE MASONRY
+   Module target: .et_pb_blog_0
+   Post count is controlled in the Divi Blog module.
+================================ */
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-masonry-gap: clamp(14px, 1.4vw, 22px);
+    display: block !important;
+    column-count: 3 !important;
+    column-gap: var(--hail-masonry-gap) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /*
+   * Small post counts should not use CSS columns.
+   * These are controlled by the Divi Blog module post count setting.
+   */
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="1"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    column-count: auto !important;
+    max-width: 720px !important;
+    margin-inline: auto !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="2"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--hail-masonry-gap) !important;
+    column-count: auto !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container[data-post-count="3"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) !important;
+    grid-template-rows: repeat(2, minmax(240px, auto)) !important;
+    gap: var(--hail-masonry-gap) !important;
+    column-count: auto !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 280px !important;
+    margin: 0 0 var(--hail-masonry-gap) !important;
+    padding: clamp(18px, 1.5vw, 24px) !important;
+    overflow: hidden !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 14px 32px rgba(5, 25, 20, 0.16) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 1) {
+    min-height: 420px !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 2),
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 5) {
+    min-height: 330px !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 3) {
+    min-height: 380px !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 4),
+  .et_pb_blog_0 article.et_pb_post:nth-of-type(6n + 6) {
+    min-height: 300px !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="1"]
+    article.et_pb_post {
+    display: flex !important;
+    min-height: clamp(380px, 42vw, 560px) !important;
+    margin: 0 !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="2"]
+    article.et_pb_post {
+    display: flex !important;
+    min-height: clamp(320px, 34vw, 460px) !important;
+    margin: 0 !important;
+  }
+
+  .et_pb_blog_0
+    .et_pb_ajax_pagination_container[data-post-count="3"]
+    article.et_pb_post {
+    display: flex !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.2) 42%,
+      rgba(0, 0, 0, 0.58) 82%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(12px, 0.82vw, 14px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(19px, 1.25vw, 25px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+    transition: color 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::before,
+  .et_pb_blog_0 article.et_pb_post:focus-within::before {
+    opacity: 0.9;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover::after,
+  .et_pb_blog_0 article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+  .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover .entry-title a,
+  .et_pb_blog_0 article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    box-shadow:
+      0 0 0 3px rgba(200, 159, 48, 0.82),
+      0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  @media (max-width: 980px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      column-count: 2 !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      column-count: 1 !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post:nth-of-type(n) {
+      min-height: 300px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-date {
+      font-size: clamp(13px, 3.7vw, 15px) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post,
+    .et_pb_blog_0 article.et_pb_post::before,
+    .et_pb_blog_0 article.et_pb_post::after,
+    .et_pb_blog_0 article.et_pb_post .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post .entry-title a {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within,
+    .et_pb_blog_0 article.et_pb_post:hover .hail-card-text,
+    .et_pb_blog_0 article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      container.querySelectorAll(".pagination").forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = post.querySelector(
+          '.post-content-inner a[href*="hail.to"]',
+        );
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty(
+            "background-image",
+            'url("' + imageUrl + '")',
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const fallbackUrl = titleLink.href;
+        const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-06" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   DIVI BLOG -> 1 COLUMN NEWSFEED
+   Module target: .et_pb_blog_0
+   Post count is controlled in the Divi Blog module.
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0,
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(16px, 1.8vw, 26px);
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: var(--hail-grid-gap) !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    margin-inline: auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    min-height: clamp(330px, 38vw, 520px) !important;
+    margin: 0 !important;
+    padding: clamp(22px, 2vw, 34px) !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 14px 34px rgba(5, 25, 20, 0.17) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container,
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date),
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.22) 42%,
+      rgba(0, 0, 0, 0.62) 84%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 100%
+    );
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: min(100%, 760px) !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(13px, 0.9vw, 15px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.04 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(28px, 3vw, 52px) !important;
+    font-weight: 800 !important;
+    line-height: 1.04 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  @media (max-width: 767px) {
+    .et_pb_blog_0 article.et_pb_post {
+      min-height: 300px !important;
+      padding: 20px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1] ? parseInt(parts[1].replace("w", ""), 10) : 0;
+
+            return { url: url, width: isNaN(width) ? 0 : width };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+        if (src && !src.startsWith("data:image")) imageUrl = src;
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      return dateMatch ? dateMatch[0].trim() : text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+      if (publishedDate) return cleanDateText(publishedDate.textContent);
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+      if (existingCopiedDate) return cleanDateText(existingCopiedDate.textContent);
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+      if (meta) return cleanDateText(meta.textContent);
+
+      return "";
+    }
+
+    function removePagination(container) {
+      container.querySelectorAll(".pagination").forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+        if (wrapper && wrapper !== container) wrapper.remove();
+        else pagination.remove();
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+      if (!url) return;
+      if (opensNewTab) window.open(url, "_blank", "noopener");
+      else window.location.href = url;
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(".entry-featured-image-url img, .et_pb_image_container img");
+        const hailLink = post.querySelector('.post-content-inner a[href*="hail.to"]');
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty("background-image", 'url("' + imageUrl + '")', "important");
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+        if (dateText && !textGroup.contains(dateEl)) textGroup.appendChild(dateEl);
+        if (!textGroup.contains(title)) textGroup.appendChild(title);
+
+        const finalUrl = hailLink ? hailLink.href : titleLink.href;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+        titleLink.href = finalUrl;
+
+        if (imageLink) imageLink.href = finalUrl;
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-07" aria-hidden="true" tabindex="-1"><style>
+  /* ================================
+   DIVI BLOG -> 2 COLUMN NEWSFEED
+   Module target: .et_pb_blog_0
+   Post count is controlled in the Divi Blog module.
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0,
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(14px, 1.5vw, 22px);
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--hail-grid-gap) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding-bottom: clamp(42px, 4.5vw, 58px) !important;
+  }
+
+  .et_pb_blog_0 .et_pb_ajax_pagination_container::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 .et_pb_salvattore_content,
+  .et_pb_blog_0 .column,
+  .et_pb_blog_0 .column.size-1of4,
+  .et_pb_blog_0 .column.size-1of3,
+  .et_pb_blog_0 .column.size-1of2,
+  .et_pb_blog_0 .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 .pagination,
+  .et_pb_blog_0 .pagination.clearfix,
+  .et_pb_blog_0 .pagination .alignleft,
+  .et_pb_blog_0 .pagination .alignright,
+  .et_pb_blog_0 .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    min-height: clamp(300px, 28vw, 430px) !important;
+    margin: 0 !important;
+    padding: clamp(20px, 1.8vw, 28px) !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 14px 34px rgba(5, 25, 20, 0.17) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .entry-featured-image-url,
+  .et_pb_blog_0 article.et_pb_post .et_pb_image_container,
+  .et_pb_blog_0 article.et_pb_post > .post-meta,
+  .et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date),
+  .et_pb_blog_0 article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    z-index: -1 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 38%,
+      rgba(0, 0, 0, 0.56) 78%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(200, 159, 48, 0.96) 0%,
+      rgba(200, 159, 48, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 56%,
+      rgba(103, 177, 16, 0.96) 100%
+    );
+    pointer-events: none;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(13px, 0.9vw, 15px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c89f30;
+    flex: 0 0 auto;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(22px, 1.65vw, 32px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+  }
+
+  .et_pb_blog_0 article.et_pb_post:hover,
+  .et_pb_blog_0 article.et_pb_post:focus-within {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 22px 42px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  @media (max-width: 767px) {
+    .et_pb_blog_0 .et_pb_ajax_pagination_container {
+      grid-template-columns: 1fr !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post {
+      min-height: 300px !important;
+      padding: 20px !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {
+      font-size: clamp(22px, 6.4vw, 31px) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .et_pb_blog_0 article.et_pb_post {
+      transition: none !important;
+    }
+
+    .et_pb_blog_0 article.et_pb_post:hover,
+    .et_pb_blog_0 article.et_pb_post:focus-within {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1] ? parseInt(parts[1].replace("w", ""), 10) : 0;
+
+            return { url: url, width: isNaN(width) ? 0 : width };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+        if (src && !src.startsWith("data:image")) imageUrl = src;
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      return dateMatch ? dateMatch[0].trim() : text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+      if (publishedDate) return cleanDateText(publishedDate.textContent);
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+      if (existingCopiedDate) return cleanDateText(existingCopiedDate.textContent);
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+      if (meta) return cleanDateText(meta.textContent);
+
+      return "";
+    }
+
+    function removePagination(container) {
+      container.querySelectorAll(".pagination").forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+        if (wrapper && wrapper !== container) wrapper.remove();
+        else pagination.remove();
+      });
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+      if (!url) return;
+      if (opensNewTab) window.open(url, "_blank", "noopener");
+      else window.location.href = url;
+    }
+
+    function initHailBlogGrid() {
+      const blog = document.querySelector(".et_pb_blog_0");
+      if (!blog) return;
+
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(".entry-featured-image-url img, .et_pb_image_container img");
+        const hailLink = post.querySelector('.post-content-inner a[href*="hail.to"]');
+
+        if (!title || !titleLink) return;
+
+        const imageUrl = getBestImageUrl(img);
+
+        if (imageUrl) {
+          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+          post.style.setProperty("background-image", 'url("' + imageUrl + '")', "important");
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+        if (dateText && !textGroup.contains(dateEl)) textGroup.appendChild(dateEl);
+        if (!textGroup.contains(title)) textGroup.appendChild(title);
+
+        const finalUrl = hailLink ? hailLink.href : titleLink.href;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+        titleLink.href = finalUrl;
+
+        if (imageLink) imageLink.href = finalUrl;
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailBlogGrid);
+    window.addEventListener("load", initHailBlogGrid);
+    setTimeout(initHailBlogGrid, 250);
+    setTimeout(initHailBlogGrid, 1000);
+  })();
+</script></textarea>
+
     <script>
-      const copyButton = document.getElementById("copy-code");
-      const codeTemplate = document.getElementById("code-template");
+      const copyButtons = document.querySelectorAll(".copy-code");
       const copyStatus = document.getElementById("copy-status");
+      const copyResetTimers = new WeakMap();
 
       function fallbackCopy(code) {
         const textarea = document.createElement("textarea");
@@ -705,8 +4344,36 @@
         }
       }
 
-      async function copyCodeModule() {
-        const code = codeTemplate.value;
+      function showButtonState(button, label, className) {
+        const originalLabel = button.dataset.originalLabel || button.textContent;
+        button.dataset.originalLabel = originalLabel;
+        button.style.width = button.offsetWidth + "px";
+        button.textContent = label;
+        button.classList.remove("is-copied", "is-error");
+        button.classList.add(className);
+
+        const existingTimer = copyResetTimers.get(button);
+
+        if (existingTimer) {
+          clearTimeout(existingTimer);
+        }
+
+        const timer = setTimeout(function () {
+          button.textContent = originalLabel;
+          button.classList.remove("is-copied", "is-error");
+          button.style.width = "";
+          copyResetTimers.delete(button);
+        }, 1100);
+
+        copyResetTimers.set(button, timer);
+      }
+
+      async function copyCodeModule(button) {
+        const template = document.getElementById(button.dataset.codeTarget);
+        const code = template.value;
+        const name = button.dataset.newsfeedName;
+
+        showButtonState(button, "Copied", "is-copied");
 
         try {
           if (navigator.clipboard && window.isSecureContext) {
@@ -715,18 +4382,23 @@
             fallbackCopy(code);
           }
 
-          copyStatus.textContent = "Copied Newsfeed-01 code.";
+          copyStatus.textContent = "Copied " + name + " code.";
         } catch (error) {
           try {
             fallbackCopy(code);
-            copyStatus.textContent = "Copied Newsfeed-01 code.";
+            copyStatus.textContent = "Copied " + name + " code.";
           } catch (fallbackError) {
             copyStatus.textContent = "Copy failed. Please try again.";
+            showButtonState(button, "Failed", "is-error");
           }
         }
       }
 
-      copyButton.addEventListener("click", copyCodeModule);
+      copyButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          copyCodeModule(button);
+        });
+      });
     </script>
   </body>
 </html>
