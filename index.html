@@ -124,6 +124,36 @@
         line-height: 1.5;
       }
 
+      .class-copy-button {
+        display: inline-flex;
+        align-items: center;
+        min-width: 0;
+        min-height: 0;
+        margin: 0 2px;
+        padding: 3px 7px;
+        border-radius: 5px;
+        color: #15352f;
+        background: #eef2e9;
+        box-shadow: inset 0 0 0 1px rgba(21, 53, 47, 0.14);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.92em;
+        font-weight: 800;
+        line-height: 1.25;
+        vertical-align: baseline;
+      }
+
+      .class-copy-button:hover {
+        color: #15352f;
+        background: #e5eddc;
+        box-shadow: inset 0 0 0 1px rgba(21, 53, 47, 0.18);
+      }
+
+      .class-copy-button.is-copied {
+        color: #fff;
+        background: #1e88e5;
+        box-shadow: none;
+      }
+
       .setup-notes {
         display: grid;
         gap: 4px;
@@ -725,7 +755,7 @@
           <h2>Divi 4</h2>
           <ol class="instructions">
             <li>Add the standard Divi 4 Blog module.</li>
-            <li>Add <code>hail-newsfeed</code> to the Blog module CSS Class field.</li>
+            <li>Add <button type="button" class="class-copy-button" data-copy-text="hail-newsfeed" aria-label="Copy hail-newsfeed CSS class">hail-newsfeed</button> to the Blog module CSS Class field.</li>
             <li>Add a Code module below it and paste in one of the newsfeed codes.</li>
           </ol>
           <div class="setup-notes">
@@ -7005,6 +7035,7 @@ php_value post_max_size 7M</code>
 
     <script>
       const copyButtons = document.querySelectorAll(".copy-code");
+      const classCopyButtons = document.querySelectorAll(".class-copy-button");
       const copyStatus = document.getElementById("copy-status");
       const primaryColourInput = document.getElementById("primary-colour");
       const primaryColourHexInput = document.getElementById("primary-colour-hex");
@@ -7135,6 +7166,32 @@ php_value post_max_size 7M</code>
       copyButtons.forEach(function (button) {
         button.addEventListener("click", function () {
           copyCodeModule(button);
+        });
+      });
+
+      classCopyButtons.forEach(function (button) {
+        button.addEventListener("click", async function () {
+          const text = button.dataset.copyText || "";
+
+          showButtonState(button, "Copied", "is-copied");
+
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(text);
+            } else {
+              fallbackCopy(text);
+            }
+
+            copyStatus.textContent = "Copied " + text + ".";
+          } catch (error) {
+            try {
+              fallbackCopy(text);
+              copyStatus.textContent = "Copied " + text + ".";
+            } catch (fallbackError) {
+              copyStatus.textContent = "Copy failed. Please try again.";
+              showButtonState(button, "Failed", "is-error");
+            }
+          }
         });
       });
 
