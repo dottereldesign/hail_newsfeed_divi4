@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hail Newsfeeds</title>
+    <link rel="icon" href="favicon-64.png">
     <style>
       body {
         margin: 0;
@@ -31,6 +32,22 @@
         height: 42px;
         max-width: 160px;
         object-fit: contain;
+      }
+
+      .page-banner {
+        background: #fff;
+      }
+
+      .page-banner-inner {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .page-banner img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
       }
 
       main {
@@ -269,14 +286,20 @@
       </div>
     </header>
 
+    <section class="page-banner" aria-label="Hail Newsfeeds banner">
+      <div class="page-banner-inner">
+        <img src="banner.png" alt="Newsfeed by Hail">
+      </div>
+    </section>
+
     <main>
       <header class="page-header">
         <div>
-          <h1>Hail Newsfeeds</h1>
           <h2>Divi 4</h2>
           <ol class="instructions">
             <li>Add the standard Divi 4 Blog module.</li>
             <li>Add a Code module below it and paste in one of the newsfeed codes.</li>
+            <li>Every code block includes the Newsfeed by Hail image.</li>
           </ol>
         </div>
 
@@ -741,6 +764,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -889,19 +952,22 @@
         const img = post.querySelector(
           ".entry-featured-image-url img, .et_pb_image_container img",
         );
-        const hailLink = post.querySelector(
-          '.post-content-inner a[href*="hail.to"]',
-        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
           post.style.setProperty(
             "background-image",
-            'url("' + imageUrl + '")',
+            safeCssImageUrl,
             "important",
           );
         }
@@ -1460,6 +1526,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -1608,18 +1714,22 @@
         const img = post.querySelector(
           ".entry-featured-image-url img, .et_pb_image_container img",
         );
-        const hailLink = post.querySelector(
-          '.post-content-inner a[href*="hail.to"]',
-        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!titleLink || !title) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
           post.style.setProperty(
             "background-image",
-            'url("' + imageUrl + '")',
+            safeCssImageUrl,
             "important",
           );
         }
@@ -2056,6 +2166,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -2204,19 +2354,22 @@
         const img = post.querySelector(
           ".entry-featured-image-url img, .et_pb_image_container img",
         );
-        const hailLink = post.querySelector(
-          '.post-content-inner a[href*="hail.to"]',
-        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
           post.style.setProperty(
             "background-image",
-            'url("' + imageUrl + '")',
+            safeCssImageUrl,
             "important",
           );
         }
@@ -2619,6 +2772,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -2765,19 +2958,22 @@
         const img = post.querySelector(
           ".entry-featured-image-url img, .et_pb_image_container img",
         );
-        const hailLink = post.querySelector(
-          '.post-content-inner a[href*="hail.to"]',
-        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
           post.style.setProperty(
             "background-image",
-            'url("' + imageUrl + '")',
+            safeCssImageUrl,
             "important",
           );
         }
@@ -3267,6 +3463,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -3413,19 +3649,22 @@
         const img = post.querySelector(
           ".entry-featured-image-url img, .et_pb_image_container img",
         );
-        const hailLink = post.querySelector(
-          '.post-content-inner a[href*="hail.to"]',
-        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
           post.style.setProperty(
             "background-image",
-            'url("' + imageUrl + '")',
+            safeCssImageUrl,
             "important",
           );
         }
@@ -3730,6 +3969,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -3841,15 +4120,24 @@
         const titleLink = post.querySelector(".entry-title a");
         const imageLink = post.querySelector(".entry-featured-image-url");
         const img = post.querySelector(".entry-featured-image-url img, .et_pb_image_container img");
-        const hailLink = post.querySelector('.post-content-inner a[href*="hail.to"]');
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
-          post.style.setProperty("background-image", 'url("' + imageUrl + '")', "important");
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
+          post.style.setProperty(
+            "background-image",
+            safeCssImageUrl,
+            "important",
+          );
         }
 
         let textGroup = post.querySelector(".hail-card-text");
@@ -4142,6 +4430,46 @@
 
 <script>
   (function () {
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+
+      if (!imageUrl) return "";
+
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
     function getBestImageUrl(img) {
       if (!img) return "";
 
@@ -4253,15 +4581,24 @@
         const titleLink = post.querySelector(".entry-title a");
         const imageLink = post.querySelector(".entry-featured-image-url");
         const img = post.querySelector(".entry-featured-image-url img, .et_pb_image_container img");
-        const hailLink = post.querySelector('.post-content-inner a[href*="hail.to"]');
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
 
         if (!title || !titleLink) return;
 
         const imageUrl = getBestImageUrl(img);
+        const safeCssImageUrl = getSafeCssUrl(imageUrl);
 
-        if (imageUrl) {
-          post.style.setProperty("--hail-card-image", 'url("' + imageUrl + '")');
-          post.style.setProperty("background-image", 'url("' + imageUrl + '")', "important");
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
+          post.style.setProperty(
+            "background-image",
+            safeCssImageUrl,
+            "important",
+          );
         }
 
         let textGroup = post.querySelector(".hail-card-text");
