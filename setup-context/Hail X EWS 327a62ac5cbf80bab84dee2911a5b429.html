@@ -1,0 +1,1564 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Hail X EWS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="327a62ac-5cbf-80ba-b84d-ee2911a5b429" class="page sans"><header><h1 class="page-title" dir="auto">Hail X EWS</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-8046-84c3-cc7e68ea1440" class="block-color-blue">Hail WordPress+ Integration</h2></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-806b-aee2-e21643894419" class="toggle"><li><details open=""><summary>Instructions</summary><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-804c-8071-c03c62cd3cc2" class=""><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-801b-8aab-edec90ccab3d" class="">With <strong>WordPress+</strong>, Hail users can push content directly to selected areas of a WordPress website using configured connections.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-802c-97c9-dfb078345865" class="">Because WordPress is highly modular, every site setup will be slightly different, but the steps below cover the general configuration needed to make WordPress+ work smoothly with Hail.</p></div></blockquote></div><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-8016-8567-c4a0f0339008" class="">Overview</h2></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80ec-9c43-ff24806c74b0" class="">With <strong>WordPress+</strong>, <strong>articles</strong> and <strong>publications</strong> from Hail can be pushed into WordPress as standard post objects.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8024-afeb-c90f29cbc31e" class=""><strong>The following content is pushed automatically:</strong></p></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-803a-8e36-d26a9b92ed3f" class="bulleted-list"><li style="list-style-type:disc">title</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80ea-a157-dda4bd60c3db" class="bulleted-list"><li style="list-style-type:disc">featured image</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-805a-8cb6-fcb2df3be572" class="bulleted-list"><li style="list-style-type:disc">body content</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8099-b3b8-d4c777b6a6f6" class="bulleted-list"><li style="list-style-type:disc">author</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8069-a118-e3c017d80dcf" class="bulleted-list"><li style="list-style-type:disc">publish date</li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-801c-8a71-f1964a327e54" class="">Once pushed, this content can be used in WordPress like any other post, including in archives, category pages, tag filters, widgets, and custom page layouts.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80eb-bd7c-d446c4590d11" class="">Each connection can be configured to apply a single WordPress category to the posts it creates. If no category is assigned, posts will default to <strong>Uncategorised</strong>.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-809a-8768-ca3f27687900" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="327a62ac-5cbf-8014-84f1-f915f343fc5c"/></div><div style="display:contents" dir="auto"><h1 id="327a62ac-5cbf-8037-8ad4-f5c38f091543" class="">Setup Guide</h1></div><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-80cc-b8e1-d799e7cedc63" class="block-color-blue">WordPress</h2></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-805e-ad47-f42ffe3528e0" class="block-color-blue_background">1. Create Categories</h3></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8089-aabf-e8dbe2cb89bf" class="">In <strong>WordPress</strong>, go to <strong>Posts → Categories</strong> and create the categories you want each connection to push into. Recommended connection categories include <strong>Articles</strong>, <strong>Publications</strong>, <strong>Notices</strong>, and <strong>Alerts</strong>.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-806c-b8a3-fa8a0c924e43" class="">Hail will automatically push all public tags into WordPress, so any further filtering can usually be managed there.</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8072-9898-d16700bd218d" class="">As an alternative, you can create categories based on page destinations instead of content types. This can provide a clearer UX when content is pushed from Hail. For example, you might create categories such as <strong>Homepage</strong>, <strong>Newsletter Page</strong>, or <strong>Sports Page</strong>, depending on how the site is structured. </p></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-807e-be0e-d4fbb1136f87" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.38.31_AM.png"><img style="width:682px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.38.31_AM.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-803d-ba01-eca5fc18ca4c" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-80bb-8668-e980361a1a2b" class="block-color-blue_background">2. Create an Application Password</h3></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80ce-b7c1-ec09a3e933cc" class="">Go to <strong>Users</strong> in WordPress and select an admin user.</p></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-8016-9cd2-d9fb518971e1" class="numbered-list" start="1"><li>Scroll down to <strong>Application Passwords</strong> and create a new application password.</li></ol></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-80a4-9cb3-d1a59218a195" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.39.41_AM.png"><img style="width:710px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.39.41_AM.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8066-a7b0-da81d78ffe2e" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.42.17_AM.png"><img style="width:710px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.42.17_AM.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-807f-8dac-ea5cc94cfb19" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-804d-bdb4-c45f4cd097a1" class="numbered-list" start="2"><li>Note down the following details, as you will need them when setting up the Hail connection:<br/><strong>What is your Wordpress site URL?</strong><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80ff-a9e9-f72a434327b6" class=""><strong>What is your Wordpress site Username? </strong>(The username which is the Application Password is created on)</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-804e-b6c8-cff521ab030a" class=""><strong>What is your Wordpress site Application Password?</strong></p></div></li></ol></div><div style="display:contents" dir="auto"><p id="336a62ac-5cbf-80bb-8e6a-cae66afa01ae" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-80ba-951f-de2a04a2d7d7" class="numbered-list" start="3"><li><mark class="highlight-yellow">WRITE STEP REGARDING PUSHING ATLEAST 1 PUB OR ART SO THEY DONT HAVE INVISIBLE NEWSFEED.</mark></li></ol></div><div style="display:contents" dir="auto"><p id="336a62ac-5cbf-807c-8a68-fb1117a34af3" class=""><mark class="highlight-yellow">ADD STEP CHECK IF YA PSOTS CAME (yellow text for jamie to update steps)</mark></p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8001-9c57-e50fdb4fb4a1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80fc-922e-f406a6cf686c" class="">Want a fast default template → See Hail Newsfeed 04 (Comes built with code and module, fully responsive.) Scroll down page.</p></div><div style="display:contents" dir="auto"><h3 id="34ba62ac-5cbf-806c-a805-d7901f3d70a2" class=""></h3></div><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-805c-92a7-fd74494afe06" class="block-color-teal">Hail</h2></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-801a-a94c-dfe3de79082c" class="block-color-teal_background">Create a WordPress+ Connection</h3></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-8031-a116-d3ba65f28735" class="numbered-list" start="1"><li>Go to <a href="https://hail.to/app/">Hail</a> and select the Organisation from the top-right menu. If you only have 1 - then it will be the default.<div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-80c1-a09c-d66b5f6c8e33" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.14.49_AM.png"><img style="width:382.9921875px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.14.49_AM.png"/></a></figure></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-8003-a7cc-cd2c3eb83ed7" class="numbered-list" start="2"><li>Select <code>Connections</code> tab from the left side bar</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-8020-be63-e77a637cef20" class="numbered-list" start="3"><li>Select<code>Blogging</code> tab and then <code>Wordpess Plus</code> connection <div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-800a-b4cf-c88530f0b768" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.13.07_AM.png"><img style="width:682px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.13.07_AM.png"/></a></figure></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-803c-a15d-dffa0fc204b8" class="numbered-list" start="4"><li>Enter your Wordpress site URL (e.g. <code>https://wordpress-site.co.nz</code>)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-80c8-99bc-f25ab4d42587" class="numbered-list" start="5"><li>Enter your <code>username</code><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-8029-aa38-e6b30601cffa" class="">Note: not the application password name, the actual WP users username</blockquote></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-808d-a679-d16825c5fb6e" class="numbered-list" start="6"><li>Enter your <code>Application Password</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="327a62ac-5cbf-80cb-984c-f8eb09adc6f8" class="numbered-list" start="7"><li>Click <code>Authorise</code></li></ol></div><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-8006-85a4-d307ef14a743" class="">At this point Hail will make the necessary calls to your Wordpress site, and the next steps allow you to customise your new Wordpress+ connection within Hail.  After customising you will be able to push your Hail content into Wordpress from the standard connections panel inside Hail’s Article &amp; Publication edit screens</blockquote></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80eb-8919-f10983865dc1" class="">There is a form submission / validation issue if “Which post type should be applied to posts for this connection?” is left blank. <code>NONE</code> should be manually selected in this case</p></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-80c6-ad46-cb3984b72f89" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.42.46_AM.png"><img style="width:529.9921875px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.42.46_AM.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8076-b920-fae5128f4009" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.44.44_AM.png"><img style="width:525.9921875px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.44.44_AM.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80bf-b512-e60d48ea3efc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80c1-acbf-ca08407dec4a" class="">When editing an Article or Publication in Hail, users will see the new <strong>Push to WordPress</strong> connection in the right-hand sidebar. Clicking this will send the content to WordPress as a post using the category assigned to that connection. In WordPress, you can then use blog modules or post queries filtered by category to display the pushed content.</p></div><div style="display:contents" dir="auto"><p id="336a62ac-5cbf-80e8-be13-efa74c4d4aea" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80dc-a693-fd58fec65ca5" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-80a5-869e-f0d2122b2888" class="block-color-red">Gotchas</h2></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-805c-bdbc-ca514324185f" class="block-color-blue_background">Wordfence</h3></div><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-80e9-b086-c5933bc38d6d" class=""><strong><span style="border-bottom:0.05em solid">Troubleshooting: </span></strong>If Wordfence has disabled application passwords you will need to enable (uncheck) this in Wordfence config. <br/></blockquote></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-80a1-987a-f86943bf6966" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-12-01_at_12.24.59_PM.png"><img style="width:709.90625px" src="Hail%20X%20EWS/Screenshot_2025-12-01_at_12.24.59_PM.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8099-89a5-d87b7ca77d9f" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-12-01_at_12.25.38_PM.png"><img style="width:709.9375px" src="Hail%20X%20EWS/Screenshot_2025-12-01_at_12.25.38_PM.png"/></a></figure></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="327a62ac-5cbf-8046-83ba-f066d9fbd1bf" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">remove_action(&#x27;request&#x27;, &#x27;wordfence::preventAuthorNScans&#x27;);</code></pre></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8053-9227-d700b856b34e" class="">(Optional) Network &amp; Plugin considerations:<div class="indented"><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8031-9407-ce70881fd971" class=""><strong><span style="border-bottom:0.05em solid">HTTP (and not HTTPS)</span></strong></p></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8078-af05-fa551342ef3f" class="bulleted-list"><li style="list-style-type:disc">Add the following to <code>functions.php</code><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js" integrity="sha512-+8BiRfWso6waiFDv6tEmWF8yfPGgxAtOYLDUB0rRISLwtpxkJ9lpPNUhxwWlikn3qSO+4RQyzDppi62o3ON/AA==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js" integrity="sha512-plzrTi61ltEMFf84gTVO9IkvIMfBu07bnDuahvdlIclmFWzXJ9VcRsny9d45sxFZRv3jJg/MHNyuxnUYEMxMEg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="327a62ac-5cbf-8050-be33-e60a39ee66fb" class="code code-wrap"><code class="language-php" style="white-space:pre-wrap;word-break:break-all">add_filter( &#x27;wp_is_application_passwords_available&#x27;, &#x27;__return_true&#x27; );</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80df-a779-e45f7b7cdc3d" class=""><strong><span style="border-bottom:0.05em solid">Wordfence</span></strong></p></div><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-80d5-bd46-c2bb5935ae4a" class="">IMPORTANT: in WPStaq hosted websites that are in Dev state ( have the hosted URL as staging access website ) Wordfence plugin will need to be disabled as it will prevent the article being pushed to the website. <div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8052-98f4-dc34ba1572f8" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_3.15.54_PM.png"><img style="width:331.984375px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_3.15.54_PM.png"/></a></figure></div></blockquote></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-803b-8c6a-ea016cb2cb48" class="bulleted-list"><li style="list-style-type:disc">In Brute Force Protection Drop Down, disable “Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, the WordPress REST API, and WordPress XML Sitemaps”</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80e2-840f-f7132671201e" class="bulleted-list"><li style="list-style-type:disc">In Brute Force Protection Drop Down, disable “Disable WordPress application passwords”</li></ul></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8014-9a46-c9d90d93af6b" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.37.09_AM.png"><img style="width:682px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_9.37.09_AM.png"/></a></figure></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80ba-9a63-e0316e673647" class="bulleted-list"><li style="list-style-type:disc">In Advanced Firewall Options dropdown, whitelist IPs with the following Hail IP addresses:<div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80be-9903-ef621f6c20b9" class="bulleted-list"><li style="list-style-type:circle"><code>13.213.13.58</code></li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80a0-a817-cd86126ebec6" class="bulleted-list"><li style="list-style-type:circle"><code>54.187.252.11</code></li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-804a-86b2-de30b8eb66f7" class="bulleted-list"><li style="list-style-type:circle"><code>18.143.159.98</code> </li></ul></div></li></ul></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8094-b963-da5c115bf5f2" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_4.06.16_PM.png"><img style="width:625.9375px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_4.06.16_PM.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8018-a840-d3aa57bbf0c1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8052-86c4-f586997c9ba4" class=""><strong><span style="border-bottom:0.05em solid">Really Simple SSL</span></strong></p></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8056-ae59-fe7b15af9834" class="bulleted-list"><li style="list-style-type:disc">Check that the setting <code>Disable user enumeration</code> is unticked</li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80df-b729-d604b6d11d8d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8028-a16f-e1bf69d5be36" class=""><strong><span style="border-bottom:0.05em solid">Yoast SEO</span></strong></p></div><div style="display:contents" dir="auto"><blockquote id="327a62ac-5cbf-80c7-a0f6-d8813194d6b4" class=""><em>EWS Websites are hosted on WP Staq where the File Editor is not accessible. This means you will have to use FTP access to edit functions.php. Steps on doing this safely is required. </em></blockquote></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80ab-b38c-ca88157f55ad" class="bulleted-list"><li style="list-style-type:disc">Add the following to <code>functions.php</code></li></ul></div><div style="display:contents" dir="auto"><pre id="327a62ac-5cbf-804f-bf3a-d91e72985353" class="code code-wrap"><code class="language-php" style="white-space:pre-wrap;word-break:break-all">remove_action(&#x27;request&#x27;, &#x27;wordfence::preventAuthorNScans&#x27;); </code></pre></div></div></p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8017-a674-ea03ee98c324" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="327a62ac-5cbf-80b8-ac81-d85f754119b1"/></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8019-bd13-c28d3fc85a89" class="">There is a form submission / validation issue if “Which post type should be applied to posts for this connection?” is left blank. <code>NONE</code> should be manually selected in this case</p></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8031-b160-cbc0fa7e2c2e" class="image"><a href="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.40.50_AM.png"><img style="width:487.9921875px" src="Hail%20X%20EWS/Screenshot_2025-11-18_at_11.40.50_AM.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-80d6-9a60-c4297fe78cdd" class="">If failing to push</h3></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8095-b84f-f2b6638dee3f" class="bulleted-list"><li style="list-style-type:disc">Check Upload Limit, possibly images might be too big, fix:<div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80fc-966e-c2586da89e4e" class="bulleted-list"><li style="list-style-type:circle">ssh into the server (ssh root@ip)</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80c4-aef3-d31c72102462" class="bulleted-list"><li style="list-style-type:circle">head to the file root (most commonly cd /var/www/html on our WP droplets)</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-80b6-87bf-dd56de1fce12" class="bulleted-list"><li style="list-style-type:circle">open the htaccess (sudo nano .htaccess)</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8024-a8e3-e900a576630e" class="bulleted-list"><li style="list-style-type:circle">and insert after the wordpress section</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8039-b7b3-d056ac421f9a" class="bulleted-list"><li style="list-style-type:circle">php_value upload_max_filesize 5M</li></ul></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8001-a4b1-ec9aa4391da4" class="bulleted-list"><li style="list-style-type:circle">php_value post_max_size 7M</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80d4-b7e8-f586114aba51" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-806a-95dc-c290a7864341" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80fa-b947-e36466d09b46" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8096-a8d0-e6e9fd2554f6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80fe-8765-ced5263aad3e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80a7-933e-d630ac797265" class="">
+</p></div></details></li></ul></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-80ea-9746-f2fa3c70ce47" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="327a62ac-5cbf-8031-87f8-fb1fc5003200" class="block-color-purple"><strong>Divi Cloud Saved Sections</strong></h2></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-800a-acb4-de5f5953550e" class="">Add a new section, click add from Divi Cloud - sign-in and you’ll see categories on the left sidebar - select Hail. Select one of the two and then add the code below to complete the setup. Please note, plugins are required for the different styles - see red text.</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80e9-8e9a-d46c4e356d8a" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="34ba62ac-5cbf-8017-a521-d924645eb1ac" class=""></h3></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8016-b1f3-fc092d9783e8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-80fa-aa4c-d2e079b5d4b0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-8049-89dd-ef168228ea16" class="">Hail Newsfeed 01</h3></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-80ea-a58f-ee3392cfab25" class=""><mark class="highlight-purple"><strong>Divi Cloud: </strong></mark><mark class="highlight-default">Hail - Newsfeed 01 (req. Divi Blog Extra)</mark></p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-800b-82df-ded6677d1c8c" class="block-color-red">Plugin Required (Divi Blog Extra)</p></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-80f4-8265-c551f978c6a5" class="image"><a href="Hail%20X%20EWS/image.png"><img style="width:704px" src="Hail%20X%20EWS/image.png"/></a></figure></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8084-b08b-efb2f537714a" class="toggle"><li><details open=""><summary>hail-newsfeed-01, Divi Theme Options CSS:</summary><div style="display:contents" dir="auto"><pre id="327a62ac-5cbf-803f-bf09-d8c6614a1eda" class="code code-wrap"><code class="language-markdown" style="white-space:pre-wrap;word-break:break-all">/*
+ * Hail Publications — Full-card click (CSS-only)
+ * Works for:
+ *  - Divi Blog module + Divi Blog Extras (article.et_pb_post…)
+ *  - DBP/BRBL Post Tiles (article.dbp-post-tile-inner…)
+ * Requirement:
+ *  - Hail publication link already includes target=&quot;_blank&quot;
+ */
+
+
+/* =========================================================
+   A) DIVI BLOG + DIVI BLOG EXTRAS
+   ========================================================= */
+
+/* Only cards that actually contain a Hail publication link */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) {
+  position: relative !important;
+  cursor: pointer;
+}
+
+/* IMPORTANT: ensure no inner wrapper becomes the containing block / clips the overlay
+   (Divi Blog module uses .post-content-inner; Blog Extras uses .post-data etc.) */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-content,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-content-inner,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-data,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-data p,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .entry-title,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-meta {
+  position: static !important;
+  overflow: visible !important;
+}
+
+/* Divi image container can stay clipped for the zoom effect, but ensure it isn&#x27;t a containing block */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .et_pb_image_container {
+  position: static !important;
+}
+
+/* Hide ONLY the paragraph that is just the Hail publication link
+   (CRITICAL: do NOT use overflow:hidden here or you can clip the overlay link) */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;])
+p:has(&gt; a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]):has(&gt; a:only-child){
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  overflow: visible !important;
+}
+
+/* FULL-CARD OVERLAY (uses the EXISTING hail link) */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;])
+a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;] {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: block !important;
+  background: transparent !important;
+  pointer-events: auto !important;
+  text-indent: -9999px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+/* Hover zoom */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) img {
+  transition: transform 0.3s;
+}
+
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]):hover img {
+  transform: scale(1.08);
+}
+
+/* Keep media clipped */
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .et_pb_image_container,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-media-container,
+:where(.et_pb_blog_grid_wrapper, .et_pb_blog, .et_pb_blog_extras, .et_pb_posts, .el-dbe-blog-extra)
+article.et_pb_post:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .post-media {
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   B) DBP / BRBL POST TILES
+   ========================================================= */
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) {
+  position: relative !important;
+  cursor: pointer;
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .dbp-post-tile-content,
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .dbp-post-tile-meta,
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .dbp-post-tile-title,
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .dbp-post-tile-excerpt {
+  position: static !important;
+  overflow: visible !important;
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;])
+p:has(&gt; a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]):has(&gt; a:only-child){
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  overflow: visible !important;
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;])
+a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: block !important;
+  background: transparent !important;
+  text-indent: -9999px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) img {
+  transition: transform 0.3s;
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]):hover img {
+  transform: scale(1.08);
+}
+
+:where(.dbp-post-tiles, .dbp-module, .brbl_post_tiles)
+article.dbp-post-tile-inner:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]) .dbp-post-tile-figure {
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   HAIL NEWSFEED 01
+   Editorial / magazine split newsfeed
+   ========================================================= */
+
+.hail-newsfeed-01{
+  --news-gap: 18px;
+  --news-radius: 24px;
+  --tile-h: clamp(250px, 21vw, 360px);
+  --pad: clamp(16px, 1.15vw, 24px);
+
+  --title-size: clamp(1.18rem, 1.85vw, 1.6875rem);
+  --feature-title-size: clamp(2rem, 2.65vw, 3.35rem);
+
+  --meta-size: 14px;
+}
+
+.hail-newsfeed-01 .et_pb_posts{
+  overflow: visible !important;
+}
+
+/* =========================================================
+   Outer magazine grid only
+   ========================================================= */
+
+.hail-newsfeed-01 .et_pb_posts &gt; .el-dbe-blog-extra{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-areas:
+    &quot;feature feature card2 card3&quot;
+    &quot;feature feature card4 card5&quot;;
+  grid-template-rows: repeat(2, minmax(0, var(--tile-h)));
+  grid-auto-rows: minmax(0, var(--tile-h));
+  gap: var(--news-gap);
+  align-items: stretch;
+}
+
+/* =========================================================
+   Card shell
+   ========================================================= */
+
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post{
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: var(--pad) !important;
+  float: none !important;
+  overflow: hidden !important;
+
+  border: 0 !important;
+  border-radius: var(--news-radius) !important;
+  background: #111 !important;
+  box-shadow: none !important;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(1){ grid-area: feature; }
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(2){ grid-area: card2; }
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(3){ grid-area: card3; }
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(4){ grid-area: card4; }
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(5){ grid-area: card5; }
+
+/* =========================================================
+   Media
+   ========================================================= */
+
+.hail-newsfeed-01 .post-media-container,
+.hail-newsfeed-01 .post-media{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.hail-newsfeed-01 .entry-featured-image-url{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hail-newsfeed-01 .post-media-container::before,
+.hail-newsfeed-01 .post-media::before,
+.hail-newsfeed-01 .entry-featured-image-url::before{
+  content: none !important;
+  display: none !important;
+}
+
+.hail-newsfeed-01 .entry-featured-image-url img,
+.hail-newsfeed-01 .post-media img,
+.hail-newsfeed-01 img.et_pb_post_main_image{
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  filter: brightness(.83);
+  transform: scale(1);
+  transition: transform .45s ease, filter .45s ease;
+}
+
+.hail-newsfeed-01 article.et_pb_post:hover img.et_pb_post_main_image,
+.hail-newsfeed-01 article.et_pb_post:hover .entry-featured-image-url img{
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   Overlay wash
+   ========================================================= */
+
+.hail-newsfeed-01 article.et_pb_post::before{
+  content: &quot;&quot;;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.64) 0%,
+      rgba(0,0,0,.38) 26%,
+      rgba(0,0,0,.16) 58%,
+      rgba(0,0,0,.06) 100%
+    );
+}
+
+/* =========================================================
+   Strip DBE chrome
+   ========================================================= */
+
+.hail-newsfeed-01 .post-categories,
+.hail-newsfeed-01 .el-read-more-link,
+.hail-newsfeed-01 .post-meta .author,
+.hail-newsfeed-01 .post-meta .comments,
+.hail-newsfeed-01 .post-meta .divider{
+  display: none !important;
+}
+
+.hail-newsfeed-01 .post-content .abs-url{
+  display: none !important;
+}
+
+/* kill DBE white panel look */
+.hail-newsfeed-01 .post-content,
+.hail-newsfeed-01 .post-data,
+.hail-newsfeed-01 .post-data p,
+.hail-newsfeed-01 .entry-title,
+.hail-newsfeed-01 .entry-title a,
+.hail-newsfeed-01 .post-meta{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* =========================================================
+   Bottom stack
+   IMPORTANT:
+   - no inner grid
+   - no flex-grow
+   - title block above date
+   - date sits on bottom padding line
+   ========================================================= */
+
+.hail-newsfeed-01 .post-content,
+.hail-newsfeed-01 .post-meta{
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+}
+
+.hail-newsfeed-01 .post-content,
+.hail-newsfeed-01 .et_pb_post_extra.el_dbe_block_extended .post-content{
+  order: 1 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  z-index: 4 !important;
+  pointer-events: none;
+}
+
+.hail-newsfeed-01 .post-meta{
+  order: 2 !important;
+  display: block !important;
+  margin: 6px 0 0 !important;
+  padding: 0 !important;
+  z-index: 4 !important;
+  color: rgba(255,255,255,.92) !important;
+  font-size: var(--meta-size) !important;
+  line-height: 1.2 !important;
+  pointer-events: none;
+}
+
+.hail-newsfeed-01 .post-meta .published{
+  display: inline-flex !important;
+  align-items: center;
+  gap: .45em;
+}
+
+/* =========================================================
+   Title
+   ========================================================= */
+
+.hail-newsfeed-01 .entry-title{
+  position: static !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: var(--title-size);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-weight: 800;
+  overflow: visible !important;
+  pointer-events: none;
+}
+
+.hail-newsfeed-01 .entry-title a{
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #fff !important;
+  text-decoration: none !important;
+  text-indent: 0 !important;
+  text-align: left !important;
+  transform: none !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal !important;
+  pointer-events: auto;
+}
+
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(1) .entry-title{
+  font-size: var(--feature-title-size);
+}
+
+/* =========================================================
+   Excerpt handling
+   - hide excerpt on non-Hail cards
+   - Hail cards keep post-data in DOM so overlay works
+   - Hail paragraph already collapses above
+   ========================================================= */
+
+.hail-newsfeed-01 .post-data{
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
+  pointer-events: none;
+}
+
+.hail-newsfeed-01 .post-data:empty{
+  display: none !important;
+}
+
+/* hide excerpt on cards that do NOT have a hail publication */
+.hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:not(:has(a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;])) .post-data{
+  display: none !important;
+}
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 980px){
+  .hail-newsfeed-01{
+    --news-gap: 16px;
+    --tile-h: 280px;
+    --pad: 16px;
+    --title-size: clamp(1rem, 2.1vw, 1.28rem);
+    --feature-title-size: clamp(1rem, 2.1vw, 1.28rem);
+    --meta-size: 13px;
+  }
+
+  .hail-newsfeed-01 .et_pb_posts &gt; .el-dbe-blog-extra{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      &quot;feature feature&quot;
+      &quot;card2 card3&quot;
+      &quot;card4 card5&quot;;
+    grid-template-rows:
+      minmax(0, 500px)
+      minmax(0, var(--tile-h))
+      minmax(0, var(--tile-h));
+    grid-auto-rows: minmax(0, var(--tile-h));
+  }
+
+  .hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(1) .entry-title{
+    font-size: var(--title-size) !important;
+  }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 767px){
+  .hail-newsfeed-01{
+    --news-gap: 14px;
+    --news-radius: 18px;
+    --tile-h: 280px;
+    --pad: 18px;
+    --title-size: clamp(1rem, 5vw, 1.4rem);
+    --feature-title-size: clamp(1rem, 5vw, 1.4rem);
+    --meta-size: 13px;
+  }
+
+  .hail-newsfeed-01 .et_pb_posts &gt; .el-dbe-blog-extra{
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    grid-template-rows: none;
+    grid-auto-rows: minmax(0, var(--tile-h));
+  }
+
+  .hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post{
+    grid-area: auto !important;
+  }
+
+  .hail-newsfeed-01 .entry-title,
+  .hail-newsfeed-01 .el-dbe-blog-extra &gt; article.et_pb_post:nth-child(1) .entry-title{
+    font-size: var(--title-size) !important;
+    max-width: 100% !important;
+  }
+}</code></pre></div></details></li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-808c-a2c4-ff4900f09c1b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="327a62ac-5cbf-80fa-893e-e751f8ed5b5a" class="">Hail Newsfeed 02</h3></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8078-9f8e-d7c7d54b6823" class=""><mark class="highlight-purple"><strong>Divi Cloud:  </strong></mark></p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8041-a76b-e78f74206330" class=""><mark class="highlight-red">Plugin Required (Divi Blog Slider)</mark></p></div><div style="display:contents" dir="ltr"><figure id="327a62ac-5cbf-8050-b332-cad914996b5c" class="image"><a href="Hail%20X%20EWS/image%201.png"><img style="width:704px" src="Hail%20X%20EWS/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><ul id="327a62ac-5cbf-8077-998d-e97a81a4042e" class="toggle"><li><details open=""><summary>hail-newsfeed-02, Divi Theme Options → Integration →JavaScript &lt;body&gt;</summary><div style="display:contents" dir="auto"><pre id="327a62ac-5cbf-80f0-923b-f6c95134e007" class="code code-wrap"><code class="language-markdown" style="white-space:pre-wrap;word-break:break-all">&lt;script&gt;
+document.addEventListener(&#x27;DOMContentLoaded&#x27;, function () {
+const sliderRoot = document.querySelector(&#x27;.dipi_blog_slider_0.dp_custom_blog_slider&#x27;);
+if (!sliderRoot) return;
+
+function processDipiPublicationCards(scope) {
+const cards = scope.querySelectorAll(&#x27;.dipi-blog-post:not([data-hail-processed=&quot;true&quot;])&#x27;);cards.forEach(function (card) {
+  const siblingContent = card.nextElementSibling;
+
+  if (
+    !siblingContent ||
+    !siblingContent.classList ||
+    !siblingContent.classList.contains(&#x27;dipi-post-content&#x27;)
+  ) {
+    card.setAttribute(&#x27;data-hail-processed&#x27;, &#x27;true&#x27;);
+    return;
+  }
+
+  const publicationLink = siblingContent.querySelector(&#x27;a[href*=&quot;hail.to&quot;][href*=&quot;/publication/&quot;]&#x27;);
+  if (!publicationLink) {
+    card.setAttribute(&#x27;data-hail-processed&#x27;, &#x27;true&#x27;);
+    return;
+  }
+
+  const title = siblingContent.querySelector(&#x27;.dipi-entry-title&#x27;);
+  const existingContent = card.querySelector(&#x27;.dipi-post-content&#x27;);
+
+  card.classList.add(&#x27;has-hail-publication&#x27;);
+  card.setAttribute(&#x27;href&#x27;, publicationLink.href);
+  card.setAttribute(&#x27;target&#x27;, publicationLink.getAttribute(&#x27;target&#x27;) || &#x27;_blank&#x27;);
+  card.setAttribute(&#x27;rel&#x27;, &#x27;noopener&#x27;);
+
+  let contentTarget = existingContent;
+  if (!contentTarget) {
+    contentTarget = document.createElement(&#x27;div&#x27;);
+    contentTarget.className = &#x27;dipi-post-content dipi-post-content--rebuilt&#x27;;
+    card.appendChild(contentTarget);
+  }
+
+  if (title &amp;&amp; !contentTarget.querySelector(&#x27;.dipi-entry-title&#x27;)) {
+    const rebuiltTitle = document.createElement(&#x27;h2&#x27;);
+    rebuiltTitle.className = &#x27;dipi-entry-title&#x27;;
+    rebuiltTitle.textContent = title.textContent.trim();
+    contentTarget.appendChild(rebuiltTitle);
+  }
+
+  siblingContent.remove();
+  card.setAttribute(&#x27;data-hail-processed&#x27;, &#x27;true&#x27;);
+});
+}
+
+processDipiPublicationCards(sliderRoot);
+
+let rafId = null;
+function rerun() {
+if (rafId) cancelAnimationFrame(rafId);
+rafId = requestAnimationFrame(function () {
+processDipiPublicationCards(sliderRoot);
+});
+}
+
+sliderRoot.addEventListener(&#x27;click&#x27;, function (event) {
+if (event.target.closest(&#x27;.swiper-button-next, .swiper-button-prev, .swiper-pagination&#x27;)) {
+setTimeout(rerun, 60);
+}
+});
+
+window.addEventListener(&#x27;load&#x27;, function () {
+setTimeout(rerun, 120);
+setTimeout(rerun, 500);
+});
+
+const wrapper = sliderRoot.querySelector(&#x27;.dipi-blog-slider-wrapper&#x27;);
+if (!wrapper) return;
+
+const observer = new MutationObserver(function () {
+rerun();
+});
+
+observer.observe(wrapper, { childList: true, subtree: true });
+});
+&lt;/script&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-8031-a49c-f875d87b3cd6" class="">
+</p></div></details></li></ul></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-806c-9171-ee226e1101fc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="327a62ac-5cbf-800e-9153-fda50140945c" class=""><em>If there’s any issues or requested changes, please message me on Slack for the fastest reply, or email me </em><em><a href="mailto:jamie@hail.to">jamie@hail.to</a></em></p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8016-9699-d3ab9082142b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-800f-b812-c1e200a62f33" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="33aa62ac-5cbf-80e1-bd41-d83c20d40b9a" class="">Hail Newsfeed 03</h3></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8058-9cd8-db75ea8a187b" class=""><mark class="highlight-purple"><strong>Divi Cloud: </strong></mark>Hail – Newsfeed 03 (req. Divi Blog Slider)</p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-80e6-aea4-f62c56b69fcd" class=""><mark class="highlight-red">Plugin Required (Divi Blog Slider)</mark></p></div><div style="display:contents" dir="ltr"><figure id="33aa62ac-5cbf-80dd-8912-d832d746b455" class="image"><a href="Hail%20X%20EWS/image%202.png"><img style="width:703.9921875px" src="Hail%20X%20EWS/image%202.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8001-8e1c-fb9ad018416e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="33aa62ac-5cbf-8029-b23e-ce4d924482e7" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="34ba62ac-5cbf-805a-92b6-e60e9f1edc5d" class=""><strong>Hail Newsfeed 04 </strong></h3></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8001-a671-dba425815493" class=""><mark class="highlight-teal">Divi Cloud: Hail - Newsfeed 04 (req. none)</mark></p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80fd-9ee0-ec31675cc5e2" class="">Divi → Divi Library → <strong>Import (Recommended)</strong></p></div><div style="display:contents" dir="ltr"><figure id="34ba62ac-5cbf-8098-af4c-e80aeb9d6bef"><div class="source"><a href="Hail%20X%20EWS/Hail_Newsfeed_04_-_Section_(ModuleCode).json">Hail Newsfeed 04 - Section (Module+Code).json</a></div></figure></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-805a-90b8-fff214fafc33" class="">
+</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-806b-8503-c1535fd67de2" class=""><mark class="highlight-red">Ignore below if using the import method</mark></p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80b0-8494-d01a232ddbee" class="">
+</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js" integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="34ba62ac-5cbf-8041-8800-d69c4518a6bb" class="code code-wrap"><code class="language-json" style="white-space:pre-wrap;word-break:break-all">{&quot;context&quot;:&quot;et_builder_layouts&quot;,&quot;data&quot;:{&quot;19372544&quot;:{&quot;ID&quot;:19372544,&quot;post_date&quot;:&quot;2026-04-24 09:04:25&quot;,&quot;post_date_gmt&quot;:&quot;2026-04-23 23:04:25&quot;,&quot;post_content&quot;:&quot;[et_pb_section fb_built=\&quot;1\&quot; custom_padding_last_edited=\&quot;on|phone\&quot; disabled_on=\&quot;off|off|off\&quot; module_id=\&quot;dp-scroll-page\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; custom_padding=\&quot;96px|48px|96px|48px|false|false\&quot; custom_padding_tablet=\&quot;80px|32px||32px|false|false\&quot; custom_padding_phone=\&quot;60px|16px|60px|16px|false|false\&quot; hover_enabled=\&quot;0\&quot; da_disable_devices=\&quot;off|off|off\&quot; locked=\&quot;off\&quot; global_colors_info=\&quot;{}\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot; template_type=\&quot;section\&quot;][et_pb_row disabled_on=\&quot;off|off|off\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; width=\&quot;90%\&quot; max_width=\&quot;100%\&quot; custom_padding=\&quot;0px||||false|false\&quot; hover_enabled=\&quot;0\&quot; locked=\&quot;off\&quot; global_colors_info=\&quot;{}\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_column type=\&quot;4_4\&quot; _builder_version=\&quot;4.24.2\&quot; _module_preset=\&quot;default\&quot; global_colors_info=\&quot;{}\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_text _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; header_2_font=\&quot;|700||on|||||\&quot; header_2_text_align=\&quot;center\&quot; header_2_text_color=\&quot;gcid-ec81c81b-3a31-47d7-a3a1-8d4ffd151693\&quot; header_2_font_size=\&quot;4vw\&quot; module_alignment=\&quot;left\&quot; scroll_fade_enable=\&quot;on\&quot; hover_enabled=\&quot;0\&quot; header_2_font_size_tablet=\&quot;60px\&quot; header_2_font_size_phone=\&quot;40px\&quot; header_2_font_size_last_edited=\&quot;on|tablet\&quot; header_2_letter_spacing_tablet=\&quot;-2px\&quot; header_2_letter_spacing_phone=\&quot;-2px\&quot; header_2_letter_spacing_last_edited=\&quot;on|tablet\&quot; locked=\&quot;off\&quot; global_colors_info=\&quot;{%22gcid-ec81c81b-3a31-47d7-a3a1-8d4ffd151693%22:%91%22header_2_text_color%22%93}\&quot; custom_padding=\&quot;0px||||false|false\&quot; custom_margin=\&quot;0px||||false|false\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;]&lt;h2&gt;Latest News&lt;\/h2&gt;[\/et_pb_text][brbl_post_tiles include_categories=\&quot;16\&quot; order=\&quot;DESC\&quot; layout=\&quot;tile-2\&quot; base_height=\&quot;300px\&quot; show_author=\&quot;off\&quot; ft_show_excerpt=\&quot;off\&quot; category_bg=\&quot;gcid-heading-color\&quot; overlay_visibility=\&quot;always\&quot; overlay_bg_color=\&quot;rgba(0,0,0,0.3)\&quot; tiles_gap_tablet=\&quot;\&quot; tiles_gap_phone=\&quot;\&quot; tiles_gap_last_edited=\&quot;on|phone\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; title_font=\&quot;|700||on|||||\&quot; title_text_color=\&quot;gcid-4b7ae6f2-31ae-4cb3-85b8-172cd9fc2f01\&quot; title_line_height=\&quot;1.2em\&quot; excerpt_font=\&quot;|||on|||||\&quot; ft_title_font=\&quot;|700||on|||||\&quot; ft_title_font_size=\&quot;48px\&quot; ft_title_line_height=\&quot;1.1em\&quot; category_font_size=\&quot;12px\&quot; category_line_height=\&quot;2em\&quot; date_font_size=\&quot;14px\&quot; date_line_height=\&quot;1em\&quot; scroll_fade_enable=\&quot;on\&quot; ft_title_font_size_tablet=\&quot;48px\&quot; ft_title_font_size_phone=\&quot;22px\&quot; ft_title_font_size_last_edited=\&quot;on|phone\&quot; scroll_fade_tablet=\&quot;\&quot; scroll_fade_phone=\&quot;0|50|50|100|100%|100|100\&quot; scroll_fade_last_edited=\&quot;on|phone\&quot; border_radii_post=\&quot;on|15px|15px|15px|15px\&quot; global_colors_info=\&quot;{%22gcid-heading-color%22:%91%22category_bg%22%93,%22gcid-4b7ae6f2-31ae-4cb3-85b8-172cd9fc2f01%22:%91%22title_text_color%22%93,%22gcid-fc702411-ff1d-4ab8-9628-9b76451799d5%22:%91%22overlay_bg_color_gradient_stops%22%93}\&quot; overlay_bg_color__hover_enabled=\&quot;on|desktop\&quot; overlay_bg_color__hover=\&quot;rgba(0,0,0,0.5)\&quot; overlay_bg_enable_color__hover=\&quot;on\&quot; overlay_bg_color_gradient_stops__hover=\&quot;rgba(255,255,255,0) 0%|#67765f 100%\&quot; overlay_bg_use_color_gradient__hover=\&quot;on\&quot; theme_builder_area=\&quot;post_content\&quot;][\/brbl_post_tiles][\/et_pb_column][\/et_pb_row][et_pb_row _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; width=\&quot;100%\&quot; max_width=\&quot;1440px\&quot; hover_enabled=\&quot;0\&quot; sticky_enabled=\&quot;0\&quot; locked=\&quot;off\&quot; custom_padding=\&quot;0px||0px||false|false\&quot; custom_margin=\&quot;0px||0px||false|false\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_column _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; type=\&quot;4_4\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_blog _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; hover_enabled=\&quot;0\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;][\/et_pb_blog][et_pb_code _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; hover_enabled=\&quot;0\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;]&lt;style&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* ================================&lt;!-- [et_pb_line_break_holder] --&gt;   SAFETY: HIDE OLD POST TILES MODULE&lt;!-- [et_pb_line_break_holder] --&gt;   This is the module causing mobile\/tablet excerpt issues.&lt;!-- [et_pb_line_break_holder] --&gt;================================ *\/&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.brbl_post_tiles_0,&lt;!-- [et_pb_line_break_holder] --&gt;.brbl_post_tiles_0.et_pb_module,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_module.brbl_post_tiles_0 {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Extra safety if any DBP tile excerpts leak through elsewhere *\/&lt;!-- [et_pb_line_break_holder] --&gt;.dbp-post-tile-excerpt {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* ================================&lt;!-- [et_pb_line_break_holder] --&gt;   DIVI BLOG \u2192 3 COL \/ 2 ROW FEATURE GRID&lt;!-- [et_pb_line_break_holder] --&gt;   Module target: .et_pb_blog_0&lt;!-- [et_pb_line_break_holder] --&gt;================================ *\/&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Main grid *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .et_pb_ajax_pagination_container {&lt;!-- [et_pb_line_break_holder] --&gt;  display: grid !important;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-template-columns: 2fr 1fr 1fr !important;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-template-rows: 300px 300px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  gap: 10px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  width: 100% !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Neutralise Divi \/ Salvattore masonry wrappers *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .et_pb_salvattore_content,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .column,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .column.size-1of3,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .column.size-1of2,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .column.size-1of1 {&lt;!-- [et_pb_line_break_holder] --&gt;  display: contents !important;&lt;!-- [et_pb_line_break_holder] --&gt;  width: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Completely hide Older \/ Next Entries *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .pagination,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .pagination.clearfix,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .pagination .alignleft,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .pagination .alignright,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 .pagination a {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Base card *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post {&lt;!-- [et_pb_line_break_holder] --&gt;  position: relative !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  border: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  border-radius: 12px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  background-color: #0b3f34 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  background-size: cover !important;&lt;!-- [et_pb_line_break_holder] --&gt;  background-position: center !important;&lt;!-- [et_pb_line_break_holder] --&gt;  background-repeat: no-repeat !important;&lt;!-- [et_pb_line_break_holder] --&gt;  min-height: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;  cursor: pointer;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Exact layout *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(1) {&lt;!-- [et_pb_line_break_holder] --&gt;  grid-column: 1;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-row: 1 \/ span 2;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(2) {&lt;!-- [et_pb_line_break_holder] --&gt;  grid-column: 2;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-row: 1;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(3) {&lt;!-- [et_pb_line_break_holder] --&gt;  grid-column: 3;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-row: 1;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(4) {&lt;!-- [et_pb_line_break_holder] --&gt;  grid-column: 2;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-row: 2;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(5) {&lt;!-- [et_pb_line_break_holder] --&gt;  grid-column: 3;&lt;!-- [et_pb_line_break_holder] --&gt;  grid-row: 2;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Only show 5 posts *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(n+6) {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Hide the real image element because JS puts it on the card background *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .entry-featured-image-url,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .et_pb_image_container {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Hide original Divi meta. JS copies the date into .hail-card-date *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post &gt; .post-meta,&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Hide excerpt\/content visually, but keep it in DOM for Hail link detection *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .post-content {&lt;!-- [et_pb_line_break_holder] --&gt;  position: absolute !important;&lt;!-- [et_pb_line_break_holder] --&gt;  width: 1px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: 1px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: hidden !important;&lt;!-- [et_pb_line_break_holder] --&gt;  opacity: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  pointer-events: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  clip-path: inset(50%) !important;&lt;!-- [et_pb_line_break_holder] --&gt;  white-space: nowrap !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  z-index: -1 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Smooth full-image overlay with stronger darkness at bottom *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post::before {&lt;!-- [et_pb_line_break_holder] --&gt;  content: \&quot;\&quot;;&lt;!-- [et_pb_line_break_holder] --&gt;  position: absolute;&lt;!-- [et_pb_line_break_holder] --&gt;  inset: 0;&lt;!-- [et_pb_line_break_holder] --&gt;  z-index: 1;&lt;!-- [et_pb_line_break_holder] --&gt;  background:&lt;!-- [et_pb_line_break_holder] --&gt;    linear-gradient(&lt;!-- [et_pb_line_break_holder] --&gt;      180deg,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.10) 0%,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.14) 22%,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.22) 45%,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.38) 68%,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.62) 86%,&lt;!-- [et_pb_line_break_holder] --&gt;      rgba(0, 0, 0, 0.76) 100%&lt;!-- [et_pb_line_break_holder] --&gt;    );&lt;!-- [et_pb_line_break_holder] --&gt;  pointer-events: none;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Gold\/green stripe *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post::after {&lt;!-- [et_pb_line_break_holder] --&gt;  content: \&quot;\&quot;;&lt;!-- [et_pb_line_break_holder] --&gt;  position: absolute;&lt;!-- [et_pb_line_break_holder] --&gt;  left: 0;&lt;!-- [et_pb_line_break_holder] --&gt;  right: 0;&lt;!-- [et_pb_line_break_holder] --&gt;  bottom: 12px;&lt;!-- [et_pb_line_break_holder] --&gt;  height: 7px;&lt;!-- [et_pb_line_break_holder] --&gt;  z-index: 2;&lt;!-- [et_pb_line_break_holder] --&gt;  background: linear-gradient(&lt;!-- [et_pb_line_break_holder] --&gt;    90deg,&lt;!-- [et_pb_line_break_holder] --&gt;    rgba(200,159,48,0.95) 0%,&lt;!-- [et_pb_line_break_holder] --&gt;    rgba(200,159,48,0.95) 55%,&lt;!-- [et_pb_line_break_holder] --&gt;    rgba(13,63,51,0.95) 55%,&lt;!-- [et_pb_line_break_holder] --&gt;    rgba(13,63,51,0.95) 100%&lt;!-- [et_pb_line_break_holder] --&gt;  );&lt;!-- [et_pb_line_break_holder] --&gt;  pointer-events: none;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Text group: date above title *\/&lt;!-- [et_pb_line_break_holder] --&gt;\/* Bottom spacing now matches left spacing *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .hail-card-text {&lt;!-- [et_pb_line_break_holder] --&gt;  position: absolute !important;&lt;!-- [et_pb_line_break_holder] --&gt;  left: 24px;&lt;!-- [et_pb_line_break_holder] --&gt;  right: 24px;&lt;!-- [et_pb_line_break_holder] --&gt;  bottom: 24px;&lt;!-- [et_pb_line_break_holder] --&gt;  z-index: 3;&lt;!-- [et_pb_line_break_holder] --&gt;  display: flex !important;&lt;!-- [et_pb_line_break_holder] --&gt;  flex-direction: column !important;&lt;!-- [et_pb_line_break_holder] --&gt;  gap: 10px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Copied date *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .hail-card-date {&lt;!-- [et_pb_line_break_holder] --&gt;  display: block !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: visible !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: visible !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  color: rgba(255,255,255,0.82) !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-size: 15px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  line-height: 1 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-family: Lato, Helvetica, Arial, sans-serif !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-weight: 300 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  text-decoration: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Title *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {&lt;!-- [et_pb_line_break_holder] --&gt;  position: static !important;&lt;!-- [et_pb_line_break_holder] --&gt;  display: block !important;&lt;!-- [et_pb_line_break_holder] --&gt;  visibility: visible !important;&lt;!-- [et_pb_line_break_holder] --&gt;  height: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;  overflow: visible !important;&lt;!-- [et_pb_line_break_holder] --&gt;  margin: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  padding: 0 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  line-height: 1.05 !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {&lt;!-- [et_pb_line_break_holder] --&gt;  color: #fff !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-family: Poppins, Helvetica, Arial, sans-serif !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-weight: 800 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  line-height: 1.05 !important;&lt;!-- [et_pb_line_break_holder] --&gt;  letter-spacing: 0.02em !important;&lt;!-- [et_pb_line_break_holder] --&gt;  text-transform: uppercase !important;&lt;!-- [et_pb_line_break_holder] --&gt;  text-decoration: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  font-size: clamp(22px, 1.45vw, 30px) !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Bigger title on featured card *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post:nth-of-type(1) .hail-card-text .entry-title a {&lt;!-- [et_pb_line_break_holder] --&gt;  font-size: clamp(32px, 2.7vw, 52px) !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Hide Divi read more button *\/&lt;!-- [et_pb_line_break_holder] --&gt;.et_pb_blog_0 article.et_pb_post .more-link {&lt;!-- [et_pb_line_break_holder] --&gt;  display: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Tablet *\/&lt;!-- [et_pb_line_break_holder] --&gt;@media (max-width: 980px) {&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 .et_pb_ajax_pagination_container {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-template-columns: 1fr 1fr !important;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-template-rows: 360px 260px 260px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(1) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: 1 \/ span 2;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: 1;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(2) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: 1;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: 2;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(3) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: 2;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: 2;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(4) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: 1;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: 3;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(5) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: 2;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: 3;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post .hail-card-text {&lt;!-- [et_pb_line_break_holder] --&gt;    left: 22px;&lt;!-- [et_pb_line_break_holder] --&gt;    right: 22px;&lt;!-- [et_pb_line_break_holder] --&gt;    bottom: 22px;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post::after {&lt;!-- [et_pb_line_break_holder] --&gt;    bottom: 10px;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;\/* Mobile *\/&lt;!-- [et_pb_line_break_holder] --&gt;@media (max-width: 600px) {&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 .et_pb_ajax_pagination_container {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-template-columns: 1fr !important;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-template-rows: none !important;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post,&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(1),&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(2),&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(3),&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(4),&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post:nth-of-type(5) {&lt;!-- [et_pb_line_break_holder] --&gt;    grid-column: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;    grid-row: auto !important;&lt;!-- [et_pb_line_break_holder] --&gt;    min-height: 300px !important;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post .hail-card-text {&lt;!-- [et_pb_line_break_holder] --&gt;    left: 20px;&lt;!-- [et_pb_line_break_holder] --&gt;    right: 20px;&lt;!-- [et_pb_line_break_holder] --&gt;    bottom: 20px;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  .et_pb_blog_0 article.et_pb_post::after {&lt;!-- [et_pb_line_break_holder] --&gt;    bottom: 8px;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;}&lt;!-- [et_pb_line_break_holder] --&gt;&lt;\/style&gt;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;script&gt;&lt;!-- [et_pb_line_break_holder] --&gt;(function () {&lt;!-- [et_pb_line_break_holder] --&gt;  function getBestImageUrl(img) {&lt;!-- [et_pb_line_break_holder] --&gt;    if (!img) return &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const srcset =&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-srcset&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-lazy-srcset&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;srcset&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (srcset) {&lt;!-- [et_pb_line_break_holder] --&gt;      const candidates = srcset&lt;!-- [et_pb_line_break_holder] --&gt;        .split(&#x27;,&#x27;)&lt;!-- [et_pb_line_break_holder] --&gt;        .map(function (item) {&lt;!-- [et_pb_line_break_holder] --&gt;          const parts = item.trim().split(\/\\s+\/);&lt;!-- [et_pb_line_break_holder] --&gt;          const url = parts[0];&lt;!-- [et_pb_line_break_holder] --&gt;          const width = parts[1] ? parseInt(parts[1].replace(&#x27;w&#x27;, &#x27;&#x27;), 10) : 0;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;          return {&lt;!-- [et_pb_line_break_holder] --&gt;            url: url,&lt;!-- [et_pb_line_break_holder] --&gt;            width: isNaN(width) ? 0 : width&lt;!-- [et_pb_line_break_holder] --&gt;          };&lt;!-- [et_pb_line_break_holder] --&gt;        })&lt;!-- [et_pb_line_break_holder] --&gt;        .filter(function (item) {&lt;!-- [et_pb_line_break_holder] --&gt;          return item.url &amp;&amp; !item.url.startsWith(&#x27;data:image&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;        });&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (candidates.length) {&lt;!-- [et_pb_line_break_holder] --&gt;        candidates.sort(function (a, b) {&lt;!-- [et_pb_line_break_holder] --&gt;          return b.width - a.width;&lt;!-- [et_pb_line_break_holder] --&gt;        });&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;        return candidates[0].url.replace(\/-\\d+x\\d+(?=\\.(jpg|jpeg|png|webp))\/i, &#x27;&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    let imageUrl =&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-full-url&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-large_image&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-src&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-lazy-src&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      img.getAttribute(&#x27;data-eio-lazy-src&#x27;) ||&lt;!-- [et_pb_line_break_holder] --&gt;      &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (!imageUrl) {&lt;!-- [et_pb_line_break_holder] --&gt;      const src = img.getAttribute(&#x27;src&#x27;) || img.currentSrc || &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (src &amp;&amp; !src.startsWith(&#x27;data:image&#x27;)) {&lt;!-- [et_pb_line_break_holder] --&gt;        imageUrl = src;&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    return imageUrl.replace(\/-\\d+x\\d+(?=\\.(jpg|jpeg|png|webp))\/i, &#x27;&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  function cleanDateText(text) {&lt;!-- [et_pb_line_break_holder] --&gt;    if (!text) return &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    text = text&lt;!-- [et_pb_line_break_holder] --&gt;      .replace(\/\u25f7\/g, &#x27;&#x27;)&lt;!-- [et_pb_line_break_holder] --&gt;      .replace(\/\\s+\/g, &#x27; &#x27;)&lt;!-- [et_pb_line_break_holder] --&gt;      .trim();&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const dateMatch = text.match(\/\\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\\.?\\s+\\d{1,2},?\\s+\\d{4}\\b\/i);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (dateMatch) {&lt;!-- [et_pb_line_break_holder] --&gt;      return dateMatch[0].trim();&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    return text;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  function getDateText(post) {&lt;!-- [et_pb_line_break_holder] --&gt;    const publishedDate = post.querySelector(&#x27;.post-meta .published&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (publishedDate) {&lt;!-- [et_pb_line_break_holder] --&gt;      return cleanDateText(publishedDate.textContent);&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const existingCopiedDate = post.querySelector(&#x27;.hail-card-date&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (existingCopiedDate) {&lt;!-- [et_pb_line_break_holder] --&gt;      return cleanDateText(existingCopiedDate.textContent);&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const meta = post.querySelector(&#x27;p.post-meta, .post-meta&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    if (meta) {&lt;!-- [et_pb_line_break_holder] --&gt;      return cleanDateText(meta.textContent);&lt;!-- [et_pb_line_break_holder] --&gt;    }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    return &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  function removePagination(container) {&lt;!-- [et_pb_line_break_holder] --&gt;    const paginations = container.querySelectorAll(&#x27;.pagination&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    paginations.forEach(function (pagination) {&lt;!-- [et_pb_line_break_holder] --&gt;      const wrapper = pagination.parentElement;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (wrapper &amp;&amp; wrapper !== container) {&lt;!-- [et_pb_line_break_holder] --&gt;        wrapper.remove();&lt;!-- [et_pb_line_break_holder] --&gt;      } else {&lt;!-- [et_pb_line_break_holder] --&gt;        pagination.remove();&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;    });&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  function initHailBlogGrid() {&lt;!-- [et_pb_line_break_holder] --&gt;    const blog = document.querySelector(&#x27;.et_pb_blog_0&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;    if (!blog) return;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const container = blog.querySelector(&#x27;.et_pb_ajax_pagination_container&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;    if (!container) return;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    removePagination(container);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    const articles = Array.from(blog.querySelectorAll(&#x27;article.et_pb_post&#x27;));&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    articles.forEach(function (article) {&lt;!-- [et_pb_line_break_holder] --&gt;      container.appendChild(article);&lt;!-- [et_pb_line_break_holder] --&gt;    });&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;    articles.forEach(function (post) {&lt;!-- [et_pb_line_break_holder] --&gt;      const title = post.querySelector(&#x27;.entry-title&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      const titleLink = post.querySelector(&#x27;.entry-title a&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      const imageLink = post.querySelector(&#x27;.entry-featured-image-url&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      const img = post.querySelector(&#x27;.entry-featured-image-url img, .et_pb_image_container img&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      const hailLink = post.querySelector(&#x27;.post-content-inner a[href*=\&quot;hail.to\&quot;]&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (!titleLink || !title) return;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      const imageUrl = getBestImageUrl(img);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (imageUrl) {&lt;!-- [et_pb_line_break_holder] --&gt;        post.style.setProperty(&#x27;background-image&#x27;, &#x27;url(\&quot;&#x27; + imageUrl + &#x27;\&quot;)&#x27;, &#x27;important&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      let textGroup = post.querySelector(&#x27;.hail-card-text&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (!textGroup) {&lt;!-- [et_pb_line_break_holder] --&gt;        textGroup = document.createElement(&#x27;div&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;        textGroup.className = &#x27;hail-card-text&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;        post.appendChild(textGroup);&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      let dateEl = post.querySelector(&#x27;.hail-card-date&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;      const dateText = getDateText(post);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (!dateEl) {&lt;!-- [et_pb_line_break_holder] --&gt;        dateEl = document.createElement(&#x27;div&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;        dateEl.className = &#x27;hail-card-date&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      dateEl.textContent = dateText ? &#x27;\u25f7 &#x27; + dateText : &#x27;&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (dateText &amp;&amp; !textGroup.contains(dateEl)) {&lt;!-- [et_pb_line_break_holder] --&gt;        textGroup.appendChild(dateEl);&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (!textGroup.contains(title)) {&lt;!-- [et_pb_line_break_holder] --&gt;        textGroup.appendChild(title);&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      const fallbackUrl = titleLink.href;&lt;!-- [et_pb_line_break_holder] --&gt;      const finalUrl = hailLink ? hailLink.href : fallbackUrl;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      post.dataset.finalUrl = finalUrl;&lt;!-- [et_pb_line_break_holder] --&gt;      post.dataset.opensNewTab = hailLink ? &#x27;true&#x27; : &#x27;false&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      titleLink.href = finalUrl;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (imageLink) {&lt;!-- [et_pb_line_break_holder] --&gt;        imageLink.href = finalUrl;&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (hailLink) {&lt;!-- [et_pb_line_break_holder] --&gt;        titleLink.target = &#x27;_blank&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;        titleLink.rel = &#x27;noopener&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;        if (imageLink) {&lt;!-- [et_pb_line_break_holder] --&gt;          imageLink.target = &#x27;_blank&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;          imageLink.rel = &#x27;noopener&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;        }&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;      if (!post.dataset.hailGridClickReady) {&lt;!-- [et_pb_line_break_holder] --&gt;        post.dataset.hailGridClickReady = &#x27;true&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;        post.addEventListener(&#x27;click&#x27;, function (event) {&lt;!-- [et_pb_line_break_holder] --&gt;          const clickedLink = event.target.closest(&#x27;a&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;          if (clickedLink) return;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;          const url = post.dataset.finalUrl;&lt;!-- [et_pb_line_break_holder] --&gt;          const opensNewTab = post.dataset.opensNewTab === &#x27;true&#x27;;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;          if (!url) return;&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;          if (opensNewTab) {&lt;!-- [et_pb_line_break_holder] --&gt;            window.open(url, &#x27;_blank&#x27;, &#x27;noopener&#x27;);&lt;!-- [et_pb_line_break_holder] --&gt;          } else {&lt;!-- [et_pb_line_break_holder] --&gt;            window.location.href = url;&lt;!-- [et_pb_line_break_holder] --&gt;          }&lt;!-- [et_pb_line_break_holder] --&gt;        });&lt;!-- [et_pb_line_break_holder] --&gt;      }&lt;!-- [et_pb_line_break_holder] --&gt;    });&lt;!-- [et_pb_line_break_holder] --&gt;  }&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  document.addEventListener(&#x27;DOMContentLoaded&#x27;, initHailBlogGrid);&lt;!-- [et_pb_line_break_holder] --&gt;  window.addEventListener(&#x27;load&#x27;, initHailBlogGrid);&lt;!-- [et_pb_line_break_holder] --&gt;&lt;!-- [et_pb_line_break_holder] --&gt;  setTimeout(initHailBlogGrid, 250);&lt;!-- [et_pb_line_break_holder] --&gt;  setTimeout(initHailBlogGrid, 1000);&lt;!-- [et_pb_line_break_holder] --&gt;})();&lt;!-- [et_pb_line_break_holder] --&gt;&lt;\/script&gt;[\/et_pb_code][\/et_pb_column][\/et_pb_row][et_pb_row column_structure=\&quot;1_2,1_2\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; width=\&quot;100%\&quot; max_width=\&quot;1440px\&quot; hover_enabled=\&quot;0\&quot; global_colors_info=\&quot;{}\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_column type=\&quot;1_2\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; global_colors_info=\&quot;{}\&quot; theme_builder_area=\&quot;post_content\&quot;][dipi_button_grid flex_direction=\&quot;row\&quot; justify_content=\&quot;flex-start\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; position_origin_a=\&quot;bottom_right\&quot; width=\&quot;100%\&quot; custom_margin=\&quot;|||-10px|false|false\&quot; custom_margin_tablet=\&quot;\&quot; custom_margin_phone=\&quot;\&quot; custom_margin_last_edited=\&quot;on|desktop\&quot; custom_padding=\&quot;0px|||0px|false|false\&quot; locked=\&quot;off\&quot; global_colors_info=\&quot;{}\&quot; theme_builder_area=\&quot;post_content\&quot;][dipi_button_grid_child button_id=\&quot;News \&quot; button_type=\&quot;dp_button\&quot; button_text=\&quot;All Articles\&quot; button_link=\&quot;\/community\/news-articles\/\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; text_style_text_color=\&quot;gcid-primary-color\&quot; background_color=\&quot;gcid-body-color\&quot; background_enable_color=\&quot;on\&quot; custom_button=\&quot;on\&quot; button_text_color=\&quot;#FFFFFF\&quot; button_bg_color=\&quot;gcid-body-color\&quot; button_border_color=\&quot;gcid-body-color\&quot; button_border_radius=\&quot;1px\&quot; button_use_icon=\&quot;off\&quot; custom_padding=\&quot;10px||10px||true|false\&quot; button_text_size_tablet=\&quot;\&quot; button_text_size_phone=\&quot;14px\&quot; button_text_size_last_edited=\&quot;on|phone\&quot; global_colors_info=\&quot;{%22gcid-primary-color%22:%91%22button_border_color__sticky%22,%22text_style_text_color%22,%22button_border_color__sticky%22,%22text_style_text_color%22%93,%22gcid-fc450ebb-d97b-45f2-906f-058a66b7c5e6%22:%91%22text_style_text_color__sticky%22,%22text_style_text_color__sticky%22%93,%22gcid-body-color%22:%91%22button_text_color__hover%22,%22button_border_color%22,%22button_bg_color%22,%22background_color%22,%22button_text_color__hover%22,%22button_border_color%22,%22button_bg_color%22,%22background_color%22%93,%22gcid-329c5443-57ad-423b-8365-5715c9bf899d%22:%91%22button_border_color__hover%22,%22button_bg_color__hover%22,%22background_color__hover%22,%22button_border_color__hover%22,%22button_bg_color__hover%22,%22background_color__hover%22%93}\&quot; button_text_size__sticky_enabled=\&quot;on|sticky\&quot; button_bg_color__sticky_enabled=\&quot;on|desktop\&quot; button_bg_color__sticky=\&quot;#023564\&quot; button_bg_enable_color__sticky=\&quot;on\&quot; button_border_color__sticky_enabled=\&quot;on|desktop\&quot; button_border_color__sticky=\&quot;gcid-primary-color\&quot; text_style_text_color__sticky_enabled=\&quot;on|sticky\&quot; text_style_text_color__sticky=\&quot;gcid-fc450ebb-d97b-45f2-906f-058a66b7c5e6\&quot; button_text_color__sticky_enabled=\&quot;on|desktop\&quot; button_text_color__sticky=\&quot;#FFFFFF\&quot; background__hover_enabled=\&quot;on|desktop\&quot; background_color__hover=\&quot;#f3c22b\&quot; background_enable_color__hover=\&quot;on\&quot; button_text_color__hover_enabled=\&quot;on|hover\&quot; button_text_color__hover=\&quot;#023564\&quot; button_bg_color__hover_enabled=\&quot;on|hover\&quot; button_bg_color__hover=\&quot;#f3c22b\&quot; button_bg_enable_color__hover=\&quot;on\&quot; button_border_color__hover_enabled=\&quot;on|hover\&quot; button_border_color__hover=\&quot;#f3c22b\&quot; theme_builder_area=\&quot;post_content\&quot;][\/dipi_button_grid_child][dipi_button_grid_child button_id=\&quot;publications\&quot; button_type=\&quot;dp_button\&quot; button_text=\&quot;News Publications\&quot; button_link=\&quot;\/community\/publications\/\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; text_style_text_color=\&quot;gcid-primary-color\&quot; background_color=\&quot;gcid-body-color\&quot; background_enable_color=\&quot;on\&quot; custom_button=\&quot;on\&quot; button_text_color=\&quot;#FFFFFF\&quot; button_bg_color=\&quot;gcid-body-color\&quot; button_border_color=\&quot;gcid-body-color\&quot; button_border_radius=\&quot;1px\&quot; button_use_icon=\&quot;off\&quot; custom_padding=\&quot;10px||10px||true|false\&quot; button_text_size_tablet=\&quot;\&quot; button_text_size_phone=\&quot;14px\&quot; button_text_size_last_edited=\&quot;on|phone\&quot; global_colors_info=\&quot;{%22gcid-primary-color%22:%91%22button_border_color__sticky%22,%22text_style_text_color%22%93,%22gcid-fc450ebb-d97b-45f2-906f-058a66b7c5e6%22:%91%22text_style_text_color__sticky%22%93,%22gcid-body-color%22:%91%22button_text_color__hover%22,%22button_border_color%22,%22button_bg_color%22,%22background_color%22%93,%22gcid-329c5443-57ad-423b-8365-5715c9bf899d%22:%91%22button_border_color__hover%22,%22button_bg_color__hover%22,%22background_color__hover%22%93}\&quot; button_text_size__sticky_enabled=\&quot;on|sticky\&quot; button_bg_color__sticky_enabled=\&quot;on|desktop\&quot; button_bg_color__sticky=\&quot;#023564\&quot; button_bg_enable_color__sticky=\&quot;on\&quot; button_border_color__sticky_enabled=\&quot;on|desktop\&quot; button_border_color__sticky=\&quot;gcid-primary-color\&quot; text_style_text_color__sticky_enabled=\&quot;on|sticky\&quot; text_style_text_color__sticky=\&quot;gcid-fc450ebb-d97b-45f2-906f-058a66b7c5e6\&quot; button_text_color__sticky_enabled=\&quot;on|desktop\&quot; button_text_color__sticky=\&quot;#FFFFFF\&quot; background__hover_enabled=\&quot;on|hover\&quot; background_color__hover=\&quot;#f3c22b\&quot; background_enable_color__hover=\&quot;on\&quot; button_text_color__hover_enabled=\&quot;on|hover\&quot; button_text_color__hover=\&quot;#023564\&quot; button_bg_color__hover_enabled=\&quot;on|hover\&quot; button_bg_color__hover=\&quot;#f3c22b\&quot; button_bg_enable_color__hover=\&quot;on\&quot; button_border_color__hover_enabled=\&quot;on|hover\&quot; button_border_color__hover=\&quot;#f3c22b\&quot; theme_builder_area=\&quot;post_content\&quot;][\/dipi_button_grid_child][\/dipi_button_grid][\/et_pb_column][et_pb_column type=\&quot;1_2\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; global_colors_info=\&quot;{}\&quot; theme_builder_area=\&quot;post_content\&quot;][et_pb_image src=\&quot;https:\/\/www.sjrc.vic.edu.au\/wp-content\/uploads\/2026\/03\/newsfeed-by-hail.svg\&quot; title_text=\&quot;newsfeed-by-hail\&quot; url=\&quot;https:\/\/get.hail.to\/\&quot; align=\&quot;right\&quot; _builder_version=\&quot;4.27.6\&quot; _module_preset=\&quot;default\&quot; filter_saturate=\&quot;0%\&quot; hover_enabled=\&quot;0\&quot; global_colors_info=\&quot;{}\&quot; url_new_window=\&quot;on\&quot; sticky_enabled=\&quot;0\&quot; theme_builder_area=\&quot;post_content\&quot;][\/et_pb_image][\/et_pb_column][\/et_pb_row][\/et_pb_section]&quot;,&quot;post_title&quot;:&quot;Hail - Newsfeed 04 (Module+Code)&quot;,&quot;post_excerpt&quot;:&quot;&quot;,&quot;post_status&quot;:&quot;publish&quot;,&quot;comment_status&quot;:&quot;closed&quot;,&quot;ping_status&quot;:&quot;closed&quot;,&quot;post_password&quot;:&quot;&quot;,&quot;post_name&quot;:&quot;hail-newsfeed-04-modulecode&quot;,&quot;to_ping&quot;:&quot;&quot;,&quot;pinged&quot;:&quot;&quot;,&quot;post_modified&quot;:&quot;2026-04-24 09:04:25&quot;,&quot;post_modified_gmt&quot;:&quot;2026-04-23 23:04:25&quot;,&quot;post_content_filtered&quot;:&quot;&quot;,&quot;post_parent&quot;:0,&quot;menu_order&quot;:0,&quot;post_type&quot;:&quot;et_pb_layout&quot;,&quot;post_mime_type&quot;:&quot;&quot;,&quot;comment_count&quot;:&quot;0&quot;,&quot;filter&quot;:&quot;raw&quot;,&quot;post_meta&quot;:{&quot;_et_pb_built_for_post_type&quot;:[&quot;page&quot;]},&quot;terms&quot;:{&quot;7&quot;:{&quot;name&quot;:&quot;not_global&quot;,&quot;slug&quot;:&quot;not_global&quot;,&quot;taxonomy&quot;:&quot;scope&quot;,&quot;parent&quot;:0,&quot;all_parents&quot;:[],&quot;description&quot;:&quot;&quot;},&quot;5&quot;:{&quot;name&quot;:&quot;regular&quot;,&quot;slug&quot;:&quot;regular&quot;,&quot;taxonomy&quot;:&quot;module_width&quot;,&quot;parent&quot;:0,&quot;all_parents&quot;:[],&quot;description&quot;:&quot;&quot;},&quot;4&quot;:{&quot;name&quot;:&quot;section&quot;,&quot;slug&quot;:&quot;section&quot;,&quot;taxonomy&quot;:&quot;layout_type&quot;,&quot;parent&quot;:0,&quot;all_parents&quot;:[],&quot;description&quot;:&quot;&quot;}}}},&quot;presets&quot;:{&quot;et_pb_text&quot;:{&quot;presets&quot;:{&quot;_initial&quot;:{&quot;name&quot;:&quot;Text Preset 1&quot;,&quot;version&quot;:&quot;4.27.2&quot;,&quot;settings&quot;:{&quot;ul_type&quot;:&quot;square&quot;}}},&quot;default&quot;:&quot;_initial&quot;}},&quot;global_colors&quot;:[[&quot;gcid-ec81c81b-3a31-47d7-a3a1-8d4ffd151693&quot;,{&quot;color&quot;:&quot;#0a1e3c&quot;,&quot;active&quot;:&quot;no&quot;}],[&quot;gcid-4b7ae6f2-31ae-4cb3-85b8-172cd9fc2f01&quot;,{&quot;color&quot;:&quot;#f3ede2&quot;,&quot;active&quot;:&quot;yes&quot;}],[&quot;gcid-fc702411-ff1d-4ab8-9628-9b76451799d5&quot;,{&quot;color&quot;:&quot;#67765f&quot;,&quot;active&quot;:&quot;yes&quot;}],[&quot;gcid-fc450ebb-d97b-45f2-906f-058a66b7c5e6&quot;,{&quot;color&quot;:&quot;#fcfcfc&quot;,&quot;active&quot;:&quot;yes&quot;}],[&quot;gcid-329c5443-57ad-423b-8365-5715c9bf899d&quot;,{&quot;color&quot;:&quot;#f3c22b&quot;,&quot;active&quot;:&quot;yes&quot;}]],&quot;images&quot;:{&quot;https:\/\/www.sjrc.vic.edu.au\/wp-content\/uploads\/2026\/03\/newsfeed-by-hail.svg&quot;:{&quot;encoded&quot;:&quot;PHN2ZyB3aWR0aD0iMjEwIiBoZWlnaHQ9IjMwIiB2aWV3Qm94PSIwIDAgMjEwIDMwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTMwLjA5NCAxMy42MDE2TDEyMy4yMjEgMjkuNzYyNEgxMTkuNjA4TDEyMi4xMjIgMjQuMTg1NkwxMTcuNjY0IDEzLjYwMTZIMTIxLjQxNUwxMjMuOTQ4IDIwLjQ1NDdMMTI2LjQ2MSAxMy42MDE2SDEzMC4wOTRaIiBmaWxsPSIjNzJBRjJFIi8+CjxwYXRoIGQ9Ik0xMDguOTMyIDE1LjE0ODVDMTA5LjI0NiAxNC42MzggMTA5LjY5OCAxNC4yMjU2IDExMC4yODcgMTMuOTExNEMxMTAuODc2IDEzLjU5NzIgMTExLjU1IDEzLjQ0MDEgMTEyLjMwOSAxMy40NDAxQzExMy4yMTIgMTMuNDQwMSAxMTQuMDMxIDEzLjY2OTIgMTE0Ljc2NCAxNC4xMjc0QzExNS40OTcgMTQuNTg1NiAxMTYuMDczIDE1LjI0MDEgMTE2LjQ5MiAxNi4wOTFDMTE2LjkyNCAxNi45NDIgMTE3LjE0IDE3LjkzMDMgMTE3LjE0IDE5LjA1NjFDMTE3LjE0IDIwLjE4MiAxMTYuOTI0IDIxLjE3NjkgMTE2LjQ5MiAyMi4wNDA5QzExNi4wNzMgMjIuODkxOCAxMTUuNDk3IDIzLjU1MjkgMTE0Ljc2NCAyNC4wMjQxQzExNC4wMzEgMjQuNDgyMyAxMTMuMjEyIDI0LjcxMTQgMTEyLjMwOSAyNC43MTE0QzExMS41MzcgMjQuNzExNCAxMTAuODYzIDI0LjU2MDkgMTEwLjI4NyAyNC4yNTk4QzEwOS43MTEgMjMuOTQ1NiAxMDkuMjU5IDIzLjUzMzIgMTA4LjkzMiAyMy4wMjI3VjI0LjU1NDNIMTA1LjU3NFYxMC4wMjM0SDEwOC45MzJWMTUuMTQ4NVpNMTEzLjcyMyAxOS4wNTYxQzExMy43MjMgMTguMjE4MyAxMTMuNDg3IDE3LjU2MzggMTEzLjAxNiAxNy4wOTI1QzExMi41NTggMTYuNjA4MSAxMTEuOTg4IDE2LjM2NiAxMTEuMzA4IDE2LjM2NkMxMTAuNjQgMTYuMzY2IDExMC4wNzEgMTYuNjA4MSAxMDkuNTk5IDE3LjA5MjVDMTA5LjE0MSAxNy41NzY5IDEwOC45MTIgMTguMjM4IDEwOC45MTIgMTkuMDc1OEMxMDguOTEyIDE5LjkxMzYgMTA5LjE0MSAyMC41NzQ3IDEwOS41OTkgMjEuMDU5QzExMC4wNzEgMjEuNTQzNCAxMTAuNjQgMjEuNzg1NiAxMTEuMzA4IDIxLjc4NTZDMTExLjk3NSAyMS43ODU2IDExMi41NDUgMjEuNTQzNCAxMTMuMDE2IDIxLjA1OUMxMTMuNDg3IDIwLjU2MTYgMTEzLjcyMyAxOS44OTQgMTEzLjcyMyAxOS4wNTYxWiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNODcuNDE4IDE5LjA1NjFDODcuNDE4IDE3LjkzMDMgODcuNjI3NSAxNi45NDIgODguMDQ2NCAxNi4wOTFDODguNDc4NCAxNS4yNDAxIDg5LjA2MDkgMTQuNTg1NiA4OS43OTQgMTQuMTI3NEM5MC41MjcxIDEzLjY2OTIgOTEuMzQ1MyAxMy40NDAxIDkyLjI0ODUgMTMuNDQwMUM5Mi45Njg1IDEzLjQ0MDEgOTMuNjIzMSAxMy41OTA3IDk0LjIxMjIgMTMuODkxOEM5NC44MTQ0IDE0LjE5MjkgOTUuMjg1NiAxNC41OTg3IDk1LjYyNiAxNS4xMDkyVjEwLjAyMzRIOTguOTgzOFYyNC41NTQzSDk1LjYyNlYyMi45ODM0Qzk1LjMxMTggMjMuNTA3IDk0Ljg2MDIgMjMuOTI2IDk0LjI3MTEgMjQuMjQwMUM5My42OTUxIDI0LjU1NDMgOTMuMDIwOSAyNC43MTE0IDkyLjI0ODUgMjQuNzExNEM5MS4zNDUzIDI0LjcxMTQgOTAuNTI3MSAyNC40ODIzIDg5Ljc5NCAyNC4wMjQxQzg5LjA2MDkgMjMuNTUyOSA4OC40Nzg0IDIyLjg5MTggODguMDQ2NCAyMi4wNDA5Qzg3LjYyNzUgMjEuMTc2OSA4Ny40MTggMjAuMTgyIDg3LjQxOCAxOS4wNTYxWk05NS42MjYgMTkuMDc1OEM5NS42MjYgMTguMjM4IDk1LjM5MDQgMTcuNTc2OSA5NC45MTkxIDE3LjA5MjVDOTQuNDYwOSAxNi42MDgxIDkzLjg5OCAxNi4zNjYgOTMuMjMwNCAxNi4zNjZDOTIuNTYyNyAxNi4zNjYgOTEuOTkzMyAxNi42MDgxIDkxLjUyMiAxNy4wOTI1QzkxLjA2MzggMTcuNTYzOCA5MC44MzQ3IDE4LjIxODMgOTAuODM0NyAxOS4wNTYxQzkwLjgzNDcgMTkuODk0IDkxLjA2MzggMjAuNTYxNiA5MS41MjIgMjEuMDU5QzkxLjk5MzMgMjEuNTQzNCA5Mi41NjI3IDIxLjc4NTYgOTMuMjMwNCAyMS43ODU2QzkzLjg5OCAyMS43ODU2IDk0LjQ2MDkgMjEuNTQzNCA5NC45MTkxIDIxLjA1OUM5NS4zOTA0IDIwLjU3NDcgOTUuNjI2IDE5LjkxMzYgOTUuNjI2IDE5LjA3NThaIiBmaWxsPSIjNzJBRjJFIi8+CjxwYXRoIGQ9Ik04Ni4zMTI3IDE4LjkwNDJDODYuMzEyNyAxOS4yMTg0IDg2LjI5MzEgMTkuNTQ1NyA4Ni4yNTM4IDE5Ljg4NjFINzguNjU0NUM3OC43MDY5IDIwLjU2NjggNzguOTIyOSAyMS4wOTA0IDc5LjMwMjUgMjEuNDU3Qzc5LjY5NTMgMjEuODEwNCA4MC4xNzMxIDIxLjk4NzIgODAuNzM2IDIxLjk4NzJDODEuNTczOCAyMS45ODcyIDgyLjE1NjQgMjEuNjMzNyA4Mi40ODM2IDIwLjkyNjhIODYuMDU3NEM4NS44NzQyIDIxLjY0NjggODUuNTQwNCAyMi4yOTQ4IDg1LjA1NiAyMi44NzA4Qzg0LjU4NDcgMjMuNDQ2OCA4My45ODkxIDIzLjg5ODQgODMuMjY5MSAyNC4yMjU3QzgyLjU0OTEgMjQuNTUzIDgxLjc0NCAyNC43MTY2IDgwLjg1MzggMjQuNzE2NkM3OS43ODA0IDI0LjcxNjYgNzguODI0NyAyNC40ODc1IDc3Ljk4NjkgMjQuMDI5M0M3Ny4xNDkxIDIzLjU3MTIgNzYuNDk0NSAyMi45MTY2IDc2LjAyMzMgMjIuMDY1N0M3NS41NTIgMjEuMjE0OCA3NS4zMTY0IDIwLjIxOTkgNzUuMzE2NCAxOS4wODFDNzUuMzE2NCAxNy45NDIxIDc1LjU0NTQgMTYuOTQ3MiA3Ni4wMDM2IDE2LjA5NjJDNzYuNDc0OSAxNS4yNDUzIDc3LjEyOTQgMTQuNTkwOCA3Ny45NjczIDE0LjEzMjZDNzguODA1MSAxMy42NzQ0IDc5Ljc2NzMgMTMuNDQ1MyA4MC44NTM4IDEzLjQ0NTNDODEuOTE0MiAxMy40NDUzIDgyLjg1NjcgMTMuNjY3OSA4My42ODE0IDE0LjExM0M4NC41MDYyIDE0LjU1ODEgODUuMTQ3NiAxNS4xOTMgODUuNjA1OCAxNi4wMTc3Qzg2LjA3NzEgMTYuODQyNCA4Ni4zMTI3IDE3LjgwNDYgODYuMzEyNyAxOC45MDQyWk04Mi44NzY0IDE4LjAyMDZDODIuODc2NCAxNy40NDQ2IDgyLjY4IDE2Ljk4NjQgODIuMjg3MyAxNi42NDYxQzgxLjg5NDUgMTYuMzA1NyA4MS40MDM2IDE2LjEzNTUgODAuODE0NSAxNi4xMzU1QzgwLjI1MTYgMTYuMTM1NSA3OS43NzM4IDE2LjI5OTIgNzkuMzgxMSAxNi42MjY0Qzc5LjAwMTQgMTYuOTUzNyA3OC43NjU4IDE3LjQxODQgNzguNjc0MiAxOC4wMjA2SDgyLjg3NjRaIiBmaWxsPSIjNzJBRjJFIi8+CjxwYXRoIGQ9Ik03NC4yMTUxIDE4LjkwNDJDNzQuMjE1MSAxOS4yMTg0IDc0LjE5NTUgMTkuNTQ1NyA3NC4xNTYyIDE5Ljg4NjFINjYuNTU2OUM2Ni42MDkzIDIwLjU2NjggNjYuODI1MyAyMS4wOTA0IDY3LjIwNDkgMjEuNDU3QzY3LjU5NzYgMjEuODEwNCA2OC4wNzU1IDIxLjk4NzIgNjguNjM4NCAyMS45ODcyQzY5LjQ3NjMgMjEuOTg3MiA3MC4wNTg3IDIxLjYzMzcgNzAuMzg2IDIwLjkyNjhINzMuOTU5OEM3My43NzY1IDIxLjY0NjggNzMuNDQyOCAyMi4yOTQ4IDcyLjk1ODQgMjIuODcwOEM3Mi40ODcyIDIzLjQ0NjggNzEuODkxNCAyMy44OTg0IDcxLjE3MTQgMjQuMjI1N0M3MC40NTE0IDI0LjU1MyA2OS42NDYzIDI0LjcxNjYgNjguNzU2MiAyNC43MTY2QzY3LjY4MjcgMjQuNzE2NiA2Ni43MjcyIDI0LjQ4NzUgNjUuODg5NCAyNC4wMjkzQzY1LjA1MTUgMjMuNTcxMiA2NC4zOTY5IDIyLjkxNjYgNjMuOTI1NiAyMi4wNjU3QzYzLjQ1NDMgMjEuMjE0OCA2My4yMTg4IDIwLjIxOTkgNjMuMjE4OCAxOS4wODFDNjMuMjE4OCAxNy45NDIxIDYzLjQ0NzggMTYuOTQ3MiA2My45MDYgMTYuMDk2MkM2NC4zNzczIDE1LjI0NTMgNjUuMDMxOSAxNC41OTA4IDY1Ljg2OTcgMTQuMTMyNkM2Ni43MDc1IDEzLjY3NDQgNjcuNjY5NiAxMy40NDUzIDY4Ljc1NjIgMTMuNDQ1M0M2OS44MTY1IDEzLjQ0NTMgNzAuNzU5MSAxMy42Njc5IDcxLjU4MzggMTQuMTEzQzcyLjQwODUgMTQuNTU4MSA3My4wNSAxNS4xOTMgNzMuNTA4MiAxNi4wMTc3QzczLjk3OTQgMTYuODQyNCA3NC4yMTUxIDE3LjgwNDYgNzQuMjE1MSAxOC45MDQyWk03MC43Nzg3IDE4LjAyMDZDNzAuNzc4NyAxNy40NDQ2IDcwLjU4MjQgMTYuOTg2NCA3MC4xODk3IDE2LjY0NjFDNjkuNzk3IDE2LjMwNTcgNjkuMzA2IDE2LjEzNTUgNjguNzE2OSAxNi4xMzU1QzY4LjE1NCAxNi4xMzU1IDY3LjY3NjIgMTYuMjk5MiA2Ny4yODM0IDE2LjYyNjRDNjYuOTAzOCAxNi45NTM3IDY2LjY2ODMgMTcuNDE4NCA2Ni41NzY2IDE4LjAyMDZINzAuNzc4N1oiIGZpbGw9IiM3MkFGMkUiLz4KPHBhdGggZD0iTTYyLjMwNzYgMTYuMzkwM0g2MC41MDExVjI0LjU1OUg1Ny4xNDMzVjE2LjM5MDNINTUuOTI1OFYxMy42MDE5SDU3LjE0MzNWMTMuMjg3N0M1Ny4xNDMzIDExLjkzOTQgNTcuNTI5NSAxMC45MTgzIDU4LjMwMTggMTAuMjI0NUM1OS4wNzQyIDkuNTE3NTEgNjAuMjA2NSA5LjE2NDA2IDYxLjY5ODkgOS4xNjQwNkM2MS45NDc2IDkuMTY0MDYgNjIuMTMwOSA5LjE3MDYgNjIuMjQ4NyA5LjE4MzdWMTIuMDMxQzYxLjYwNzMgMTEuOTkxNyA2MS4xNTU2IDEyLjA4MzQgNjAuODkzOCAxMi4zMDU5QzYwLjYzMiAxMi41Mjg1IDYwLjUwMTEgMTIuOTI3NyA2MC41MDExIDEzLjUwMzdWMTMuNjAxOUg2Mi4zMDc2VjE2LjM5MDNaIiBmaWxsPSIjNzJBRjJFIi8+CjxwYXRoIGQ9Ik01MC4zMTYgMjQuNzE2NkM0OS4zNjA0IDI0LjcxNjYgNDguNTA5NSAyNC41NTMgNDcuNzYzMyAyNC4yMjU3QzQ3LjAxNzEgMjMuODk4NCA0Ni40MjggMjMuNDUzMyA0NS45OTYgMjIuODkwNEM0NS41NjQgMjIuMzE0NCA0NS4zMjE4IDIxLjY3MyA0NS4yNjk1IDIwLjk2NjFINDguNTg4QzQ4LjYyNzMgMjEuMzQ1NyA0OC44MDQgMjEuNjUzMyA0OS4xMTgyIDIxLjg4OUM0OS40MzI0IDIyLjEyNDYgNDkuODE4NiAyMi4yNDI0IDUwLjI3NjggMjIuMjQyNEM1MC42OTU3IDIyLjI0MjQgNTEuMDE2NCAyMi4xNjM5IDUxLjIzODkgMjIuMDA2OEM1MS40NzQ2IDIxLjgzNjYgNTEuNTkyNCAyMS42MjA2IDUxLjU5MjQgMjEuMzU4OEM1MS41OTI0IDIxLjA0NDYgNTEuNDI4OCAyMC44MTU1IDUxLjEwMTUgMjAuNjcxNUM1MC43NzQyIDIwLjUxNDQgNTAuMjQ0IDIwLjM0NDIgNDkuNTEwOSAyMC4xNjFDNDguNzI1NSAxOS45Nzc3IDQ4LjA3MDkgMTkuNzg3OSA0Ny41NDczIDE5LjU5MTVDNDcuMDIzNyAxOS4zODIxIDQ2LjU3MiAxOS4wNjEzIDQ2LjE5MjQgMTguNjI5M0M0NS44MTI4IDE4LjE4NDIgNDUuNjIyOSAxNy41ODg2IDQ1LjYyMjkgMTYuODQyNEM0NS42MjI5IDE2LjIxNDEgNDUuNzkzMSAxNS42NDQ2IDQ2LjEzMzUgMTUuMTM0MUM0Ni40ODY5IDE0LjYxMDQgNDYuOTk3NSAxNC4xOTgxIDQ3LjY2NTEgMTMuODk3QzQ4LjM0NTggMTMuNTk1OSA0OS4xNTA5IDEzLjQ0NTMgNTAuMDgwNCAxMy40NDUzQzUxLjQ1NDkgMTMuNDQ1MyA1Mi41MzQ5IDEzLjc4NTcgNTMuMzIwNCAxNC40NjY0QzU0LjExODkgMTUuMTQ3MiA1NC41NzcxIDE2LjA1MDQgNTQuNjk0OSAxNy4xNzYySDUxLjU5MjRDNTEuNTQgMTYuNzk2NiA1MS4zNjk4IDE2LjQ5NTUgNTEuMDgxOCAxNi4yNzNDNTAuODA2OSAxNi4wNTA0IDUwLjQ0MDQgMTUuOTM5MiA0OS45ODIyIDE1LjkzOTJDNDkuNTg5NSAxNS45MzkyIDQ5LjI4ODQgMTYuMDE3NyA0OS4wNzg5IDE2LjE3NDhDNDguODY5NSAxNi4zMTg4IDQ4Ljc2NDggMTYuNTIxNyA0OC43NjQ4IDE2Ljc4MzVDNDguNzY0OCAxNy4wOTc3IDQ4LjkyODQgMTcuMzMzMyA0OS4yNTU3IDE3LjQ5MDRDNDkuNTk2IDE3LjY0NzUgNTAuMTE5NyAxNy44MDQ2IDUwLjgyNjYgMTcuOTYxN0M1MS42MzgyIDE4LjE3MTIgNTIuMjk5MyAxOC4zODA2IDUyLjgwOTggMTguNTkwMUM1My4zMjA0IDE4Ljc4NjQgNTMuNzY1NSAxOS4xMTM3IDU0LjE0NTEgMTkuNTcxOUM1NC41Mzc4IDIwLjAxNyA1NC43NDA4IDIwLjYxOTIgNTQuNzUzOCAyMS4zNzg0QzU0Ljc1MzggMjIuMDE5OSA1NC41NzA2IDIyLjU5NTkgNTQuMjA0IDIzLjEwNjRDNTMuODUwNiAyMy42MDM5IDUzLjMzMzUgMjMuOTk2NiA1Mi42NTI4IDI0LjI4NDZDNTEuOTg1MSAyNC41NzI2IDUxLjIwNjIgMjQuNzE2NiA1MC4zMTYgMjQuNzE2NloiIGZpbGw9IiM3MkFGMkUiLz4KPHBhdGggZD0iTTQ0LjU3ODYgMTMuNjAxNkw0MS42MTM1IDI0LjU1ODdIMzcuOTAyMkwzNi4xNzQyIDE3LjQ1MDRMMzQuMzg3MyAyNC41NTg3SDMwLjY5NTdMMjcuNzEwOSAxMy42MDE2SDMxLjA2ODhMMzIuNjIgMjEuNDM2NUwzNC40NjU4IDEzLjYwMTZIMzguMDJMMzkuODg1NSAyMS4zOTczTDQxLjQxNzEgMTMuNjAxNkg0NC41Nzg2WiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNMjcuMDc4MyAxOC45MDQyQzI3LjA3ODMgMTkuMjE4NCAyNy4wNTg3IDE5LjU0NTcgMjcuMDE5NCAxOS44ODYxSDE5LjQyMDFDMTkuNDcyNSAyMC41NjY4IDE5LjY4ODUgMjEuMDkwNCAyMC4wNjgxIDIxLjQ1N0MyMC40NjA5IDIxLjgxMDQgMjAuOTM4NyAyMS45ODcyIDIxLjUwMTYgMjEuOTg3MkMyMi4zMzk0IDIxLjk4NzIgMjIuOTIyIDIxLjYzMzcgMjMuMjQ5MiAyMC45MjY4SDI2LjgyMzFDMjYuNjM5OCAyMS42NDY4IDI2LjMwNiAyMi4yOTQ4IDI1LjgyMTYgMjIuODcwOEMyNS4zNTAzIDIzLjQ0NjggMjQuNzU0NyAyMy44OTg0IDI0LjAzNDcgMjQuMjI1N0MyMy4zMTQ3IDI0LjU1MyAyMi41MDk2IDI0LjcxNjYgMjEuNjE5NCAyNC43MTY2QzIwLjU0NiAyNC43MTY2IDE5LjU5MDMgMjQuNDg3NSAxOC43NTI1IDI0LjAyOTNDMTcuOTE0NyAyMy41NzEyIDE3LjI2MDEgMjIuOTE2NiAxNi43ODg5IDIyLjA2NTdDMTYuMzE3NiAyMS4yMTQ4IDE2LjA4MiAyMC4yMTk5IDE2LjA4MiAxOS4wODFDMTYuMDgyIDE3Ljk0MjEgMTYuMzExMSAxNi45NDcyIDE2Ljc2OTIgMTYuMDk2MkMxNy4yNDA1IDE1LjI0NTMgMTcuODk1MSAxNC41OTA4IDE4LjczMjkgMTQuMTMyNkMxOS41NzA3IDEzLjY3NDQgMjAuNTMyOSAxMy40NDUzIDIxLjYxOTQgMTMuNDQ1M0MyMi42Nzk4IDEzLjQ0NTMgMjMuNjIyMyAxMy42Njc5IDI0LjQ0NzEgMTQuMTEzQzI1LjI3MTggMTQuNTU4MSAyNS45MTMyIDE1LjE5MyAyNi4zNzE0IDE2LjAxNzdDMjYuODQyNyAxNi44NDI0IDI3LjA3ODMgMTcuODA0NiAyNy4wNzgzIDE4LjkwNDJaTTIzLjY0MiAxOC4wMjA2QzIzLjY0MiAxNy40NDQ2IDIzLjQ0NTYgMTYuOTg2NCAyMy4wNTI5IDE2LjY0NjFDMjIuNjYwMSAxNi4zMDU3IDIyLjE2OTIgMTYuMTM1NSAyMS41ODAxIDE2LjEzNTVDMjEuMDE3MiAxNi4xMzU1IDIwLjUzOTQgMTYuMjk5MiAyMC4xNDY3IDE2LjYyNjRDMTkuNzY3MSAxNi45NTM3IDE5LjUzMTQgMTcuNDE4NCAxOS40Mzk4IDE4LjAyMDZIMjMuNjQyWiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNMTQuMzE2IDI0LjU1ODFIMTAuOTU4Mkw1LjM0MjE4IDE2LjA1NTZWMjQuNTU4MUgxLjk4NDM4VjEwLjc3MzRINS4zNDIxOEwxMC45NTgyIDE5LjMxNTJWMTAuNzczNEgxNC4zMTZWMjQuNTU4MVoiIGZpbGw9IiM3MkFGMkUiLz4KPHBhdGggZD0iTTE3OS4zOTQgMTQuNDM0OUMxODAuMzQ1IDE1LjQ3NTcgMTgwLjgyIDE2LjkwNTYgMTgwLjgyIDE4LjcyNDZWMjYuNzM5SDE3Ni42NDFWMTkuMjkwM0MxNzYuNjQxIDE4LjM3MjUgMTc2LjQwMyAxNy42NTk3IDE3NS45MjggMTcuMTUxM0MxNzUuNDUyIDE2LjY0MzYgMTc0LjgxMyAxNi4zODkxIDE3NC4wMSAxNi4zODkxQzE3My4yMDcgMTYuMzg5MSAxNzIuNTY4IDE2LjY0MzMgMTcyLjA5MyAxNy4xNTEzQzE3MS42MTcgMTcuNjU5NCAxNzEuMzggMTguMzcyNSAxNzEuMzggMTkuMjkwM1YyNi43MzlIMTY3LjE3NlY4LjU0Njg4SDE3MS4zOFYxNC44NjVDMTcxLjgwNiAxNC4yNTkgMTcyLjM4OCAxMy43NzU0IDE3My4xMjUgMTMuNDE0NEMxNzMuODYzIDEzLjA1NDEgMTc0LjY5IDEyLjg3MzUgMTc1LjYwOCAxMi44NzM1QzE3Ny4xODEgMTIuODczNSAxNzguNDQzIDEzLjM5NDQgMTc5LjM5NCAxNC40MzQ5WiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNMTgyLjk3NCAxNi4xNDcxQzE4My41MDcgMTUuMDgxOSAxODQuMjMyIDE0LjI2MjcgMTg1LjE1IDEzLjY4ODZDMTg2LjA2OCAxMy4xMTUyIDE4Ny4wOTIgMTIuODI4MSAxODguMjIzIDEyLjgyODFDMTg5LjE5IDEyLjgyODEgMTkwLjAzOCAxMy4wMjQ3IDE5MC43NjcgMTMuNDE4MkMxOTEuNDk2IDEzLjgxMTYgMTkyLjA1OCAxNC4zMjc4IDE5Mi40NTEgMTQuOTY3VjEzLjAyNUgxOTYuNjU1VjI2Ljc0MjdIMTkyLjQ1MVYyNC44MDA3QzE5Mi4wNDEgMjUuNDM5OSAxOTEuNDcyIDI1Ljk1NjEgMTkwLjc0MyAyNi4zNDk2QzE5MC4wMTMgMjYuNzQzMSAxODkuMTY1IDI2LjkzOTYgMTg4LjE5OCAyNi45Mzk2QzE4Ny4wODQgMjYuOTM5NiAxODYuMDY4IDI2LjY0ODggMTg1LjE1IDI2LjA2NjlDMTg0LjIzMiAyNS40ODUzIDE4My41MDcgMjQuNjU3NyAxODIuOTc1IDIzLjU4NEMxODIuNDQyIDIyLjUxMDYgMTgyLjE3NiAyMS4yNjkyIDE4Mi4xNzYgMTkuODU5NkMxODIuMTc2IDE4LjQ1MDEgMTgyLjQ0MiAxNy4yMTMgMTgyLjk3NSAxNi4xNDc0TDE4Mi45NzQgMTYuMTQ3MVpNMTkxLjU3OSAxNy40MDA4QzE5MC45OTcgMTYuNzk0OCAxOTAuMjg4IDE2LjQ5MTEgMTg5LjQ1MiAxNi40OTExQzE4OC42MTYgMTYuNDkxMSAxODcuOTA3IDE2Ljc5MDQgMTg3LjMyNiAxNy4zODg2QzE4Ni43NDQgMTcuOTg3MSAxODYuNDUzIDE4LjgxMDcgMTg2LjQ1MyAxOS44NTkzQzE4Ni40NTMgMjAuOTA3OSAxODYuNzQ0IDIxLjc0IDE4Ny4zMjYgMjIuMzU0NEMxODcuOTA3IDIyLjk2ODkgMTg4LjYxNiAyMy4yNzYzIDE4OS40NTIgMjMuMjc2M0MxOTAuMjg4IDIzLjI3NjMgMTkwLjk5NyAyMi45NzMzIDE5MS41NzkgMjIuMzY2NkMxOTIuMTYgMjEuNzYwNiAxOTIuNDUxIDIwLjkzMjcgMTkyLjQ1MSAxOS44ODM3QzE5Mi40NTEgMTguODM0OCAxOTIuMTYgMTguMDA3MSAxOTEuNTc5IDE3LjQwMDhaIiBmaWxsPSIjNzJBRjJFIi8+CjxwYXRoIGQ9Ik0xOTkuMjk0IDEwLjk0MzRDMTk4LjgyNyAxMC41MDkyIDE5OC41OTQgOS45NzI0MiAxOTguNTk0IDkuMzMzMjJDMTk4LjU5NCA4LjY5NDAyIDE5OC44MjcgOC4xMzI3NyAxOTkuMjk0IDcuNjk4MjlDMTk5Ljc2MSA3LjI2NDEyIDIwMC4zNjQgNy4wNDY4OCAyMDEuMTAxIDcuMDQ2ODhDMjAxLjgzOSA3LjA0Njg4IDIwMi40MTYgNy4yNjQ0MyAyMDIuODgzIDcuNjk4MjlDMjAzLjM1IDguMTMyNzcgMjAzLjU4NCA4LjY3Nzc1IDIwMy41ODQgOS4zMzMyMkMyMDMuNTg0IDkuOTg4NyAyMDMuMzUgMTAuNTA5MiAyMDIuODgzIDEwLjk0MzRDMjAyLjQxNiAxMS4zNzc5IDIwMS44MjIgMTEuNTk0OCAyMDEuMTAxIDExLjU5NDhDMjAwLjM4IDExLjU5NDggMTk5Ljc2MSAxMS4zNzc5IDE5OS4yOTQgMTAuOTQzNFpNMjAzLjE5MSAxMy4wMjFWMjYuNzM4N0gxOTguOTg3VjEzLjAyMUgyMDMuMTkxWiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNMjA5LjczMSA4LjU0Njg4VjI2LjczOUgyMDUuNTI3VjguNTQ2ODhIMjA5LjczMVoiIGZpbGw9IiM3MkFGMkUiLz4KPHBhdGggZD0iTTEzNy43MyA5LjA3NjczTDE0MS4wMDUgMTkuMDk1OEwxNDguNzI5IDI2LjczMzlIMTYzLjczMkwxNDQuODA2IDguODY0ODFDMTQ0LjgwNiA4Ljg2NDgxIDE0NC43MzMgOC43ODkwNiAxNDQuNTg5IDguNzg5MDZDMTQ0LjU0NyA4Ljc4OTA2IDEzNy43MyA5LjA3NjczIDEzNy43MyA5LjA3NjczWiIgZmlsbD0iIzcyQUYyRSIvPgo8cGF0aCBkPSJNMTQ0LjUwOSA4Ljc5MjI0QzE0NC41NDkgOC43OTE4NyAxNDQuNTczIDguNzkxNTYgMTQ0LjU4MSA4Ljc5MTU2QzE0NC41NTggOC43OTIxMSAxNDQuMzM0IDguODA2MyAxNDIuOTIxIDkuMTE1OUMxNDIuMDU2IDkuMzA1NDkgMTQwLjA2OCAxMC4xNjg2IDEzOC4zNTIgMTAuOTY4MkwxNDEuMDA4IDE5LjA5NThMMTQ4LjczMiAyNi43MzM5SDE2My43MzVMMTQ0LjgwOSA4Ljg2NDgxQzE0NC44MDkgOC44NjQ4MSAxNDQuNzM2IDguNzg5MDYgMTQ0LjU5MiA4Ljc4OTA2QzE0NC41ODkgOC43ODkwNiAxNDQuNTYxIDguNzkwMTYgMTQ0LjUwOSA4Ljc5MjI0WiIgZmlsbD0idXJsKCNwYWludDBfbGluZWFyXzIxOV8zNDkpIi8+CjxwYXRoIGQ9Ik0xNDQuNTA5IDguNzkyMjRDMTQ0LjU0OSA4Ljc5MTg3IDE0NC41NzMgOC43OTE1NiAxNDQuNTgxIDguNzkxNTZDMTQ0LjU1OCA4Ljc5MjExIDE0NC4zMzQgOC44MDYzIDE0Mi45MjEgOS4xMTU5QzE0Mi4wNTYgOS4zMDU0OSAxNDAuMDY4IDEwLjE2ODYgMTM4LjM1MiAxMC45NjgyTDE0MS4wMDggMTkuMDk1OEwxNDguNzMyIDI2LjczMzlIMTYzLjczNUwxNDQuODA5IDguODY0ODFDMTQ0LjgwOSA4Ljg2NDgxIDE0NC43MzYgOC43ODkwNiAxNDQuNTkyIDguNzg5MDZDMTQ0LjU4OSA4Ljc4OTA2IDE0NC41NjEgOC43OTAxNiAxNDQuNTA5IDguNzkyMjRaIiBmaWxsPSJ1cmwoI3BhaW50MV9saW5lYXJfMjE5XzM0OSkiLz4KPHBhdGggZD0iTTE1OS4yMjUgMEMxNTkuMjI1IDAgMTQzLjI0NiAxNS43MjgzIDE0Mi4wOTYgMTYuOTU3NkMxNDAuNDQxIDE4LjcyODQgMTQxLjE1MiAxOS4yMzg5IDE0MS4xNTIgMTkuMjM4OUwxNDguNjU0IDI2LjY2MTFDMTQ4LjY1NCAyNi42NjExIDE0OC4yODMgMjUuNzU2NCAxNDkuNDk3IDI0LjQ3OTNDMTUwLjI0MyAyMy42OTQ4IDE1OS4yMjUgMTQuODQ0MyAxNTkuMjI1IDE0Ljg0NDNWMFoiIGZpbGw9IiM3MkFGMkUiLz4KPHBhdGggZD0iTTE0NC41ODMgOC43ODQyOUMxNDQuNTgzIDguNzg0MjkgMTM5LjI2MSA4LjgzNTMxIDEzNy45MjcgOC43NzM5NUMxMzcuMTcxIDguNzM5MjEgMTM2LjQ2NSAxMC40OTA2IDEzNS41NTEgMTIuMzM0NkMxMzYuNSAxMS44MTI4IDE0MS40MTQgOS40Mzg4MiAxNDIuOTIxIDkuMTA4NThDMTQ0LjQyOCA4Ljc3ODM0IDE0NC41ODMgOC43ODQyOSAxNDQuNTgzIDguNzg0MjlaIiBmaWxsPSIjNzJBRjJFIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMjE5XzM0OSIgeDE9IjE0MS43MzYiIHkxPSI4Ljc4OTA2IiB4Mj0iMTQyLjY0MyIgeTI9IjEwLjUwOTUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzIzMUYyMCIgc3RvcC1vcGFjaXR5PSIwLjQzIi8+CjxzdG9wIG9mZnNldD0iMC42OTUiIHN0b3AtY29sb3I9IiMyMzFGMjAiIHN0b3Atb3BhY2l0eT0iMC4wNSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMzFGMjAiIHN0b3Atb3BhY2l0eT0iMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MV9saW5lYXJfMjE5XzM0OSIgeDE9IjE1OS4zMyIgeTE9IjI2LjczMzkiIHgyPSIxNDEuODg0IiB5Mj0iOS45NjY4MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMjMxRjIwIiBzdG9wLW9wYWNpdHk9IjAiLz4KPHN0b3Agb2Zmc2V0PSIwLjEzMDYxNCIgc3RvcC1jb2xvcj0iIzIzMUYyMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+CjxzdG9wIG9mZnNldD0iMC4yNDQyOTIiIHN0b3AtY29sb3I9IiMyMzFGMjAiIHN0b3Atb3BhY2l0eT0iMC4yIi8+CjxzdG9wIG9mZnNldD0iMC40NjkwMTgiIHN0b3AtY29sb3I9IiMyMzFGMjAiIHN0b3Atb3BhY2l0eT0iMC42MiIvPgo8c3RvcCBvZmZzZXQ9IjAuNjkyMDQ5IiBzdG9wLWNvbG9yPSIjMjMxRjIwIiBzdG9wLW9wYWNpdHk9IjAuMyIvPgo8c3RvcCBvZmZzZXQ9IjAuODcwMTMyIiBzdG9wLWNvbG9yPSIjMjMxRjIwIiBzdG9wLW9wYWNpdHk9IjAuMDUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjMxRjIwIiBzdG9wLW9wYWNpdHk9IjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K&quot;,&quot;url&quot;:&quot;https:\/\/www.sjrc.vic.edu.au\/wp-content\/uploads\/2026\/03\/newsfeed-by-hail.svg&quot;,&quot;id&quot;:19372263}},&quot;thumbnails&quot;:[]}</code></pre></div><div style="display:contents" dir="auto"><ul id="34ba62ac-5cbf-8040-82ee-fc95cb2eab50" class="toggle"><li><details open=""><summary><strong>Code</strong> (if can’t find module to import from cloud, just put this into a Divi 4 default blog module.)</summary><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-806b-8add-c6425cad8be1" class="">&lt;style&gt;<br/>/* ================================<br/>SAFETY: HIDE OLD POST TILES MODULE<br/>This is the module causing mobile/tablet excerpt issues.<br/>================================ */</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8010-a9c6-ed9cc4129844" class="">.brbl_post_tiles_0,<br/>.brbl_post_tiles_0.et_pb_module,<br/>.et_pb_module.brbl_post_tiles_0 {<br/>display: none !important;<br/>visibility: hidden !important;<br/>height: 0 !important;<br/>overflow: hidden !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80ce-8b2a-fa13ad719cff" class="">/* Extra safety if any DBP tile excerpts leak through elsewhere */<br/>.dbp-post-tile-excerpt {<br/>display: none !important;<br/>visibility: hidden !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8087-a06a-d2e6bbf71368" class="">/* ================================<br/>DIVI BLOG → 3 COL / 2 ROW FEATURE GRID<br/>Module target: .et_pb_blog_0<br/>================================ */</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80de-a439-d3a2027364a6" class="">/* Main grid */<br/>.et_pb_blog_0 .et_pb_ajax_pagination_container {<br/>display: grid !important;<br/>grid-template-columns: 2fr 1fr 1fr !important;<br/>grid-template-rows: 300px 300px !important;<br/>gap: 10px !important;<br/>width: 100% !important;<br/>height: auto !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80fa-96c0-dda3f0b529f6" class="">/* Neutralise Divi / Salvattore masonry wrappers */<br/>.et_pb_blog_0 .et_pb_salvattore_content,<br/>.et_pb_blog_0 .column,<br/>.et_pb_blog_0 .column.size-1of3,<br/>.et_pb_blog_0 .column.size-1of2,<br/>.et_pb_blog_0 .column.size-1of1 {<br/>display: contents !important;<br/>width: auto !important;<br/>height: auto !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8002-88cd-e64b2f212c41" class="">/* Completely hide Older / Next Entries */<br/>.et_pb_blog_0 .pagination,<br/>.et_pb_blog_0 .pagination.clearfix,<br/>.et_pb_blog_0 .pagination .alignleft,<br/>.et_pb_blog_0 .pagination .alignright,<br/>.et_pb_blog_0 .pagination a {<br/>display: none !important;<br/>visibility: hidden !important;<br/>height: 0 !important;<br/>overflow: hidden !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8037-b2b9-da65482616e3" class="">/* Base card */<br/>.et_pb_blog_0 article.et_pb_post {<br/>position: relative !important;<br/>overflow: hidden !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>border: 0 !important;<br/>border-radius: 12px !important;<br/>background-color: #0b3f34 !important;<br/>background-size: cover !important;<br/>background-position: center !important;<br/>background-repeat: no-repeat !important;<br/>min-height: 0 !important;<br/>height: auto !important;<br/>cursor: pointer;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8094-b030-f091def12cb3" class="">/* Exact layout */<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(1) {<br/>grid-column: 1;<br/>grid-row: 1 / span 2;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80dd-a96b-f294f121484b" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(2) {<br/>grid-column: 2;<br/>grid-row: 1;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-803b-8eb5-cda58a2a7f73" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(3) {<br/>grid-column: 3;<br/>grid-row: 1;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80b5-8a20-f78abd54c5b3" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(4) {<br/>grid-column: 2;<br/>grid-row: 2;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8077-96a3-f8dcb6f0a432" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(5) {<br/>grid-column: 3;<br/>grid-row: 2;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80a7-9c70-ef35d2c3e5f2" class="">/* Only show 5 posts */<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(n+6) {<br/>display: none !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80c6-bf8a-eacd06713c90" class="">/* Hide the real image element because JS puts it on the card background */<br/>.et_pb_blog_0 article.et_pb_post .entry-featured-image-url,<br/>.et_pb_blog_0 article.et_pb_post .et_pb_image_container {<br/>display: none !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-804b-91d6-cf9e0700ac3b" class="">/* Hide original Divi meta. JS copies the date into .hail-card-date */<br/>.et_pb_blog_0 article.et_pb_post &gt; .post-meta,<br/>.et_pb_blog_0 article.et_pb_post p.post-meta:not(.hail-card-date) {<br/>display: none !important;<br/>visibility: hidden !important;<br/>height: 0 !important;<br/>overflow: hidden !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-804b-9e0c-f8f1f5ab59d3" class="">/* Hide excerpt/content visually, but keep it in DOM for Hail link detection */<br/>.et_pb_blog_0 article.et_pb_post .post-content {<br/>position: absolute !important;<br/>width: 1px !important;<br/>height: 1px !important;<br/>overflow: hidden !important;<br/>opacity: 0 !important;<br/>pointer-events: none !important;<br/>clip-path: inset(50%) !important;<br/>white-space: nowrap !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>z-index: -1 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80ac-8b65-fe7eda5edcd8" class="">/* Smooth full-image overlay with stronger darkness at bottom */<br/>.et_pb_blog_0 article.et_pb_post::before {<br/>content: &quot;&quot;;<br/>position: absolute;<br/>inset: 0;<br/>z-index: 1;<br/>background:<br/>linear-gradient(<br/>180deg,<br/>rgba(0, 0, 0, 0.10) 0%,<br/>rgba(0, 0, 0, 0.14) 22%,<br/>rgba(0, 0, 0, 0.22) 45%,<br/>rgba(0, 0, 0, 0.38) 68%,<br/>rgba(0, 0, 0, 0.62) 86%,<br/>rgba(0, 0, 0, 0.76) 100%<br/>);<br/>pointer-events: none;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80d3-b216-db3643f3b4d7" class="">/* Gold/green stripe */<br/>.et_pb_blog_0 article.et_pb_post::after {<br/>content: &quot;&quot;;<br/>position: absolute;<br/>left: 0;<br/>right: 0;<br/>bottom: 12px;<br/>height: 7px;<br/>z-index: 2;<br/>background: linear-gradient(<br/>90deg,<br/>rgba(200,159,48,0.95) 0%,<br/>rgba(200,159,48,0.95) 55%,<br/>rgba(13,63,51,0.95) 55%,<br/>rgba(13,63,51,0.95) 100%<br/>);<br/>pointer-events: none;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8050-b502-ce2aff30309a" class="">/* Text group: date above title <em>/<br/>/</em> Bottom spacing now matches left spacing */<br/>.et_pb_blog_0 article.et_pb_post .hail-card-text {<br/>position: absolute !important;<br/>left: 24px;<br/>right: 24px;<br/>bottom: 24px;<br/>z-index: 3;<br/>display: flex !important;<br/>flex-direction: column !important;<br/>gap: 10px !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80b7-8941-cf9662e88ef0" class="">/* Copied date */<br/>.et_pb_blog_0 article.et_pb_post .hail-card-date {<br/>display: block !important;<br/>visibility: visible !important;<br/>height: auto !important;<br/>overflow: visible !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>color: rgba(255,255,255,0.82) !important;<br/>font-size: 15px !important;<br/>line-height: 1 !important;<br/>font-family: Lato, Helvetica, Arial, sans-serif !important;<br/>font-weight: 300 !important;<br/>text-decoration: none !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-800e-9a41-e1708cd99b4d" class="">/* Title */<br/>.et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title {<br/>position: static !important;<br/>display: block !important;<br/>visibility: visible !important;<br/>height: auto !important;<br/>overflow: visible !important;<br/>margin: 0 !important;<br/>padding: 0 !important;<br/>line-height: 1.05 !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8014-954f-c353dae45b7a" class="">.et_pb_blog_0 article.et_pb_post .hail-card-text .entry-title a {<br/>color: #fff !important;<br/>font-family: Poppins, Helvetica, Arial, sans-serif !important;<br/>font-weight: 800 !important;<br/>line-height: 1.05 !important;<br/>letter-spacing: 0.02em !important;<br/>text-transform: uppercase !important;<br/>text-decoration: none !important;<br/>font-size: clamp(22px, 1.45vw, 30px) !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80e0-855c-fc99c1c40776" class="">/* Bigger title on featured card */<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(1) .hail-card-text .entry-title a {<br/>font-size: clamp(32px, 2.7vw, 52px) !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80fe-8f7e-f9f83d66f025" class="">/* Hide Divi read more button */<br/>.et_pb_blog_0 article.et_pb_post .more-link {<br/>display: none !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80f6-8d7f-ef132c1ac7ab" class="">/* Tablet */<br/>@media (max-width: 980px) {<br/>.et_pb_blog_0 .et_pb_ajax_pagination_container {<br/>grid-template-columns: 1fr 1fr !important;<br/>grid-template-rows: 360px 260px 260px !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8052-8037-d31528cbe7bf" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(1) {<br/>grid-column: 1 / span 2;<br/>grid-row: 1;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8079-8125-ce83279371a9" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(2) {<br/>grid-column: 1;<br/>grid-row: 2;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8093-98d5-eaa12f29208f" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(3) {<br/>grid-column: 2;<br/>grid-row: 2;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8002-a44b-fe7edef9fc49" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(4) {<br/>grid-column: 1;<br/>grid-row: 3;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80f3-b2ad-dd49bec1b7fa" class="">.et_pb_blog_0 article.et_pb_post:nth-of-type(5) {<br/>grid-column: 2;<br/>grid-row: 3;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8049-8045-fd560e2d3624" class="">.et_pb_blog_0 article.et_pb_post .hail-card-text {<br/>left: 22px;<br/>right: 22px;<br/>bottom: 22px;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8086-88ec-f8ae92970bf0" class="">.et_pb_blog_0 article.et_pb_post::after {<br/>bottom: 10px;<br/>}<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80e2-961b-caff7b34c8a0" class="">/* Mobile */<br/>@media (max-width: 600px) {<br/>.et_pb_blog_0 .et_pb_ajax_pagination_container {<br/>grid-template-columns: 1fr !important;<br/>grid-template-rows: none !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80a7-a108-d0f28d1fe11b" class="">.et_pb_blog_0 article.et_pb_post,<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(1),<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(2),<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(3),<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(4),<br/>.et_pb_blog_0 article.et_pb_post:nth-of-type(5) {<br/>grid-column: auto !important;<br/>grid-row: auto !important;<br/>min-height: 300px !important;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80c7-b976-ebbb323acc65" class="">.et_pb_blog_0 article.et_pb_post .hail-card-text {<br/>left: 20px;<br/>right: 20px;<br/>bottom: 20px;<br/>}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8007-8e37-e136ef876a0d" class="">.et_pb_blog_0 article.et_pb_post::after {<br/>bottom: 8px;<br/>}<br/>}<br/>&lt;/style&gt;</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-804e-a7e2-eb692d1aa4c0" class="">&lt;script&gt;<br/>(function () {<br/>function getBestImageUrl(img) {<br/>if (!img) return &#x27;&#x27;;</p></div><div style="display:contents" dir="auto"><pre id="34ba62ac-5cbf-8058-bacd-ecf38db4760a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const srcset =
+  img.getAttribute(&#x27;data-srcset&#x27;) ||
+  img.getAttribute(&#x27;data-lazy-srcset&#x27;) ||
+  img.getAttribute(&#x27;srcset&#x27;) ||
+  &#x27;&#x27;;
+
+if (srcset) {
+  const candidates = srcset
+    .split(&#x27;,&#x27;)
+    .map(function (item) {
+      const parts = item.trim().split(/\\s+/);
+      const url = parts[0];
+      const width = parts[1] ? parseInt(parts[1].replace(&#x27;w&#x27;, &#x27;&#x27;), 10) : 0;
+
+      return {
+        url: url,
+        width: isNaN(width) ? 0 : width
+      };
+    })
+    .filter(function (item) {
+      return item.url &amp;&amp; !item.url.startsWith(&#x27;data:image&#x27;);
+    });
+
+  if (candidates.length) {
+    candidates.sort(function (a, b) {
+      return b.width - a.width;
+    });
+
+    return candidates[0].url.replace(/-\\d+x\\d+(?=\\.(jpg|jpeg|png|webp))/i, &#x27;&#x27;);
+  }
+}
+
+let imageUrl =
+  img.getAttribute(&#x27;data-full-url&#x27;) ||
+  img.getAttribute(&#x27;data-large_image&#x27;) ||
+  img.getAttribute(&#x27;data-src&#x27;) ||
+  img.getAttribute(&#x27;data-lazy-src&#x27;) ||
+  img.getAttribute(&#x27;data-eio-lazy-src&#x27;) ||
+  &#x27;&#x27;;
+
+if (!imageUrl) {
+  const src = img.getAttribute(&#x27;src&#x27;) || img.currentSrc || &#x27;&#x27;;
+
+  if (src &amp;&amp; !src.startsWith(&#x27;data:image&#x27;)) {
+    imageUrl = src;
+  }
+}
+
+return imageUrl.replace(/-\\d+x\\d+(?=\\.(jpg|jpeg|png|webp))/i, &#x27;&#x27;);</code></pre></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-809b-8c1d-c56a1b0d1096" class="">}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-809f-9c94-c78d2d82e765" class="">function cleanDateText(text) {<br/>if (!text) return &#x27;&#x27;;</p></div><div style="display:contents" dir="auto"><pre id="34ba62ac-5cbf-8011-98f4-efcb48977ad5" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">text = text
+  .replace(/◷/g, &#x27;&#x27;)
+  .replace(/\\s+/g, &#x27; &#x27;)
+  .trim();
+
+const dateMatch = text.match(/\\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\\.?\\s+\\d{1,2},?\\s+\\d{4}\\b/i);
+
+if (dateMatch) {
+  return dateMatch[0].trim();
+}
+
+return text;</code></pre></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-802a-a487-e1ae7e18b001" class="">}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80b7-9819-ed96e6f9c1d1" class="">function getDateText(post) {<br/>const publishedDate = post.querySelector(&#x27;.post-meta .published&#x27;);</p></div><div style="display:contents" dir="auto"><pre id="34ba62ac-5cbf-8087-83fc-d01ba7d1ef04" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">if (publishedDate) {
+  return cleanDateText(publishedDate.textContent);
+}
+
+const existingCopiedDate = post.querySelector(&#x27;.hail-card-date&#x27;);
+
+if (existingCopiedDate) {
+  return cleanDateText(existingCopiedDate.textContent);
+}
+
+const meta = post.querySelector(&#x27;p.post-meta, .post-meta&#x27;);
+
+if (meta) {
+  return cleanDateText(meta.textContent);
+}
+
+return &#x27;&#x27;;</code></pre></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8028-be76-c8682c6ec527" class="">}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8011-bcb5-fdc5e83b9151" class="">function removePagination(container) {<br/>const paginations = container.querySelectorAll(&#x27;.pagination&#x27;);</p></div><div style="display:contents" dir="auto"><pre id="34ba62ac-5cbf-8011-adfc-d0de1594adfe" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">paginations.forEach(function (pagination) {
+  const wrapper = pagination.parentElement;
+
+  if (wrapper &amp;&amp; wrapper !== container) {
+    wrapper.remove();
+  } else {
+    pagination.remove();
+  }
+});</code></pre></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8024-ba89-ef1ef687b5d7" class="">}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-806c-8929-eaa2947a544e" class="">function initHailBlogGrid() {<br/>const blog = document.querySelector(&#x27;.et_pb_blog_0&#x27;);<br/>if (!blog) return;</p></div><div style="display:contents" dir="auto"><pre id="34ba62ac-5cbf-801c-8bad-d5a0fa9d8171" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const container = blog.querySelector(&#x27;.et_pb_ajax_pagination_container&#x27;);
+if (!container) return;
+
+removePagination(container);
+
+const articles = Array.from(blog.querySelectorAll(&#x27;article.et_pb_post&#x27;));
+
+articles.forEach(function (article) {
+  container.appendChild(article);
+});
+
+articles.forEach(function (post) {
+  const title = post.querySelector(&#x27;.entry-title&#x27;);
+  const titleLink = post.querySelector(&#x27;.entry-title a&#x27;);
+  const imageLink = post.querySelector(&#x27;.entry-featured-image-url&#x27;);
+  const img = post.querySelector(&#x27;.entry-featured-image-url img, .et_pb_image_container img&#x27;);
+  const hailLink = post.querySelector(&#x27;.post-content-inner a[href*=&quot;hail.to&quot;]&#x27;);
+
+  if (!titleLink || !title) return;
+
+  const imageUrl = getBestImageUrl(img);
+
+  if (imageUrl) {
+    post.style.setProperty(&#x27;background-image&#x27;, &#x27;url(&quot;&#x27; + imageUrl + &#x27;&quot;)&#x27;, &#x27;important&#x27;);
+  }
+
+  let textGroup = post.querySelector(&#x27;.hail-card-text&#x27;);
+
+  if (!textGroup) {
+    textGroup = document.createElement(&#x27;div&#x27;);
+    textGroup.className = &#x27;hail-card-text&#x27;;
+    post.appendChild(textGroup);
+  }
+
+  let dateEl = post.querySelector(&#x27;.hail-card-date&#x27;);
+  const dateText = getDateText(post);
+
+  if (!dateEl) {
+    dateEl = document.createElement(&#x27;div&#x27;);
+    dateEl.className = &#x27;hail-card-date&#x27;;
+  }
+
+  dateEl.textContent = dateText ? &#x27;◷ &#x27; + dateText : &#x27;&#x27;;
+
+  if (dateText &amp;&amp; !textGroup.contains(dateEl)) {
+    textGroup.appendChild(dateEl);
+  }
+
+  if (!textGroup.contains(title)) {
+    textGroup.appendChild(title);
+  }
+
+  const fallbackUrl = titleLink.href;
+  const finalUrl = hailLink ? hailLink.href : fallbackUrl;
+
+  post.dataset.finalUrl = finalUrl;
+  post.dataset.opensNewTab = hailLink ? &#x27;true&#x27; : &#x27;false&#x27;;
+
+  titleLink.href = finalUrl;
+
+  if (imageLink) {
+    imageLink.href = finalUrl;
+  }
+
+  if (hailLink) {
+    titleLink.target = &#x27;_blank&#x27;;
+    titleLink.rel = &#x27;noopener&#x27;;
+
+    if (imageLink) {
+      imageLink.target = &#x27;_blank&#x27;;
+      imageLink.rel = &#x27;noopener&#x27;;
+    }
+  }
+
+  if (!post.dataset.hailGridClickReady) {
+    post.dataset.hailGridClickReady = &#x27;true&#x27;;
+
+    post.addEventListener(&#x27;click&#x27;, function (event) {
+      const clickedLink = event.target.closest(&#x27;a&#x27;);
+
+      if (clickedLink) return;
+
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === &#x27;true&#x27;;
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, &#x27;_blank&#x27;, &#x27;noopener&#x27;);
+      } else {
+        window.location.href = url;
+      }
+    });
+  }
+});</code></pre></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80b9-8688-d44cc2c0b6ea" class="">}</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80fa-aff5-feb5eb89c7ff" class="">document.addEventListener(&#x27;DOMContentLoaded&#x27;, initHailBlogGrid);<br/>window.addEventListener(&#x27;load&#x27;, initHailBlogGrid);</p></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-80a1-9357-f55b493046e7" class="">setTimeout(initHailBlogGrid, 250);<br/>setTimeout(initHailBlogGrid, 1000);<br/>})();<br/>&lt;/script&gt;</p></div></details></li></ul></div><div style="display:contents" dir="ltr"><figure id="34ba62ac-5cbf-8046-bc94-d442a6dee02f" class="image"><a href="Hail%20X%20EWS/image%203.png"><img style="width:703.96875px" src="Hail%20X%20EWS/image%203.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="34ba62ac-5cbf-8019-a056-cca968f583b8" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
