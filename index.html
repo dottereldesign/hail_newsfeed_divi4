@@ -2549,6 +2549,12 @@ php_value post_max_size 7M</code>
     text-decoration: none;
   }
 
+  .hail-newsfeed .et_pb_ajax_pagination_container[data-post-count="1"],
+  .hail-newsfeed .et_pb_ajax_pagination_container[data-post-count="2"],
+  .hail-newsfeed .et_pb_ajax_pagination_container[data-post-count="3"] {
+    grid-template-rows: minmax(260px, auto) !important;
+  }
+
   /* Neutralise Divi / Salvattore masonry wrappers */
   .hail-newsfeed .et_pb_salvattore_content,
   .hail-newsfeed .column,
@@ -6031,11 +6037,6 @@ php_value post_max_size 7M</code>
           dragPointerId = event.pointerId;
           dragStartX = event.clientX;
           dragStartScrollLeft = container.scrollLeft;
-          container.classList.add("is-dragging");
-
-          if (container.setPointerCapture) {
-            container.setPointerCapture(event.pointerId);
-          }
         });
 
         container.addEventListener("pointermove", function (event) {
@@ -6044,8 +6045,16 @@ php_value post_max_size 7M</code>
           const deltaX = event.clientX - dragStartX;
 
           if (Math.abs(deltaX) > 4) {
-            dragStarted = true;
-            suppressClickUntil = Date.now() + 450;
+            if (!dragStarted) {
+              dragStarted = true;
+              container.classList.add("is-dragging");
+
+              if (container.setPointerCapture) {
+                container.setPointerCapture(event.pointerId);
+              }
+            }
+
+            suppressClickUntil = Date.now() + 120;
           }
 
           if (dragStarted) {
@@ -6063,7 +6072,7 @@ php_value post_max_size 7M</code>
         function endDrag(event) {
           if (!isDragging || event.pointerId !== dragPointerId) return;
 
-          if (container.releasePointerCapture) {
+          if (dragStarted && container.releasePointerCapture) {
             try {
               container.releasePointerCapture(event.pointerId);
             } catch (error) {}
@@ -6074,7 +6083,7 @@ php_value post_max_size 7M</code>
           container.classList.remove("is-dragging");
 
           if (dragStarted) {
-            suppressClickUntil = Date.now() + 450;
+            suppressClickUntil = Date.now() + 120;
             settleAfterDrag();
           }
         }
@@ -6816,19 +6825,14 @@ php_value post_max_size 7M</code>
 
         container.addEventListener("pointerdown", function (event) {
           if (event.button !== undefined && event.button !== 0) return;
-          if (event.target.closest("button")) return;
+          if (event.target.closest("a, button")) return;
 
           isDragging = true;
           dragStarted = false;
           dragPointerId = event.pointerId;
           dragStartX = event.clientX;
           dragStartScrollLeft = container.scrollLeft;
-          container.classList.add("is-dragging");
           pauseAutoplay();
-
-          if (container.setPointerCapture) {
-            container.setPointerCapture(event.pointerId);
-          }
         });
 
         container.addEventListener("pointermove", function (event) {
@@ -6837,8 +6841,16 @@ php_value post_max_size 7M</code>
           const deltaX = event.clientX - dragStartX;
 
           if (Math.abs(deltaX) > 4) {
-            dragStarted = true;
-            suppressClickUntil = Date.now() + 450;
+            if (!dragStarted) {
+              dragStarted = true;
+              container.classList.add("is-dragging");
+
+              if (container.setPointerCapture) {
+                container.setPointerCapture(event.pointerId);
+              }
+            }
+
+            suppressClickUntil = Date.now() + 120;
           }
 
           if (dragStarted) {
@@ -6849,7 +6861,7 @@ php_value post_max_size 7M</code>
         function endDrag(event) {
           if (!isDragging || event.pointerId !== dragPointerId) return;
 
-          if (container.releasePointerCapture) {
+          if (dragStarted && container.releasePointerCapture) {
             try {
               container.releasePointerCapture(event.pointerId);
             } catch (error) {}
@@ -6860,7 +6872,7 @@ php_value post_max_size 7M</code>
           container.classList.remove("is-dragging");
 
           if (dragStarted) {
-            suppressClickUntil = Date.now() + 450;
+            suppressClickUntil = Date.now() + 120;
             settleAfterDrag();
           }
 
