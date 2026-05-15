@@ -13,6 +13,10 @@
         background: #f6f5f0;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       .site-header {
         background: #fff;
         border-bottom: 1px solid #e4dfd1;
@@ -104,16 +108,23 @@
       }
 
       .page-header {
-        display: flex;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
         align-items: flex-start;
-        justify-content: space-between;
         gap: 28px;
         margin-bottom: 18px;
       }
 
       .page-header > div:first-child {
-        flex: 1 1 560px;
         min-width: 0;
+      }
+
+      .page-header-side {
+        display: grid;
+        align-self: start;
+        gap: 18px;
+        width: 100%;
+        min-width: 320px;
       }
 
       .instructions {
@@ -233,14 +244,122 @@
         align-items: center;
         justify-items: start;
         gap: 12px;
-        flex: 0 1 380px;
-        min-width: 300px;
+        width: 100%;
+        box-sizing: border-box;
         margin-top: 4px;
         padding: 12px;
         border: 1px solid #d8d2c0;
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.72);
         box-shadow: 0 14px 32px rgba(5, 25, 20, 0.08);
+      }
+
+      .request-card {
+        display: grid;
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 16px;
+        border: 1px solid #d8d2c0;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 14px 32px rgba(5, 25, 20, 0.08);
+      }
+
+      .request-card-title {
+        margin: 0;
+        color: #15352f;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+
+      .request-card-copy {
+        margin: 0;
+        color: #435a54;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.45;
+      }
+
+      .request-card a {
+        color: #15352f;
+        font-weight: 900;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      .start-card {
+        display: grid;
+        gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 18px;
+        border: 1px solid rgba(103, 177, 16, 0.3);
+        border-radius: 10px;
+        color: #15352f;
+        background:
+          linear-gradient(135deg, rgba(103, 177, 16, 0.12), rgba(255, 255, 255, 0.82) 48%),
+          #fff;
+        box-shadow: 0 16px 34px rgba(5, 25, 20, 0.1);
+        text-decoration: none;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .start-card:hover,
+      .start-card:focus-visible {
+        border-color: rgba(103, 177, 16, 0.58);
+        box-shadow: 0 20px 40px rgba(5, 25, 20, 0.14);
+        transform: translateY(-2px);
+      }
+
+      .start-card-eyebrow {
+        color: #67B110;
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .start-card-title {
+        margin: 0;
+        color: #15352f;
+        font-size: clamp(20px, 1.8vw, 26px);
+        font-weight: 950;
+        line-height: 1.08;
+      }
+
+      .start-card-copy {
+        margin: 0;
+        color: #435a54;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .start-card-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-self: start;
+        margin-top: 2px;
+        color: #15352f;
+        font-size: 14px;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .start-card-action::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg) translateY(-1px);
       }
 
       .required-tag {
@@ -511,15 +630,81 @@
       }
 
       .setup-step {
+        --setup-step-pad-x: clamp(22px, 2.8vw, 34px);
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        gap: 14px;
+        gap: 0;
         min-width: 0;
-        padding: clamp(20px, 2.4vw, 28px);
+        padding: 0;
         border: 1px solid #d8d2c0;
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.78);
         box-shadow: 0 14px 32px rgba(5, 25, 20, 0.08);
+        overflow: hidden;
+      }
+
+      .setup-step[open] {
+        gap: 14px;
+        padding: 0 var(--setup-step-pad-x) clamp(22px, 2.6vw, 30px);
+      }
+
+      .setup-step-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: clamp(18px, 2.1vw, 24px) var(--setup-step-pad-x);
+        color: #15352f;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .setup-step[open] .setup-step-summary {
+        margin-inline: calc(var(--setup-step-pad-x) * -1);
+      }
+
+      .setup-step-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .setup-step-summary::after {
+        content: "+";
+        display: inline-grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        color: #15352f;
+        background: #eef2e9;
+        box-shadow: inset 0 0 0 1px rgba(21, 53, 47, 0.12);
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1;
+        transition:
+          background 160ms ease,
+          transform 160ms ease;
+      }
+
+      .setup-step[open] .setup-step-summary::after {
+        content: "-";
+        background: #e4eddc;
+        transform: rotate(180deg);
+      }
+
+      .setup-step-summary:hover::after,
+      .setup-step-summary:focus-visible::after {
+        background: #dde9d1;
+      }
+
+      .setup-step-summary:focus-visible {
+        outline: 3px solid #c89f30;
+        outline-offset: -3px;
+      }
+
+      .setup-step > :not(summary) {
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .setup-step h4 {
@@ -544,7 +729,7 @@
 
       .setup-step ol,
       .setup-step ul {
-        padding-left: 1.25em;
+        padding-left: 1.45em;
       }
 
       .setup-step a {
@@ -676,6 +861,17 @@
           box-sizing: border-box;
         }
 
+        .page-header-side {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .request-card {
+          width: 100%;
+          min-width: 0;
+          box-sizing: border-box;
+        }
+
         .primary-colour-control {
           width: min(100%, 360px);
           box-sizing: border-box;
@@ -701,6 +897,10 @@
 
         .module-formula {
           grid-template-columns: 1fr;
+        }
+
+        .request-card {
+          margin-top: 0;
         }
 
         .module-row {
@@ -760,7 +960,7 @@
           </ol>
           <div class="setup-notes">
             <p>Hail publication links open in a new browser tab.</p>
-            <p>Standard articles open as WordPress posts.</p>
+            <p>Hail articles open as WordPress posts.</p>
             <p>Change the post count in the Blog module to control how many news items display.</p>
             <p>Adjust the Blog module border settings to match the site theme.</p>
             <p>Every code block includes the Newsfeed by Hail image, which links to the Hail website.</p>
@@ -775,24 +975,36 @@
           </div>
         </div>
 
-        <div class="module-formula" aria-label="Use Blog and Code modules">
-          <span class="required-tag">Required Divi 4 modules</span>
-          <div class="module-row">
-            <div class="module-card">
-              <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m9 8-4 4 4 4M15 8l4 4-4 4M13 6l-2 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span class="module-name">Code</span>
-            </div>
-            <span class="formula-symbol">+</span>
-            <div class="module-card">
-              <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 16.8h4.1L18.4 7.5l-4.1-4.1L5 12.7v4.1Zm2.4-3.1 6.9-6.9 1.1 1.1-6.9 6.9H7.4v-1.1Z" fill="currentColor"/>
-                <path d="M15.3 2.4 19.4 6.5l.7-.7c.5-.5.5-1.2 0-1.7l-2.4-2.4c-.5-.5-1.2-.5-1.7 0l-.7.7Z" fill="currentColor"/>
-              </svg>
-              <span class="module-name">Blog</span>
+        <div class="page-header-side">
+          <div class="module-formula" aria-label="Use Blog and Code modules">
+            <span class="required-tag">Required Divi 4 modules</span>
+            <div class="module-row">
+              <div class="module-card">
+                <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 8-4 4 4 4M15 8l4 4-4 4M13 6l-2 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="module-name">Code</span>
+              </div>
+              <span class="formula-symbol">+</span>
+              <div class="module-card">
+                <svg class="module-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 16.8h4.1L18.4 7.5l-4.1-4.1L5 12.7v4.1Zm2.4-3.1 6.9-6.9 1.1 1.1-6.9 6.9H7.4v-1.1Z" fill="currentColor"/>
+                  <path d="M15.3 2.4 19.4 6.5l.7-.7c.5-.5.5-1.2 0-1.7l-2.4-2.4c-.5-.5-1.2-.5-1.7 0l-.7.7Z" fill="currentColor"/>
+                </svg>
+                <span class="module-name">Blog</span>
+              </div>
             </div>
           </div>
+          <aside class="request-card" aria-label="Newsfeed change requests">
+            <h3 class="request-card-title">Want a different newsfeed style?</h3>
+            <p class="request-card-copy">Found a newsletter layout you like, or need a small change to one here? Send a screenshot or link to <a href="mailto:jamie@hail.to?subject=Hail%20Newsfeed%20request">jamie@hail.to</a>.</p>
+          </aside>
+          <a class="start-card" href="#wordpress-setup-title" aria-label="Jump to the WordPress setup guide">
+            <span class="start-card-eyebrow">New to Hail Newsfeeds?</span>
+            <h3 class="start-card-title">Start with the setup guide</h3>
+            <p class="start-card-copy">Get WordPress ready, then connect Hail so news lands in the right place.</p>
+            <span class="start-card-action">Go to setup</span>
+          </a>
         </div>
       </header>
 
@@ -904,20 +1116,20 @@
         </div>
 
         <section class="setup-section" aria-labelledby="wordpress-setup-title">
-          <h3 id="wordpress-setup-title">WordPress</h3>
+          <h3 id="wordpress-setup-title">WordPress <span class="setup-heading-note">start here if new</span></h3>
 
-          <article class="setup-step">
-            <h4>1. Create Categories</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>1. Create Categories</h4></summary>
             <p>In <strong>WordPress</strong>, go to <strong>Posts -> Categories</strong> and create the categories each connection should publish into. Recommended categories include <strong>Articles</strong>, <strong>Publications</strong>, <strong>Notices</strong>, and <strong>Alerts</strong>.</p>
             <p>Hail automatically pushes all public tags into WordPress, so extra filtering can usually be managed there.</p>
             <p>You can also create categories based on page destinations instead of content types. For example, use <strong>Homepage</strong>, <strong>Newsletter Page</strong>, or <strong>Sports Page</strong> if that better matches the site structure.</p>
             <div class="setup-images">
               <img class="setup-image" src="setup-assets/wp-categories.webp" alt="WordPress categories screen">
             </div>
-          </article>
+          </details>
 
-          <article class="setup-step">
-            <h4>2. Create an Application Password</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>2. Create an Application Password</h4></summary>
             <p>Go to <strong>Users</strong> in WordPress and select the admin user that Hail should connect with.</p>
             <ol>
               <li>Scroll to <strong>Application Passwords</strong>.</li>
@@ -933,14 +1145,14 @@
               <li><strong>WordPress username</strong> for the user that owns the application password</li>
               <li><strong>WordPress application password</strong></li>
             </ul>
-          </article>
+          </details>
         </section>
 
         <section class="setup-section" aria-labelledby="hail-setup-title">
           <h3 id="hail-setup-title">Hail</h3>
 
-          <article class="setup-step">
-            <h4>Create a WordPress+ Connection</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>Create a WordPress+ Connection</h4></summary>
             <ol>
               <li>Go to <a href="https://hail.to/app/">Hail</a> and select the organisation from the top-right menu. If you only have one organisation, it will be selected by default.</li>
               <li>Select <strong>Connections</strong> from the left sidebar.</li>
@@ -960,14 +1172,14 @@
               <img class="setup-image" src="setup-assets/hail-connection-summary.webp" alt="Hail WordPress Plus connection summary">
             </div>
             <p>When editing an Article or Publication in Hail, users will see the new <strong>Push to WordPress</strong> connection in the right-hand sidebar. Clicking it sends the content to WordPress as a post using the category assigned to that connection. In WordPress, use Blog modules or post queries filtered by category to display the pushed content.</p>
-          </article>
+          </details>
         </section>
 
         <section class="setup-section" aria-labelledby="gotchas-title">
           <h3 id="gotchas-title">Gotchas</h3>
 
-          <article class="setup-step">
-            <h4>Wordfence</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>Wordfence</h4></summary>
             <p class="setup-callout is-warning"><strong>Troubleshooting:</strong> If Wordfence has disabled application passwords, enable them again by unchecking the related Wordfence setting.</p>
             <div class="setup-images is-stacked">
               <img class="setup-image" src="setup-assets/wordfence-application-password-setting.webp" alt="Wordfence application password setting">
@@ -975,10 +1187,10 @@
             </div>
             <p>If username discovery prevention blocks the connection, remove the Wordfence author scan prevention hook in <code>functions.php</code>:</p>
             <code class="setup-code">remove_action('request', 'wordfence::preventAuthorNScans');</code>
-          </article>
+          </details>
 
-          <article class="setup-step">
-            <h4>Network and plugin considerations</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>Network and plugin considerations</h4></summary>
             <p><strong>HTTP sites:</strong> if the site is not using HTTPS, add this to <code>functions.php</code> so application passwords are available:</p>
             <code class="setup-code">add_filter('wp_is_application_passwords_available', '__return_true');</code>
             <p><strong>WPStaq development sites:</strong> Wordfence may need to be disabled while the site is in dev state, because it can prevent Hail from pushing articles to WordPress.</p>
@@ -1003,18 +1215,18 @@
             </div>
             <p><strong>Really Simple SSL:</strong> make sure <strong>Disable user enumeration</strong> is unticked.</p>
             <p><strong>Yoast SEO / WPStaq:</strong> if the WordPress file editor is unavailable, update <code>functions.php</code> over FTP or another safe file-access method.</p>
-          </article>
+          </details>
 
-          <article class="setup-step">
-            <h4>Connection form validation</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>Connection form validation</h4></summary>
             <p>If <strong>Which post type should be applied to posts for this connection?</strong> is left blank, the form can fail validation. Select <strong>NONE</strong> manually when no post type is required.</p>
             <div class="setup-images is-half">
               <img class="setup-image" src="setup-assets/hail-none-post-type-validation.webp" alt="Hail post type NONE selection">
             </div>
-          </article>
+          </details>
 
-          <article class="setup-step">
-            <h4>If publishing fails</h4>
+          <details class="setup-step">
+            <summary class="setup-step-summary"><h4>If publishing fails</h4></summary>
             <p>Check the server upload limits. Large images can stop content from being pushed successfully.</p>
             <ol>
               <li>SSH into the server, for example <code>ssh root@ip</code>.</li>
@@ -1024,7 +1236,7 @@
             </ol>
             <code class="setup-code">php_value upload_max_filesize 5M
 php_value post_max_size 7M</code>
-          </article>
+          </details>
         </section>
       </section>
 
@@ -7036,6 +7248,7 @@ php_value post_max_size 7M</code>
     <script>
       const copyButtons = document.querySelectorAll(".copy-code");
       const classCopyButtons = document.querySelectorAll(".class-copy-button");
+      const setupAccordions = document.querySelectorAll(".setup-step");
       const copyStatus = document.getElementById("copy-status");
       const primaryColourInput = document.getElementById("primary-colour");
       const primaryColourHexInput = document.getElementById("primary-colour-hex");
@@ -7214,6 +7427,23 @@ php_value post_max_size 7M</code>
           syncPrimaryColour(primaryColourHexInput.value);
         });
       }
+
+      setupAccordions.forEach(function (accordion) {
+        accordion.addEventListener("toggle", function () {
+          if (!accordion.open) return;
+
+          const section = accordion.closest(".setup-section");
+          const siblings = section
+            ? section.querySelectorAll(".setup-step")
+            : setupAccordions;
+
+          siblings.forEach(function (sibling) {
+            if (sibling !== accordion) {
+              sibling.open = false;
+            }
+          });
+        });
+      });
 
       syncPrimaryColour(defaultPrimaryColour);
     </script>
