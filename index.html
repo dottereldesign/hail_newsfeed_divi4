@@ -427,6 +427,7 @@
 
 
       .newsfeed {
+        position: relative;
         display: grid;
         grid-template-rows: minmax(0, 1fr) auto;
         align-self: stretch;
@@ -442,6 +443,31 @@
         transform: translateY(18px);
         animation: newsfeed-card-reveal 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         animation-delay: calc((var(--newsfeed-index, 1) - 1) * 110ms);
+      }
+
+      .newsfeed.is-coming-soon::before {
+        content: "Coming soon";
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 4;
+        padding: 7px 11px;
+        border-radius: 999px;
+        color: #15352f;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow:
+          inset 0 0 0 1px rgba(21, 53, 47, 0.12),
+          0 10px 20px rgba(5, 25, 20, 0.14);
+        font-size: 12px;
+        font-weight: 950;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .newsfeed.is-coming-soon .newsfeed-image,
+      .newsfeed.is-coming-soon .newsfeed-tabs-preview {
+        opacity: 0.42;
+        filter: grayscale(0.55);
       }
 
       .newsfeed:nth-child(1) {
@@ -478,6 +504,10 @@
 
       .newsfeed:nth-child(9) {
         --newsfeed-index: 9;
+      }
+
+      .newsfeed:nth-child(10) {
+        --newsfeed-index: 10;
       }
 
       @keyframes newsfeed-card-reveal {
@@ -517,6 +547,69 @@
           linear-gradient(135deg, rgba(103, 177, 16, 0.08), rgba(200, 159, 48, 0.12)),
           #eee9dc;
         font-weight: 700;
+      }
+
+      .newsfeed-tabs-preview {
+        display: grid;
+        align-content: center;
+        gap: 16px;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        box-sizing: border-box;
+        padding: 34px 28px;
+        background:
+          radial-gradient(circle at 82% 22%, rgba(103, 177, 16, 0.15), transparent 28%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 234, 0.96));
+      }
+
+      .newsfeed-tabs-preview-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .newsfeed-tabs-preview-tab {
+        padding: 8px 12px;
+        border-radius: 999px;
+        color: #435a54;
+        background: #eef2e9;
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .newsfeed-tabs-preview-tab.is-active {
+        color: #fff;
+        background: #67B110;
+        box-shadow: 0 8px 18px rgba(103, 177, 16, 0.22);
+      }
+
+      .newsfeed-tabs-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .newsfeed-tabs-preview-card {
+        min-height: 96px;
+        border-radius: 6px;
+        background:
+          linear-gradient(180deg, transparent 34%, rgba(0, 0, 0, 0.66) 100%),
+          linear-gradient(135deg, #dce8d3, #6f845a);
+        box-shadow: 0 12px 22px rgba(5, 25, 20, 0.14);
+      }
+
+      .newsfeed-tabs-preview-card:nth-child(2) {
+        background:
+          linear-gradient(180deg, transparent 34%, rgba(0, 0, 0, 0.66) 100%),
+          linear-gradient(135deg, #e7e2d7, #8c625f);
+      }
+
+      .newsfeed-tabs-preview-card:nth-child(3) {
+        background:
+          linear-gradient(180deg, transparent 34%, rgba(0, 0, 0, 0.66) 100%),
+          linear-gradient(135deg, #d6e2ec, #536f8a);
       }
 
       .newsfeed-content {
@@ -1105,6 +1198,29 @@
                 <div class="newsfeed-type">Auto Slider</div>
               </div>
               <button type="button" class="copy-code" data-code-target="code-template-09" data-newsfeed-name="Newsfeed-09">Copy Code Module</button>
+            </div>
+          </section>
+
+          <section class="newsfeed is-coming-soon" aria-label="Newsfeed-10">
+            <div class="newsfeed-tabs-preview" aria-hidden="true">
+              <div class="newsfeed-tabs-preview-tabs">
+                <span class="newsfeed-tabs-preview-tab is-active">All</span>
+                <span class="newsfeed-tabs-preview-tab">Primary School</span>
+                <span class="newsfeed-tabs-preview-tab">VIC</span>
+                <span class="newsfeed-tabs-preview-tab">SA</span>
+              </div>
+              <div class="newsfeed-tabs-preview-grid">
+                <span class="newsfeed-tabs-preview-card"></span>
+                <span class="newsfeed-tabs-preview-card"></span>
+                <span class="newsfeed-tabs-preview-card"></span>
+              </div>
+            </div>
+            <div class="newsfeed-content">
+              <div class="newsfeed-title-wrap">
+                <div class="newsfeed-title">Newsfeed-10</div>
+                <div class="newsfeed-type">Tabbed Blogs</div>
+              </div>
+              <button type="button" class="copy-code" data-code-target="code-template-10" data-newsfeed-name="Newsfeed-10">Copy Code Module</button>
             </div>
           </section>
       </div>
@@ -7242,6 +7358,798 @@ php_value post_max_size 7M</code>
     window.addEventListener("load", initHailBlogGrid);
     setTimeout(initHailBlogGrid, 250);
     setTimeout(initHailBlogGrid, 1000);
+  })();
+
+</script></textarea>
+
+    <textarea class="copy-source" id="code-template-10" aria-hidden="true" tabindex="-1"><style>
+  /* Primary accent colour. Updated by the library colour picker before copy. */
+  .hail-newsfeed-tabbed,
+  .hail-newsfeed-tab {
+    --hail-primary-colour: __HAIL_PRIMARY_COLOUR__;
+  }
+
+  /* ================================
+   DIVI BLOG TABS
+   Add these CSS classes to the four Divi Blog modules:
+   All: hail-newsfeed hail-newsfeed-tab hail-newsfeed-tab-all
+   Primary School: hail-newsfeed hail-newsfeed-tab hail-newsfeed-tab-primary
+   VIC: hail-newsfeed hail-newsfeed-tab hail-newsfeed-tab-vic
+   SA: hail-newsfeed hail-newsfeed-tab hail-newsfeed-tab-sa
+================================ */
+
+  .brbl_post_tiles_0,
+  .brbl_post_tiles_0.et_pb_module,
+  .et_pb_module.brbl_post_tiles_0 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .dbp-post-tile-excerpt {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .hail-newsfeed-tabbed {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-bottom: clamp(44px, 4.5vw, 58px);
+  }
+
+  .hail-newsfeed-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 clamp(18px, 2vw, 26px);
+    padding: 0;
+  }
+
+  .hail-newsfeed-tab-button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    min-width: 0;
+    padding: 0 18px;
+    border: 1px solid rgba(21, 53, 47, 0.14);
+    border-radius: 999px;
+    color: #15352f;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(5, 25, 20, 0.08);
+    font: inherit;
+    font-size: clamp(14px, 1vw, 16px);
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .hail-newsfeed-tab-button:hover,
+  .hail-newsfeed-tab-button:focus-visible {
+    border-color: var(--hail-primary-colour);
+    box-shadow: 0 12px 24px rgba(5, 25, 20, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .hail-newsfeed-tab-button.is-active {
+    color: #fff;
+    border-color: var(--hail-primary-colour);
+    background: var(--hail-primary-colour);
+    box-shadow: 0 14px 26px rgba(5, 25, 20, 0.16);
+  }
+
+  .hail-newsfeed-tabs-stage {
+    display: block;
+    min-width: 0;
+  }
+
+  .hail-newsfeed-tabbed .hail-newsfeed-tab-panel:not(.is-hail-tab-active) {
+    display: none !important;
+  }
+
+  .hail-newsfeed-tab {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hail-newsfeed-tabbed > .hail-newsfeed-brand-link {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    width: clamp(118px, 13vw, 168px);
+    aspect-ratio: 210 / 30;
+    background-image: url("https://hail-assets.syd1.cdn.digitaloceanspaces.com/logos/newsfeed-by-hail.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: auto;
+    display: block;
+    font-size: 0;
+    text-decoration: none;
+  }
+
+  .hail-newsfeed-tab .et_pb_ajax_pagination_container {
+    --hail-grid-gap: clamp(12px, 1.2vw, 18px);
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: var(--hail-grid-gap) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    align-items: stretch !important;
+    grid-auto-flow: row !important;
+    box-sizing: border-box !important;
+  }
+
+  .hail-newsfeed-tab .et_pb_salvattore_content,
+  .hail-newsfeed-tab .column,
+  .hail-newsfeed-tab .column.size-1of4,
+  .hail-newsfeed-tab .column.size-1of3,
+  .hail-newsfeed-tab .column.size-1of2,
+  .hail-newsfeed-tab .column.size-1of1 {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hail-newsfeed-tab .pagination,
+  .hail-newsfeed-tab .pagination.clearfix,
+  .hail-newsfeed-tab .pagination .alignleft,
+  .hail-newsfeed-tab .pagination .alignright,
+  .hail-newsfeed-tab .pagination a {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: clamp(250px, 23vw, 330px) !important;
+    aspect-ratio: 1 / 0.86 !important;
+    margin: 0 !important;
+    padding: clamp(18px, 1.5vw, 24px) !important;
+    border: 0 !important;
+    background-color: #67B110 !important;
+    background-image: var(--hail-card-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 12px 30px rgba(5, 25, 20, 0.16) !important;
+    cursor: pointer;
+    isolation: isolate !important;
+    transform: translateY(0) !important;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms ease !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .entry-featured-image-url,
+  .hail-newsfeed-tab article.et_pb_post .et_pb_image_container {
+    display: none !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post > .post-meta,
+  .hail-newsfeed-tab article.et_pb_post p.post-meta:not(.hail-card-date) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .post-content {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: -1 !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 40%,
+      rgba(0, 0, 0, 0.58) 82%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7px;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      var(--hail-primary-colour) 0%,
+      var(--hail-primary-colour) 56%,
+      rgba(13, 63, 51, 0.96) 56%,
+      rgba(13, 63, 51, 0.96) 100%
+    );
+    pointer-events: none;
+    transform-origin: left center;
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      height 260ms ease !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-text {
+    position: relative !important;
+    z-index: 3;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 2px !important;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(12px, 0.82vw, 14px) !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-date:empty {
+    display: none !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-date::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--hail-primary-colour);
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-text .entry-title {
+    position: static !important;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.06 !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .hail-card-text .entry-title a {
+    display: block !important;
+    color: #fff !important;
+    font-size: clamp(18px, 1.2vw, 24px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-wrap: balance !important;
+    transition: color 260ms ease !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post .more-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post:hover,
+  .hail-newsfeed-tab article.et_pb_post:focus-within {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 40px rgba(5, 25, 20, 0.24) !important;
+  }
+
+  .hail-newsfeed-tab article.et_pb_post:hover::after,
+  .hail-newsfeed-tab article.et_pb_post:focus-within::after {
+    height: 9px;
+    transform: scaleX(1.015);
+  }
+
+  .hail-newsfeed-tab article.et_pb_post:hover .hail-card-text,
+  .hail-newsfeed-tab article.et_pb_post:focus-within .hail-card-text {
+    transform: translateY(-4px);
+  }
+
+  .hail-newsfeed-tab article.et_pb_post:hover .entry-title a,
+  .hail-newsfeed-tab article.et_pb_post:focus-within .entry-title a {
+    color: #fff5d6 !important;
+  }
+
+  @media (max-width: 980px) {
+    .hail-newsfeed-tab .et_pb_ajax_pagination_container {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hail-newsfeed-tabs-nav {
+      gap: 8px;
+    }
+
+    .hail-newsfeed-tab-button {
+      flex: 1 1 calc(50% - 8px);
+      padding: 0 12px;
+    }
+
+    .hail-newsfeed-tab .et_pb_ajax_pagination_container {
+      grid-template-columns: 1fr !important;
+    }
+
+    .hail-newsfeed-tab article.et_pb_post {
+      aspect-ratio: 16 / 11 !important;
+      min-height: 270px !important;
+      padding: 20px !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hail-newsfeed-tab-button,
+    .hail-newsfeed-tab article.et_pb_post,
+    .hail-newsfeed-tab article.et_pb_post::after,
+    .hail-newsfeed-tab article.et_pb_post .hail-card-text {
+      transition: none !important;
+    }
+
+    .hail-newsfeed-tab-button:hover,
+    .hail-newsfeed-tab-button:focus-visible,
+    .hail-newsfeed-tab article.et_pb_post:hover,
+    .hail-newsfeed-tab article.et_pb_post:focus-within,
+    .hail-newsfeed-tab article.et_pb_post:hover .hail-card-text,
+    .hail-newsfeed-tab article.et_pb_post:focus-within .hail-card-text {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const tabs = [
+      { key: "all", label: "All", selector: ".hail-newsfeed-tab-all" },
+      { key: "primary", label: "Primary School", selector: ".hail-newsfeed-tab-primary" },
+      { key: "vic", label: "VIC", selector: ".hail-newsfeed-tab-vic" },
+      { key: "sa", label: "SA", selector: ".hail-newsfeed-tab-sa" },
+    ];
+
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function normalizeImageUrl(url) {
+      if (!url || !isSafeHttpUrl(url)) return "";
+
+      return new URL(url, window.location.href).href.replace(
+        /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+        "",
+      );
+    }
+
+    function getSafeCssUrl(url) {
+      const imageUrl = normalizeImageUrl(url);
+      if (!imageUrl) return "";
+      return 'url("' + imageUrl.replace(/["\\]/g, "\\$&") + '")';
+    }
+
+    function isSafeHailUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        const hostname = parsed.hostname.toLowerCase();
+
+        return (
+          parsed.protocol === "https:" &&
+          (hostname === "hail.to" || hostname.endsWith(".hail.to"))
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function getBestImageUrl(img) {
+      if (!img) return "";
+
+      const srcset =
+        img.getAttribute("data-srcset") ||
+        img.getAttribute("data-lazy-srcset") ||
+        img.getAttribute("srcset") ||
+        "";
+
+      if (srcset) {
+        const candidates = srcset
+          .split(",")
+          .map(function (item) {
+            const parts = item.trim().split(/\s+/);
+            const url = parts[0];
+            const width = parts[1]
+              ? parseInt(parts[1].replace("w", ""), 10)
+              : 0;
+
+            return {
+              url: url,
+              width: isNaN(width) ? 0 : width,
+            };
+          })
+          .filter(function (item) {
+            return item.url && !item.url.startsWith("data:image");
+          });
+
+        if (candidates.length) {
+          candidates.sort(function (a, b) {
+            return b.width - a.width;
+          });
+
+          return candidates[0].url.replace(
+            /-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,
+            "",
+          );
+        }
+      }
+
+      let imageUrl =
+        img.getAttribute("data-full-url") ||
+        img.getAttribute("data-large_image") ||
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-lazy-src") ||
+        img.getAttribute("data-eio-lazy-src") ||
+        "";
+
+      if (!imageUrl) {
+        const src = img.getAttribute("src") || img.currentSrc || "";
+
+        if (src && !src.startsWith("data:image")) {
+          imageUrl = src;
+        }
+      }
+
+      return imageUrl.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i, "");
+    }
+
+    function cleanDateText(text) {
+      if (!text) return "";
+
+      text = text.replace(/\u25f7/g, "").replace(/\s+/g, " ").trim();
+
+      const dateMatch = text.match(
+        /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\b/i,
+      );
+
+      if (dateMatch) {
+        return dateMatch[0].trim();
+      }
+
+      return text;
+    }
+
+    function getDateText(post) {
+      const publishedDate = post.querySelector(".post-meta .published");
+
+      if (publishedDate) {
+        return cleanDateText(publishedDate.textContent);
+      }
+
+      const existingCopiedDate = post.querySelector(".hail-card-date");
+
+      if (existingCopiedDate) {
+        return cleanDateText(existingCopiedDate.textContent);
+      }
+
+      const meta = post.querySelector("p.post-meta, .post-meta");
+
+      if (meta) {
+        return cleanDateText(meta.textContent);
+      }
+
+      return "";
+    }
+
+    function removePagination(container) {
+      const paginations = container.querySelectorAll(".pagination");
+
+      paginations.forEach(function (pagination) {
+        const wrapper = pagination.parentElement;
+
+        if (wrapper && wrapper !== container) {
+          wrapper.remove();
+        } else {
+          pagination.remove();
+        }
+      });
+    }
+
+    function ensureBrandLink(target) {
+      const existingBrandLink = Array.prototype.find.call(
+        target.children,
+        function (child) {
+          return child.classList && child.classList.contains("hail-newsfeed-brand-link");
+        },
+      );
+
+      const brandLink = existingBrandLink || document.createElement("a");
+      brandLink.className = "hail-newsfeed-brand-link";
+      brandLink.href = "https://get.hail.to/";
+      brandLink.target = "_blank";
+      brandLink.rel = "noopener";
+      brandLink.setAttribute("aria-label", "Newsfeed by Hail");
+      brandLink.setAttribute("title", "Newsfeed by Hail");
+
+      if (!existingBrandLink) {
+        target.appendChild(brandLink);
+      }
+    }
+
+    function openPost(post) {
+      const url = post.dataset.finalUrl;
+      const opensNewTab = post.dataset.opensNewTab === "true";
+
+      if (!url) return;
+
+      if (opensNewTab) {
+        window.open(url, "_blank", "noopener");
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function initBlog(blog) {
+      const container = blog.querySelector(".et_pb_ajax_pagination_container");
+      if (!container) return;
+
+      removePagination(container);
+
+      const articles = Array.from(blog.querySelectorAll("article.et_pb_post"));
+
+      articles.forEach(function (article) {
+        container.appendChild(article);
+      });
+
+      container.dataset.postCount = String(articles.length);
+
+      articles.forEach(function (post) {
+        const title = post.querySelector(".entry-title");
+        const titleLink = post.querySelector(".entry-title a");
+        const imageLink = post.querySelector(".entry-featured-image-url");
+        const img = post.querySelector(
+          ".entry-featured-image-url img, .et_pb_image_container img",
+        );
+        const hailLink = Array.from(
+          post.querySelectorAll('.post-content-inner a[href]'),
+        ).find(function (link) {
+          return isSafeHailUrl(link.href);
+        });
+
+        if (!title || !titleLink) return;
+
+        const safeCssImageUrl = getSafeCssUrl(getBestImageUrl(img));
+
+        if (safeCssImageUrl) {
+          post.style.setProperty("--hail-card-image", safeCssImageUrl);
+          post.style.setProperty(
+            "background-image",
+            safeCssImageUrl,
+            "important",
+          );
+        }
+
+        let textGroup = post.querySelector(".hail-card-text");
+
+        if (!textGroup) {
+          textGroup = document.createElement("div");
+          textGroup.className = "hail-card-text";
+          post.appendChild(textGroup);
+        }
+
+        let dateEl = post.querySelector(".hail-card-date");
+        const dateText = getDateText(post);
+
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "hail-card-date";
+        }
+
+        dateEl.textContent = dateText || "";
+
+        if (dateText && !textGroup.contains(dateEl)) {
+          textGroup.appendChild(dateEl);
+        }
+
+        if (!textGroup.contains(title)) {
+          textGroup.appendChild(title);
+        }
+
+        const finalUrl = hailLink ? hailLink.href : titleLink.href;
+
+        post.dataset.finalUrl = finalUrl;
+        post.dataset.opensNewTab = hailLink ? "true" : "false";
+        titleLink.href = finalUrl;
+
+        if (imageLink) {
+          imageLink.href = finalUrl;
+        }
+
+        if (hailLink) {
+          titleLink.target = "_blank";
+          titleLink.rel = "noopener";
+
+          if (imageLink) {
+            imageLink.target = "_blank";
+            imageLink.rel = "noopener";
+          }
+        }
+
+        if (!post.dataset.hailGridClickReady) {
+          post.dataset.hailGridClickReady = "true";
+
+          post.addEventListener("click", function (event) {
+            if (event.target.closest("a, button")) return;
+            openPost(post);
+          });
+        }
+      });
+    }
+
+    function initHailTabbedNewsfeed() {
+      const blogItems = tabs
+        .map(function (tab) {
+          return {
+            tab: tab,
+            blog: document.querySelector(tab.selector),
+          };
+        })
+        .filter(function (item) {
+          return item.blog;
+        });
+
+      if (!blogItems.length) return;
+
+      let wrapper = document.querySelector(".hail-newsfeed-tabbed");
+      const firstBlog = blogItems[0].blog;
+
+      if (!wrapper) {
+        wrapper = document.createElement("div");
+        wrapper.className = "hail-newsfeed-tabbed";
+        firstBlog.parentNode.insertBefore(wrapper, firstBlog);
+      }
+
+      let nav = wrapper.querySelector(".hail-newsfeed-tabs-nav");
+
+      if (!nav) {
+        nav = document.createElement("div");
+        nav.className = "hail-newsfeed-tabs-nav";
+        nav.setAttribute("role", "tablist");
+        nav.setAttribute("aria-label", "Newsfeed categories");
+        wrapper.appendChild(nav);
+      }
+
+      let stage = wrapper.querySelector(".hail-newsfeed-tabs-stage");
+
+      if (!stage) {
+        stage = document.createElement("div");
+        stage.className = "hail-newsfeed-tabs-stage";
+        wrapper.appendChild(stage);
+      }
+
+      nav.innerHTML = "";
+
+      blogItems.forEach(function (item) {
+        const button = document.createElement("button");
+        button.className = "hail-newsfeed-tab-button";
+        button.type = "button";
+        button.setAttribute("role", "tab");
+        button.dataset.hailTab = item.tab.key;
+        button.textContent = item.tab.label;
+        nav.appendChild(button);
+
+        item.blog.classList.add("hail-newsfeed-tab-panel");
+        item.blog.dataset.hailTabPanel = item.tab.key;
+
+        if (item.blog.parentNode !== stage) {
+          stage.appendChild(item.blog);
+        }
+
+        initBlog(item.blog);
+      });
+
+      ensureBrandLink(wrapper);
+
+      function setActiveTab(key) {
+        const activeKey = blogItems.some(function (item) {
+          return item.tab.key === key;
+        })
+          ? key
+          : blogItems[0].tab.key;
+
+        wrapper.dataset.hailActiveTab = activeKey;
+
+        blogItems.forEach(function (item) {
+          const isActive = item.tab.key === activeKey;
+          item.blog.hidden = !isActive;
+          item.blog.classList.toggle("is-hail-tab-active", isActive);
+        });
+
+        nav.querySelectorAll(".hail-newsfeed-tab-button").forEach(function (button) {
+          const isActive = button.dataset.hailTab === activeKey;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+          button.setAttribute("tabindex", isActive ? "0" : "-1");
+        });
+      }
+
+      nav.querySelectorAll(".hail-newsfeed-tab-button").forEach(function (button) {
+        if (button.dataset.hailTabReady) return;
+
+        button.dataset.hailTabReady = "true";
+        button.addEventListener("click", function () {
+          setActiveTab(button.dataset.hailTab);
+        });
+      });
+
+      setActiveTab(wrapper.dataset.hailActiveTab || blogItems[0].tab.key);
+    }
+
+    document.addEventListener("DOMContentLoaded", initHailTabbedNewsfeed);
+    window.addEventListener("load", initHailTabbedNewsfeed);
+    setTimeout(initHailTabbedNewsfeed, 250);
+    setTimeout(initHailTabbedNewsfeed, 1000);
   })();
 </script></textarea>
 
